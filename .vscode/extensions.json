@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "vue.volar",
+    "Vue.vscode-typescript-vue-plugin",
+    "hollowtree.vue-snippets",
+    "syler.sass-indented",
+    "christian-kohler.path-intellisense",
+    "usernamehw.errorlens",
+    "formulahendry.auto-rename-tag",
+    "dbaeumer.vscode-eslint",
+    "IBM.output-colorizer",
+    "bradlc.vscode-tailwindcss",
+    "ChakrounAnas.turbo-console-log"
+  ]
+}

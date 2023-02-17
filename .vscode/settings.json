@@ -1,0 +1,13 @@
+{
+  "prettier.configPath": "./.prettierrc",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "explorer.compactFolders": false,
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
+  "auto-rename-tag.activationOnLanguage": ["php", "javascript", "blade"],
+  "editor.bracketPairColorization.enabled": true
+}
+
