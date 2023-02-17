@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <div class="stage h-screen w-full">sdfas</div>
+  <div class="stage h-screen w-full"></div>
 </template>
 
 <style lang="scss">
@@ -19,6 +19,6 @@ export default {
   background-image: url('/img/fondo.png');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 0;
+  background-position: bottom;
 }
 </style>
