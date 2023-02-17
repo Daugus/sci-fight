@@ -100,9 +100,9 @@ div {
 
 // GOLPEADO
 .hit {
-  animation: hit 0.3s steps(2) /*Numero de sprites que hay en la imagen*/ infinite;
-  width: 551.5px; // Ancho del sprite mas ancho
-  height: 182px; // Alto completo de la imagen
+  animation: hit 0.75s steps(5) /*Numero de sprites que hay en la imagen*/ infinite;
+  width: 551.4px; // Ancho del sprite mas ancho
+  height: 201px; // Alto completo de la imagen
   background: url('/src/img/characters/astraeus/hit.png'); // Cambiar ultima parte de la URL dependiendo de la variable
 }
 
@@ -111,7 +111,7 @@ div {
     background-position: 0px;
   }
   100% {
-    background-position: -1103px; // Ancho completo de la imagen
+    background-position: -2757px; // Ancho completo de la imagen
   }
 }
 
