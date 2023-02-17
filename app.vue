@@ -16,4 +16,3 @@
   @apply font-bold;
 }
 </style>
-
