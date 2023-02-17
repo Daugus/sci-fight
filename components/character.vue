@@ -6,23 +6,23 @@
 
 <style lang="scss">
 .idle {
-  width: 118px;
-  height: 107px;
-  background: url('/src/img/characters/astraeus/idle.png');
+  width: 1102.75px;
+  height: 982px;
+  background: url('/src/img/characters/astraeus/appear.png');
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;
   padding: 0;
 
-  animation: idle 0.75s steps(5) infinite;
+  animation: appear 1s steps(8) infinite;
 }
 
-@keyframes idle {
+@keyframes appear {
   0% {
     background-position: 0px;
   }
   100% {
-    background-position: -590px;
+    background-position: -8822px;
   }
 }
 </style>
