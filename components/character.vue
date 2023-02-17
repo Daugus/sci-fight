@@ -1,11 +1,11 @@
 <script lang="ts"></script>
 
 <template>
-  <div class="idle"></div>
+  <div class="appear"></div>
 </template>
 
 <style lang="scss">
-.idle {
+.appear {
   width: 1102.75px;
   height: 982px;
   background: url('/src/img/characters/astraeus/appear.png');
