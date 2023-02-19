@@ -1,134 +1,165 @@
-<script lang="ts"></script>
+<script lang="ts">
+export default {
+  data() {
+    return {
+      width: '',
+      maxWidth: '',
+      height: '',
+      animation: '',
+      sprite: '',
+
+      movement: '',
+    };
+  },
+  methods: {
+    appear() {
+      this.width = '486px';
+      this.height = '500px';
+      this.maxWidth = '-3888px';
+      this.animation = 'animation 1s steps(8) infinite';
+      this.sprite = 'url(' + new URL(`/src/img/characters/astraeus/appear.png`, import.meta.url) + ')';
+
+      this.movement = '';
+    },
+    idle() {
+      this.width = '113px';
+      this.height = '201px';
+      this.maxWidth = '-565px';
+      this.animation = 'animation .75s steps(5) infinite';
+      this.sprite = 'url(' + new URL(`/src/img/characters/astraeus/idle.png`, import.meta.url) + ')';
+
+      this.movement = '';
+    },
+    move() {
+      this.width = '113px';
+      this.height = '201px';
+      this.maxWidth = '-565px';
+      this.animation = 'animation .5s steps(5) infinite';
+      this.sprite = 'url(' + new URL(`/src/img/characters/astraeus/move.png`, import.meta.url) + ')';
+
+      this.movement = 'movement 1.5s linear infinite';
+    },
+    attack() {
+      this.width = '477px';
+      this.height = '220px';
+      this.maxWidth = '-3816px';
+      this.animation = 'animation 1s steps(8) infinite';
+      this.sprite = 'url(' + new URL(`/src/img/characters/astraeus/attack.png`, import.meta.url) + ')';
+
+      this.movement = '';
+    },
+    hit() {
+      this.width = '113px';
+      this.height = '201px';
+      this.maxWidth = '-565px';
+      this.animation = 'animation .75s steps(5) infinite';
+      this.sprite = 'url(' + new URL(`/src/img/characters/astraeus/hit.png`, import.meta.url) + ')';
+
+      this.movement = '';
+    },
+    death() {
+      this.width = '113px';
+      this.height = '286px';
+      this.maxWidth = '-678px';
+      this.animation = 'animation .75s steps(6) infinite';
+      this.sprite = 'url(' + new URL(`/src/img/characters/astraeus/death.png`, import.meta.url) + ')';
+
+      this.movement = '';
+    },
+  },
+};
+</script>
 
 <template>
-  <section>
-    <div class="appear"></div>
-    <div class="idle"></div>
-    <div class="move"></div>
-    <div class="attack"></div>
-    <div class="hit"></div>
-    <div class="death"></div>
+  <section class="stage">
+    <div class="hitbox">
+      <div class="character"></div>
+    </div>
+  </section>
+
+  <section class="actions">
+    <button @click.prevent="appear()">Appear</button>
+    <button @click.prevent="idle()">Idle</button>
+    <button @click.prevent="move()">Move</button>
+    <button @click.prevent="attack()">Attack</button>
+    <button @click.prevent="hit()">Hit</button>
+    <button @click.prevent="death()">Death</button>
   </section>
 </template>
 
 <style lang="scss">
-section {
+.actions {
+  position: absolute;
+  bottom: 5%;
+  display: flex;
+  gap: 2rem;
+
+  button {
+    border: 1px solid black;
+    padding: 0.5rem 1rem;
+
+    &:hover {
+      background-color: lightgray;
+    }
+  }
+}
+
+.stage {
+  width: 600px;
+  height: 600px;
   display: flex;
   justify-content: center;
   align-items: end;
-  gap: 2rem;
+  padding-bottom: 4.5%;
+
+  background-image: url('src/img/stages/fondo.png');
+  background-repeat: no-repeat;
+  background-position: bottom;
 }
 
-// GENERAL
-div {
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin: 0;
-  padding: 0;
+.hitbox {
+  width: v-bind(width);
+  height: v-bind(height);
+
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: scale(1);
+
+  animation: v-bind(movement);
+
+  .character {
+    position: relative;
+    z-index: 11;
+    width: 100%;
+    height: 100%;
+    background: v-bind(sprite);
+
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    animation: v-bind(animation);
+  }
 }
 
-// APARICION --
-.appear {
-  animation: appear 1s steps(8) /*Numero de sprites que hay en la iamgen*/ infinite;
-  width: 486px; // Ancho completo de la imagen entre el nuemro de sprites
-  height: 500px; // Alto completo de la imagen
-  background: url('/src/img/characters/astraeus/appear.png'); // Cambiar ultima parte de la URL dependiendo de la variable
-}
-
-@keyframes appear {
+@keyframes animation {
   0% {
     background-position: 0px;
   }
   100% {
-    background-position: -4492px; // Ancho completo de la imagen
+    background-position: v-bind(maxWidth);
   }
 }
 
-// ESTATICO
-.idle {
-  animation: idle 0.75s steps(5) /*Numero de sprites que hay en la imagen*/ infinite;
-  width: 551.4px; // Ancho del sprite mas ancho
-  height: 201px; // Alto completo de la imagen
-  background: url('/src/img/characters/astraeus/idle.png'); // Cambiar ultima parte de la URL dependiendo de la variable
-}
-
-@keyframes idle {
+@keyframes movement {
   0% {
-    background-position: 0px;
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
   }
   100% {
-    background-position: -2757px; // Ancho completo de la imagen
-  }
-}
-
-// MOVIMIENTO
-.move {
-  animation: move 0.5s steps(5) /*Numero de sprites que hay en la imagen*/ infinite;
-  width: 551.4px; // Ancho del sprite mas ancho
-  height: 201px; // Alto completo de la imagen
-  background: url('/src/img/characters/astraeus/move.png'); // Cambiar ultima parte de la URL dependiendo de la variable
-}
-
-@keyframes move {
-  0% {
-    background-position: 0px;
-  }
-  100% {
-    background-position: -2757px; // Ancho completo de la imagen
-  }
-}
-
-// ATAQUE
-.attack {
-  animation: attack 1s steps(8) /*Numero de sprites que hay en la imagen*/ infinite;
-  width: 550px; // Ancho del sprite mas ancho
-  height: 220px; // Alto completo de la imagen
-  background: url('/src/img/characters/astraeus/attack.png'); // Cambiar ultima parte de la URL dependiendo de la variable
-}
-
-@keyframes attack {
-  0% {
-    background-position: 0px;
-  }
-  100% {
-    background-position: -4411px; // Ancho completo de la imagen
-  }
-}
-
-// GOLPEADO
-.hit {
-  animation: hit 0.75s steps(5) /*Numero de sprites que hay en la imagen*/ infinite;
-  width: 551.4px; // Ancho del sprite mas ancho
-  height: 201px; // Alto completo de la imagen
-  background: url('/src/img/characters/astraeus/hit.png'); // Cambiar ultima parte de la URL dependiendo de la variable
-}
-
-@keyframes hit {
-  0% {
-    background-position: 0px;
-  }
-  100% {
-    background-position: -2757px; // Ancho completo de la imagen
-  }
-}
-
-// MUERTE
-.death {
-  animation: death 1s steps(6) /*Numero de sprites que hay en la imagen*/ infinite;
-  width: 551.3px; // Ancho del sprite mas ancho
-  height: 286px; // Alto completo de la imagen
-  background: url('/src/img/characters/astraeus/death.png'); // Cambiar ultima parte de la URL dependiendo de la variable
-}
-
-@keyframes death {
-  0% {
-    background-position: 0px;
-  }
-  100% {
-    background-position: -3308px; // Ancho completo de la imagen
+    transform: translateX(-100%);
   }
 }
 </style>
