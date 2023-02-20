@@ -1,3 +1,6 @@
 <template>
-  <Character />
+  <!-- <Astraeus /> -->
+  <!-- <Galvus /> -->
+  <Quasar />
+  <!-- <Vespera /> -->
 </template>
