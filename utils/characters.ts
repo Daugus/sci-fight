@@ -24,16 +24,19 @@ const characters: Character[] = [
     },
   },
   {
+    /* Nombre */
     name: 'quasar',
 
-    health: 120,
-
+    /* Caracteristicas del personaje */
     hitbox: {
-      height: 10,
-      width: 5,
+      height: 140,
+      width: 135,
     },
     weight: 100,
     speed: 100,
+
+    /* Caracteristicas en combate */
+    health: 120,
 
     attack: {
       damage: 20,
@@ -45,16 +48,19 @@ const characters: Character[] = [
     },
   },
   {
+    /* Nombre */
     name: 'astraeus',
 
-    health: 140,
-
+    /* Caracteristicas del personaje */
     hitbox: {
-      height: 10,
-      width: 5,
+      height: 201,
+      width: 113,
     },
     weight: 130,
     speed: 80,
+
+    /* Caracteristicas en combate */
+    health: 140,
 
     attack: {
       damage: 30,
