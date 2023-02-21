@@ -1,6 +1,6 @@
 <template>
   <!-- <Astraeus /> -->
   <!-- <Galvus /> -->
-  <Quasar />
-  <!-- <Vespera /> -->
+  <!-- <Quasar /> -->
+  <Vespera />
 </template>
