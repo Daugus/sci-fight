@@ -77,8 +77,8 @@ const characters: Character[] = [
 
     /* Caracteristicas del personaje */
     hitbox: {
-      height: 175,
-      width: 197.1,
+      height: 176,
+      width: 192.2,
     },
     weight: 60,
     speed: 120,
