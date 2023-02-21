@@ -72,16 +72,19 @@ const characters: Character[] = [
     },
   },
   {
+    /* Nombre */
     name: 'vespera',
 
-    health: 120,
-
+    /* Caracteristicas del personaje */
     hitbox: {
-      height: 10,
-      width: 5,
+      height: 175,
+      width: 197.1,
     },
     weight: 60,
     speed: 120,
+
+    /* Caracteristicas en combate */
+    health: 120,
 
     attack: {
       damage: 30,
