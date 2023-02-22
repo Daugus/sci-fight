@@ -2,11 +2,17 @@
 export default {
   data() {
     //crear el intervalo para que sean de tipo timer
-    let timerP1 = setInterval(() => '');
-    clearInterval(timerP1);
+    let timerIzquierdaP1 = setInterval(() => '');
+    clearInterval(timerIzquierdaP1);
 
-    let timerP2 = setInterval(() => '');
-    clearInterval(timerP2);
+    let timerDerechaP1 = setInterval(() => '');
+    clearInterval(timerDerechaP1);
+
+    let timerizquierdaP2 = setInterval(() => '');
+    clearInterval(timerizquierdaP2);
+
+    let timerDerechaP2 = setInterval(() => '');
+    clearInterval(timerDerechaP2);
 
     return {
       attack: false,
@@ -20,14 +26,17 @@ export default {
       aPressed: false,
       rightPressed: false,
       leftPressed: false,
-      currentIntervalP1: timerP1,
-      currentIntervalP2: timerP2,
+      currentIntervalIzqP1: timerIzquierdaP1,
+      currentIntervalDerP1: timerDerechaP1,
+      currentIntervalIzqP2: timerizquierdaP2,
+      currentIntervalDerP2: timerDerechaP2,
     };
   },
   mounted() {
     // Añadir eventListener al documento para poder usar el teclado fisico
     document.addEventListener('keyup', this.keyUp);
     document.addEventListener('keydown', this.keyDown);
+    document.body.classList.add('overflow-hidden');
   },
   methods: {
     keyUp(event: KeyboardEvent) {
@@ -76,20 +85,28 @@ export default {
     },
     // funciones para mover los divs
     moveLeftP1() {
-      this.positionP1 -= this.movementP1;
-      this.distanceP1 = `${this.positionP1 - this.movementP1}%`;
+      if (!this.dPressed && this.positionP1 > 1) {
+        this.positionP1 -= this.movementP1;
+        this.distanceP1 = `${this.positionP1 - this.movementP1}%`;
+      }
     },
     moveRightP1() {
-      this.positionP1 += this.movementP1;
-      this.distanceP1 = `${this.positionP1 + this.movementP1}%`;
+      if (!this.aPressed && this.positionP1 < 99 - this.widthP1) {
+        this.positionP1 += this.movementP1;
+        this.distanceP1 = `${this.positionP1 + this.movementP1}%`;
+      }
     },
     moveLeftP2() {
-      this.positionP2 += this.movementP2;
-      this.distanceP2 = `${this.positionP2 + this.movementP2}%`;
+      if (!this.rightPressed && this.positionP2 < 99 - this.widthP2) {
+        this.positionP2 += this.movementP2;
+        this.distanceP2 = `${this.positionP2 + this.movementP2}%`;
+      }
     },
     moveRightP2() {
-      this.positionP2 -= this.movementP2;
-      this.distanceP2 = `${this.positionP2 - this.movementP2}%`;
+      if (!this.leftPressed && this.positionP2 > 1) {
+        this.positionP2 -= this.movementP2;
+        this.distanceP2 = `${this.positionP2 - this.movementP2}%`;
+      }
     },
   },
   computed: {
@@ -99,46 +116,51 @@ export default {
     movementP2() {
       return this.characterP2.speed / 250;
     },
-    limiteDerechoP1() {
-      return screen.width - this.characterP1.hitbox.width;
+    widthP1() {
+      return (this.characterP1.hitbox.width / screen.width) * 100;
     },
-
-    limiteDerechoP2() {
-      return screen.width - this.characterP2.hitbox.width;
+    widthP2() {
+      return (this.characterP2.hitbox.width / screen.width) * 100;
+    },
+    widthPxP1() {
+      return `${this.characterP1.hitbox.width}px`;
+    },
+    widthPxP2() {
+      return `${this.characterP2.hitbox.width}px`;
     },
   },
   // crear el watch para que las funciones de movimiento se ejecuten constantemente mientras este pulsado
   watch: {
     dPressed: function () {
-      clearInterval(this.currentIntervalP1);
+      clearInterval(this.currentIntervalIzqP1);
 
       if (this.dPressed) {
         this.moveRightP1();
-        this.currentIntervalP1 = setInterval(this.moveRightP1, 10);
+        this.currentIntervalIzqP1 = setInterval(this.moveRightP1, 10);
       }
     },
     aPressed: function () {
-      clearInterval(this.currentIntervalP1);
+      clearInterval(this.currentIntervalDerP1);
 
       if (this.aPressed) {
         this.moveLeftP1();
-        this.currentIntervalP1 = setInterval(this.moveLeftP1, 10);
+        this.currentIntervalDerP1 = setInterval(this.moveLeftP1, 10);
       }
     },
     rightPressed: function () {
-      clearInterval(this.currentIntervalP2);
+      clearInterval(this.currentIntervalIzqP2);
 
       if (this.rightPressed) {
         this.moveRightP2();
-        this.currentIntervalP2 = setInterval(this.moveRightP2, 10);
+        this.currentIntervalIzqP2 = setInterval(this.moveRightP2, 10);
       }
     },
     leftPressed: function () {
-      clearInterval(this.currentIntervalP2);
+      clearInterval(this.currentIntervalDerP2);
 
       if (this.leftPressed) {
         this.moveLeftP2();
-        this.currentIntervalP2 = setInterval(this.moveLeftP2, 10);
+        this.currentIntervalDerP2 = setInterval(this.moveLeftP2, 10);
       }
     },
   },
@@ -174,8 +196,6 @@ export default {
 
 <style lang="scss">
 .player {
-  width: 135px;
-  height: 140px;
   position: absolute;
   bottom: 0;
 
@@ -189,11 +209,17 @@ export default {
 }
 
 #player1 {
+  width: v-bind(widthPxP1);
+  height: 140px;
   background-color: red;
   left: v-bind(distanceP1);
 }
 
 #player2 {
+  transform: rotateY(180deg);
+  width: v-bind(widthPxP2);
+  height: 140px;
+
   background-color: blue;
   right: v-bind(distanceP2);
 }
