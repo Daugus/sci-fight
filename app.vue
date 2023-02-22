@@ -2,6 +2,7 @@
   <header class="absolute w-full py-5 text-2xl">
     <ul class="flex justify-center gap-2">
       <li><NuxtLink to="/">Index</NuxtLink></li>
+      <li><NuxtLink to="/menu">Menu</NuxtLink></li>
       <li><NuxtLink to="/ejemplo">Ejemplo</NuxtLink></li>
     </ul>
   </header>
@@ -16,4 +17,3 @@
   @apply font-bold;
 }
 </style>
-
