@@ -5,6 +5,6 @@ export default defineNuxtConfig({
   tailwindcss: {
     cssPath: '~/assets/css/style.scss',
   },
-  ssr: true,
+  ssr: false,
 });
 

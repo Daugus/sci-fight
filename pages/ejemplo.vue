@@ -1,17 +1,37 @@
 <script lang="ts">
-import characters from '../utils/characters';
-
 export default {
   data() {
     return {
       characterList: characters,
     };
   },
+  mounted() {},
+  methods: {
+    toggleFullscreen() {
+      if (document.fullscreenElement) return;
+      document.documentElement.requestFullscreen();
+    },
+  },
 };
 </script>
 
 <template>
-  <div class="stage h-screen w-full">sdfas</div>
+  <div class="stage flex h-screen w-full items-center justify-center">
+    <button
+      @click="toggleFullscreen"
+      id="fs"
+    >
+      fs
+    </button>
+    <ul class="text-white">
+      <li
+        v-for="(c, i) in characterList"
+        :key="c.name"
+      >
+        {{ c.name }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style lang="scss">
