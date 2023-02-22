@@ -2,7 +2,7 @@
 export default {
   data() {
     return {
-      width: '',
+      width: '675px',
       maxWidth: '',
       height: '',
       animation: '',
@@ -11,44 +11,38 @@ export default {
   },
   methods: {
     appear() {
-      this.width = '183px';
       this.height = '140px';
-      this.maxWidth = '-732px';
+      this.maxWidth = '-2700px';
       this.animation = 'animation .4s steps(4) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/quasar/appear.png`, import.meta.url) + ')';
     },
     idle() {
-      this.width = '135px';
       this.height = '140px';
-      this.maxWidth = '-675px';
+      this.maxWidth = '-3375px';
       this.animation = 'animation .5s steps(5) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/quasar/idle.png`, import.meta.url) + ')';
     },
     move() {
-      this.width = '146px';
       this.height = '140px';
-      this.maxWidth = '-1168px';
+      this.maxWidth = '-5400px';
       this.animation = 'animation .8s steps(8) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/quasar/move.png`, import.meta.url) + ')';
     },
     attack() {
-      this.width = '443px';
       this.height = '140px';
-      this.maxWidth = '-3544px';
+      this.maxWidth = '-5400px';
       this.animation = 'animation .8s steps(8) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/quasar/attack.png`, import.meta.url) + ')';
     },
     hit() {
-      this.width = '135px';
       this.height = '140px';
-      this.maxWidth = '-675px';
+      this.maxWidth = '-3375px';
       this.animation = 'animation .5s steps(5) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/quasar/hit.png`, import.meta.url) + ')';
     },
     death() {
-      this.width = '213px';
       this.height = '140px';
-      this.maxWidth = '-1065px';
+      this.maxWidth = '-3375px';
       this.animation = 'animation .5s steps(5) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/quasar/death.png`, import.meta.url) + ')';
     },
@@ -104,6 +98,7 @@ export default {
 }
 
 .hitbox {
+  position: absolute;
   width: v-bind(width);
   height: v-bind(height);
 
