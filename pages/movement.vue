@@ -40,9 +40,8 @@ export default {
   },
   methods: {
     keyUp(event: KeyboardEvent) {
-      // if (/^[a-z]{1}$/.test(event.key) === false) return;
       // hacer el switch case de las teclas para que se puedan leer
-      //ademas setear el componente a flase para que pare
+      // ademas setear el componente a clase para que pare
       switch (event.key) {
         case 'w':
           this.attack = true;
