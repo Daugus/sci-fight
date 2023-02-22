@@ -8,7 +8,7 @@ const astraeus: Character = {
   attack: {
     hitbox: {
       height: 50,
-      width: 0,
+      width: 330,
     },
     cooldown: 0,
     damage: 0,
