@@ -13,19 +13,19 @@ export default {
   },
   mounted() {
     // Animacion "Appear"
-    this.spriteW = '198.2px';
-    this.spriteH = '176px';
-    this.spriteMW = '-1784px';
-    this.animation = 'animation .9s steps(9) infinite';
-    this.sprite = 'url(' + new URL(`/src/img/characters/vespera/appear.png`, import.meta.url) + ')';
+    this.spriteW = '183px';
+    this.spriteH = '140px';
+    this.spriteMW = '-732px';
+    this.animation = 'animation .4s steps(4) infinite';
+    this.sprite = 'url(' + new URL(`/src/img/characters/quasar/appear.png`, import.meta.url) + ')';
 
     // Animacion "Idle"
     setTimeout(() => {
-      this.spriteW = '192px';
-      this.spriteH = '176px';
-      this.spriteMW = '-1153px';
-      this.animation = 'animation .6s steps(6) infinite';
-      this.sprite = 'url(' + new URL(`/src/img/characters/vespera/idle.png`, import.meta.url) + ')';
+      this.spriteW = '135px';
+      this.spriteH = '140px';
+      this.spriteMW = '-675px';
+      this.animation = 'animation .5s steps(5) infinite';
+      this.sprite = 'url(' + new URL(`/src/img/characters/quasar/idle.png`, import.meta.url) + ')';
     }, 900);
 
     // Añadir eventListener al documento para poder usar el teclado fisico
@@ -33,18 +33,18 @@ export default {
   },
   methods: {
     pressedKey(event: KeyboardEvent) {
-      switch (event.key) {
+      switch (event.key.toLowerCase()) {
         case 'w':
           // Activar ataque
           this.attack = true;
 
           setTimeout(() => {
             // Cambiar sprite
-            this.spriteW = '624px';
-            this.spriteH = '220px';
-            this.spriteMW = '-3125px';
-            this.animation = 'animation .5s steps(5) infinite';
-            this.sprite = 'url(' + new URL(`/src/img/characters/vespera/attack.png`, import.meta.url) + ')';
+            this.spriteW = '443px';
+            this.spriteH = '140px';
+            this.spriteMW = '-3544px';
+            this.animation = 'animation .8s steps(8) infinite';
+            this.sprite = 'url(' + new URL(`/src/img/characters/quasar/attack.png`, import.meta.url) + ')';
           }, 100);
 
           setTimeout(() => {
@@ -52,12 +52,12 @@ export default {
             this.attack = false;
 
             // Cambiar sprite
-            this.spriteW = '192px';
-            this.spriteH = '176px';
-            this.spriteMW = '-1153px';
-            this.animation = 'animation .6s steps(6) infinite';
-            this.sprite = 'url(' + new URL(`/src/img/characters/vespera/idle.png`, import.meta.url) + ')';
-          }, 600);
+            this.spriteW = '135px';
+            this.spriteH = '140px';
+            this.spriteMW = '-675px';
+            this.animation = 'animation .5s steps(5) infinite';
+            this.sprite = 'url(' + new URL(`/src/img/characters/quasar/idle.png`, import.meta.url) + ')';
+          }, 800);
           break;
 
         // case 'ArrowUp':
@@ -97,8 +97,8 @@ export default {
   bottom: 0;
 
   #hitbox {
-    width: 192px;
-    height: 176px;
+    width: 135px;
+    height: 140px;
     background-color: rgba(255, 0, 0, 0.5);
     position: absolute;
   }

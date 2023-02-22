@@ -2,7 +2,7 @@
 export default {
   data() {
     return {
-      width: '',
+      width: '565px',
       maxWidth: '',
       height: '',
       animation: '',
@@ -11,44 +11,38 @@ export default {
   },
   methods: {
     appear() {
-      this.width = '486px';
       this.height = '500px';
-      this.maxWidth = '-3888px';
+      this.maxWidth = '-4520px';
       this.animation = 'animation .8s steps(8) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/astraeus/appear.png`, import.meta.url) + ')';
     },
     idle() {
-      this.width = '113px';
       this.height = '201px';
-      this.maxWidth = '-565px';
+      this.maxWidth = '-2825px';
       this.animation = 'animation .5s steps(5) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/astraeus/idle.png`, import.meta.url) + ')';
     },
     move() {
-      this.width = '113px';
       this.height = '201px';
-      this.maxWidth = '-565px';
+      this.maxWidth = '-2825px';
       this.animation = 'animation .5s steps(5) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/astraeus/move.png`, import.meta.url) + ')';
     },
     attack() {
-      this.width = '477px';
       this.height = '220px';
-      this.maxWidth = '-3816px';
+      this.maxWidth = '-4520px';
       this.animation = 'animation .8s steps(8) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/astraeus/attack.png`, import.meta.url) + ')';
     },
     hit() {
-      this.width = '113px';
       this.height = '201px';
-      this.maxWidth = '-565px';
+      this.maxWidth = '-2825px';
       this.animation = 'animation .5s steps(5) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/astraeus/hit.png`, import.meta.url) + ')';
     },
     death() {
-      this.width = '113px';
       this.height = '286px';
-      this.maxWidth = '-678px';
+      this.maxWidth = '-3390px';
       this.animation = 'animation .6s steps(6) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/astraeus/death.png`, import.meta.url) + ')';
     },
