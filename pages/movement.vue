@@ -10,7 +10,8 @@ export default {
 
     return {
       attack: false,
-      character: characters[1],
+      characterP1: characters[1],
+      characterP2: characters[1],
       positionP1: 0,
       positionP2: 0,
       distanceP1: '0px',
@@ -76,20 +77,35 @@ export default {
     },
     // funciones para mover los divs
     moveLeftP1() {
-      this.positionP1 -= this.character.speed / 30;
-      this.distanceP1 = `${this.positionP1 - this.character.speed / 30}px`;
+      this.positionP1 -= this.movementP1;
+      this.distanceP1 = `${this.positionP1 - this.movementP1}%`;
     },
     moveRightP1() {
-      this.positionP1 += this.character.speed / 30;
-      this.distanceP1 = `${this.positionP1 + this.character.speed / 30}px`;
+      this.positionP1 += this.movementP1;
+      this.distanceP1 = `${this.positionP1 + this.movementP1}%`;
     },
     moveLeftP2() {
-      this.positionP2 += this.character.speed / 30;
-      this.distanceP2 = `${this.positionP2 + this.character.speed / 30}px`;
+      this.positionP2 += this.movementP2;
+      this.distanceP2 = `${this.positionP2 + this.movementP2}%`;
     },
     moveRightP2() {
-      this.positionP2 -= this.character.speed / 30;
-      this.distanceP2 = `${this.positionP2 - this.character.speed / 30}px`;
+      this.positionP2 -= this.movementP2;
+      this.distanceP2 = `${this.positionP2 - this.movementP2}%`;
+    },
+  },
+  computed: {
+    movementP1() {
+      return this.characterP1.speed / 250;
+    },
+    movementP2() {
+      return this.characterP2.speed / 250;
+    },
+    limiteDerechoP1() {
+      return screen.width - this.characterP1.hitbox.width;
+    },
+
+    limiteDerechoP2() {
+      return screen.width - this.characterP2.hitbox.width;
     },
   },
   // crear el watch para que las funciones de movimiento se ejecuten constantemente mientras este pulsado
