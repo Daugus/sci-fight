@@ -1,6 +1,7 @@
 <script lang="ts">
 export default {
   data() {
+    //crear el intervalo para que sean de tipo timer
     let timerP1 = setInterval(() => '');
     clearInterval(timerP1);
 
@@ -30,6 +31,8 @@ export default {
   methods: {
     keyUp(event: KeyboardEvent) {
       // if (/^[a-z]{1}$/.test(event.key) === false) return;
+      // hacer el switch case de las teclas para que se puedan leer
+      //ademas setear el componente a flase para que pare
       switch (event.key) {
         case 'w':
           this.attack = true;
@@ -55,6 +58,7 @@ export default {
       }
     },
     keyDown(event: KeyboardEvent) {
+      //switch para que se muevan los divs
       switch (event.key) {
         case 'a':
           this.aPressed = true;
@@ -70,6 +74,7 @@ export default {
           break;
       }
     },
+    // funciones para mover los divs
     moveLeftP1() {
       this.positionP1 -= this.character.speed / 30;
       this.distanceP1 = `${this.positionP1 - this.character.speed / 30}px`;
@@ -87,6 +92,7 @@ export default {
       this.distanceP2 = `${this.positionP2 - this.character.speed / 30}px`;
     },
   },
+  // crear el watch para que las funciones de movimiento se ejecuten constantemente mientras este pulsado
   watch: {
     dPressed: function () {
       clearInterval(this.currentIntervalP1);
