@@ -1,6 +1,4 @@
 <script lang="ts">
-import characters from '../utils/characters';
-
 export default {
   data() {
     return {
