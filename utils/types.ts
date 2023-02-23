@@ -15,6 +15,7 @@ export type speed = {
 };
 
 export type Character = {
+  name: string;
   hitbox: hitbox;
   attack: attack;
   speed: speed;

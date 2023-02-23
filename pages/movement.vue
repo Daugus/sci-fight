@@ -15,21 +15,28 @@ export default {
     clearInterval(timerDerechaP2);
 
     return {
-      attackP1: false,
+      attackP1: true,
       attackP2: false,
+
       characterP1: quasar,
       characterP2: quasar,
+
       positionP1: 0,
       positionP2: 0,
-      distanceP1: '0px',
-      distanceP2: '0px',
+
+      distanceP1: '1%',
+      distanceP2: '1%',
+
       dPressed: false,
-      aPressed: false,
       rightPressed: false,
+
+      aPressed: false,
       leftPressed: false,
+
       currentIntervalIzqP1: timerIzquierdaP1,
-      currentIntervalDerP1: timerDerechaP1,
       currentIntervalIzqP2: timerizquierdaP2,
+
+      currentIntervalDerP1: timerDerechaP1,
       currentIntervalDerP2: timerDerechaP2,
     };
   },
@@ -50,10 +57,11 @@ export default {
     //   this.sprite = 'url(' + new URL(`/src/img/characters/quasar/idle.png`, import.meta.url) + ')';
     // }, 900);
 
+    document.body.classList.add('overflow-hidden');
+
     // Añadir eventListener al documento para poder usar el teclado fisico
     document.addEventListener('keyup', this.keyUp);
     document.addEventListener('keydown', this.keyDown);
-    document.body.classList.add('overflow-hidden');
   },
   methods: {
     keyUp(event: KeyboardEvent) {
@@ -150,6 +158,13 @@ export default {
         this.distanceP2 = `${this.positionP2 - this.movementP2}%`;
       }
     },
+    getRect(attackRect: DOMRect, playerNumber: number) {
+      const receiverPlayerNumber = playerNumber === 1 ? 2 : 1;
+
+      const playerRect = document.querySelector(`#player${receiverPlayerNumber}`)!.getBoundingClientRect();
+
+      const intersect = attackRect.x + attackRect.width >= playerRect!.x && attackRect.x <= playerRect.x + playerRect.width;
+    },
   },
   computed: {
     movementP1() {
@@ -210,17 +225,19 @@ export default {
 </script>
 
 <template>
+  <Character />
+
   <div
     class="player"
     id="player1"
   >
     Player 1
-    <div
-      class="attack"
+
+    <CharacterAttack
+      :player-number="1"
+      @getRect="getRect"
       v-if="attackP1 === true"
-    >
-      Attack
-    </div>
+    />
   </div>
 
   <div
@@ -228,12 +245,11 @@ export default {
     id="player2"
   >
     Player 2
-    <div
-      class="attack"
+    <CharacterAttack
+      :player-number="2"
+      @getRect="getRect"
       v-if="attackP2 === true"
-    >
-      Attack
-    </div>
+    />
   </div>
 </template>
 
