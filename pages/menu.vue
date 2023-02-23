@@ -4,21 +4,36 @@
 
     <!-- Selección de personajes -->
     <div class="flex justify-around border p-2">
-      <div class="flex border p-2">
-        <div class="m-2 border p-2">asdasdadsadasdasdadadasdas</div>
-        <div class="m-2 border p-2">a</div>
-      </div>
-      <div class="flex border p-2">
-        <div class="m-2 border p-2">a</div>
-        <div class="m-2 border p-2">a</div>
-      </div>
+      <MenuFicha
+        colorfondo="bg-red-500"
+        :rotar="false"
+      ></MenuFicha>
+      <MenuFicha
+        colorfondo="bg-blue-700"
+        :rotar="true"
+      ></MenuFicha>
+    </div>
+    <div class="m-2 flex justify-center gap-96 border p-2">
+      <div class="row m-2 border p-2">nombre</div>
+      <div class="row m-2 border p-2">nombre</div>
     </div>
     <div class="flex justify-around border">
-      <div class="m-2 border p-2">a</div>
-      <div class="m-2 border p-2">a</div>
+      <div class="m-2 border p-2">
+        <img
+          src="/src/img/wad.png"
+          alt=""
+        />
+      </div>
+      <div class="m-2 border p-2">
+        <img
+          src="/src/img/flechas.png"
+          alt=""
+        />
+      </div>
     </div>
-    <div class="border">
+    <div class="mt-10 mb-10 border">
       <button class="w-96 rounded bg-green-300 p-2 shadow-xl">Jugar</button>
     </div>
   </div>
 </template>
+<style></style>
