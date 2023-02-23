@@ -3,9 +3,3 @@
     <NuxtPage />
   </div>
 </template>
-
-<style lang="scss">
-.router-link-active {
-  @apply font-bold;
-}
-</style>

@@ -1,50 +1,15 @@
 <script lang="ts">
 export default {
-  data() {
-    return {
-      testData: '',
-    };
-  },
-  mounted() {
-    this.testMethod('hola');
-  },
-  computed: {
-    testComputed() {
-      return `computed ${this.testData} computed`;
-    },
-  },
-  methods: {
-    testMethod(str: string) {
-      this.testData = str;
-    },
-  },
+  data() {},
+  computed: {},
+  methods: {},
 };
 </script>
 
 <template>
   <div>
-    <h1 class="text-blue-800">
-      página de index
-      <span>test sass</span>
-    </h1>
-
-    <br />
-
-    <input
-      type="text"
-      v-model="testData"
-      class="rounded-xl border-2 p-2"
-    />
-
-    <pre>data: {{ testData }}</pre>
-    <pre>computed: {{ testComputed }}</pre>
+    <h1>página de index</h1>
   </div>
 </template>
 
-<style lang="scss">
-h1 {
-  span {
-    color: red;
-  }
-}
-</style>
+<style lang="scss"></style>

@@ -16,8 +16,8 @@ export default {
 
     return {
       attack: false,
-      characterP1: characters[1],
-      characterP2: characters[1],
+      characterP1: quasar,
+      characterP2: quasar,
       positionP1: 0,
       positionP2: 0,
       distanceP1: '0px',
@@ -33,21 +33,21 @@ export default {
     };
   },
   mounted() {
-    // Animacion "Appear"
-    this.spriteW = '183px';
-    this.spriteH = '140px';
-    this.spriteMW = '-732px';
-    this.animation = 'animation .4s steps(4) infinite';
-    this.sprite = 'url(' + new URL(`/src/img/characters/quasar/appear.png`, import.meta.url) + ')';
+    // // Animacion "Appear"
+    // this.spriteW = '183px';
+    // this.spriteH = '140px';
+    // this.spriteMW = '-732px';
+    // this.animation = 'animation .4s steps(4) infinite';
+    // this.sprite = 'url(' + new URL(`/src/img/characters/quasar/appear.png`, import.meta.url) + ')';
 
-    // Animacion "Idle"
-    setTimeout(() => {
-      this.spriteW = '135px';
-      this.spriteH = '140px';
-      this.spriteMW = '-675px';
-      this.animation = 'animation .5s steps(5) infinite';
-      this.sprite = 'url(' + new URL(`/src/img/characters/quasar/idle.png`, import.meta.url) + ')';
-    }, 900);
+    // // Animacion "Idle"
+    // setTimeout(() => {
+    //   this.spriteW = '135px';
+    //   this.spriteH = '140px';
+    //   this.spriteMW = '-675px';
+    //   this.animation = 'animation .5s steps(5) infinite';
+    //   this.sprite = 'url(' + new URL(`/src/img/characters/quasar/idle.png`, import.meta.url) + ')';
+    // }, 900);
 
     // Añadir eventListener al documento para poder usar el teclado fisico
     document.addEventListener('keyup', this.keyUp);
@@ -63,26 +63,26 @@ export default {
           // Activar ataque
           this.attack = true;
 
-          setTimeout(() => {
-            // Cambiar sprite
-            this.spriteW = '443px';
-            this.spriteH = '140px';
-            this.spriteMW = '-3544px';
-            this.animation = 'animation .8s steps(8) infinite';
-            this.sprite = 'url(' + new URL(`/src/img/characters/quasar/attack.png`, import.meta.url) + ')';
-          }, 100);
+          // setTimeout(() => {
+          //   // Cambiar sprite
+          //   this.spriteW = '443px';
+          //   this.spriteH = '140px';
+          //   this.spriteMW = '-3544px';
+          //   this.animation = 'animation .8s steps(8) infinite';
+          //   this.sprite = 'url(' + new URL(`/src/img/characters/quasar/attack.png`, import.meta.url) + ')';
+          // }, 100);
 
-          setTimeout(() => {
-            // Desactivar ataque
-            this.attack = false;
+          // setTimeout(() => {
+          // Desactivar ataque
+          // this.attack = false;
 
-            // Cambiar sprite
-            this.spriteW = '135px';
-            this.spriteH = '140px';
-            this.spriteMW = '-675px';
-            this.animation = 'animation .5s steps(5) infinite';
-            this.sprite = 'url(' + new URL(`/src/img/characters/quasar/idle.png`, import.meta.url) + ')';
-          }, 800);
+          // Cambiar sprite
+          //   this.spriteW = '135px';
+          //   this.spriteH = '140px';
+          //   this.spriteMW = '-675px';
+          //   this.animation = 'animation .5s steps(5) infinite';
+          //   this.sprite = 'url(' + new URL(`/src/img/characters/quasar/idle.png`, import.meta.url) + ')';
+          // }, 800);
           break;
         case 'a':
           this.aPressed = false;
@@ -145,10 +145,10 @@ export default {
   },
   computed: {
     movementP1() {
-      return this.characterP1.speed / 250;
+      return this.characterP1.speed.space / 250;
     },
     movementP2() {
-      return this.characterP2.speed / 250;
+      return this.characterP2.speed.space / 250;
     },
     widthP1() {
       return (this.characterP1.hitbox.width / screen.width) * 100;
@@ -243,6 +243,8 @@ export default {
   position: absolute;
   bottom: 0;
 
+  height: 140px;
+
   .attack {
     width: 443px;
     height: 70px;
@@ -250,19 +252,10 @@ export default {
     position: absolute;
     bottom: 0;
   }
-
-#player2 {
-  transform: rotateY(180deg);
-  width: v-bind(widthPxP2);
-  height: 140px;
-
-  background-color: blue;
-  right: v-bind(distanceP2);
 }
 
 #player1 {
   width: v-bind(widthPxP1);
-  height: 140px;
   background-color: red;
   left: v-bind(distanceP1);
 }
@@ -270,7 +263,6 @@ export default {
 #player2 {
   transform: rotateY(180deg);
   width: v-bind(widthPxP2);
-  height: 140px;
 
   background-color: blue;
   right: v-bind(distanceP2);

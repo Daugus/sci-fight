@@ -14,7 +14,7 @@ const vespera: Character = {
     damage: 0,
   },
   speed: {
-    space: 0,
+    space: 120,
     time: 0,
   },
   health: 0,

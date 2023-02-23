@@ -14,7 +14,7 @@ const astraeus: Character = {
     damage: 0,
   },
   speed: {
-    space: 0,
+    space: 80,
     time: 0,
   },
   health: 0,
