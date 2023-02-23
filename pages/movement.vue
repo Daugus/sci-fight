@@ -90,29 +90,27 @@ export default {
         case 'd':
           this.dPressed = false;
           break;
-        case 'ArrowLeft':
+        case 'arrowleft':
           this.leftPressed = false;
           break;
-        case 'ArrowRight':
+        case 'arrowright':
           this.rightPressed = false;
-          break;
-        default:
           break;
       }
     },
     keyDown(event: KeyboardEvent) {
       //switch para que se muevan los divs
-      switch (event.key) {
+      switch (event.key.toLowerCase()) {
         case 'a':
           this.aPressed = true;
           break;
         case 'd':
           this.dPressed = true;
           break;
-        case 'ArrowLeft':
+        case 'arrowleft':
           this.leftPressed = true;
           break;
-        case 'ArrowRight':
+        case 'arrowright':
           this.rightPressed = true;
           break;
       }
@@ -214,16 +212,7 @@ export default {
       Attack
     </div>
   </div>
-  <div
-    class="player"
-    id="player2"
-  >
-    Player 2
-    <div
-      class="attack"
-      v-if="attack === true"
-    ></div>
-  </div>
+
   <div
     class="player"
     id="player2"
