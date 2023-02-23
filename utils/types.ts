@@ -1,22 +1,22 @@
-export type Hitbox = {
+export type hitbox = {
   height: number;
   width: number;
 };
 
-export type Attack = {
+export type attack = {
+  hitbox: hitbox;
   damage: number;
-  hitbox: Hitbox;
   cooldown: number;
 };
 
+export type speed = {
+  space: number;
+  time: number;
+};
+
 export type Character = {
-  name: string;
-
+  hitbox: hitbox;
+  attack: attack;
+  speed: speed;
   health: number;
-
-  hitbox: Hitbox;
-  weight: number;
-  speed: number;
-
-  attack: Attack;
 };

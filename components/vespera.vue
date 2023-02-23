@@ -2,7 +2,7 @@
 export default {
   data() {
     return {
-      width: '',
+      width: '1152px',
       maxWidth: '',
       height: '',
       animation: '',
@@ -11,45 +11,39 @@ export default {
   },
   methods: {
     appear() {
-      this.width = '198.2px';
       this.height = '176px';
-      this.maxWidth = '-1784px';
+      this.maxWidth = '-10368px';
       this.animation = 'animation .9s steps(9) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/vespera/appear.png`, import.meta.url) + ')';
     },
     idle() {
-      this.width = '192.2px';
       this.height = '176px';
-      this.maxWidth = '-1153px';
+      this.maxWidth = '-6912px';
       this.animation = 'animation .6s steps(6) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/vespera/idle.png`, import.meta.url) + ')';
     },
     move() {
-      this.width = '146px';
-      this.height = '140px';
-      this.maxWidth = '-1168px';
+      this.height = '176px';
+      this.maxWidth = '-6912px';
       this.animation = 'animation .6s steps(6) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/vespera/move.png`, import.meta.url) + ')';
     },
     attack() {
-      this.width = '625px';
       this.height = '220px';
-      this.maxWidth = '-3125px';
+      this.maxWidth = '-5760px';
       this.animation = 'animation .5s steps(5) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/vespera/attack.png`, import.meta.url) + ')';
     },
     hit() {
-      this.width = '192.2px';
       this.height = '176px';
-      this.maxWidth = '-1153px';
+      this.maxWidth = '-6912px';
       this.animation = 'animation .6s steps(6) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/vespera/hit.png`, import.meta.url) + ')';
     },
     death() {
-      this.width = '213px';
-      this.height = '140px';
-      this.maxWidth = '-1065px';
-      this.animation = 'animation .8s steps(8) infinite';
+      this.height = '176px';
+      this.maxWidth = '-10368px';
+      this.animation = 'animation .9s steps(9) infinite';
       this.sprite = 'url(' + new URL(`/src/img/characters/vespera/death.png`, import.meta.url) + ')';
     },
   },
@@ -104,6 +98,7 @@ export default {
 }
 
 .hitbox {
+  position: absolute;
   width: v-bind(width);
   height: v-bind(height);
 
