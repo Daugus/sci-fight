@@ -8,7 +8,7 @@ const galvus: Character = {
   attack: {
     hitbox: {
       height: 50,
-      width: 0,
+      width: 520,
     },
     cooldown: 0,
     damage: 0,
