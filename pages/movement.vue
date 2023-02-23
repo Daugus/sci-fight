@@ -15,7 +15,8 @@ export default {
     clearInterval(timerDerechaP2);
 
     return {
-      attack: false,
+      attackP1: false,
+      attackP2: false,
       characterP1: quasar,
       characterP2: quasar,
       positionP1: 0,
@@ -61,7 +62,7 @@ export default {
       switch (event.key.toLowerCase()) {
         case 'w':
           // Activar ataque
-          this.attack = true;
+          this.attackP1 = true;
 
           // setTimeout(() => {
           //   // Cambiar sprite
@@ -72,9 +73,10 @@ export default {
           //   this.sprite = 'url(' + new URL(`/src/img/characters/quasar/attack.png`, import.meta.url) + ')';
           // }, 100);
 
-          // setTimeout(() => {
-          // Desactivar ataque
-          // this.attack = false;
+          setTimeout(() => {
+            // Desactivar ataque
+            this.attackP1 = false;
+          }, 800);
 
           // Cambiar sprite
           //   this.spriteW = '135px';
@@ -89,6 +91,14 @@ export default {
           break;
         case 'd':
           this.dPressed = false;
+          break;
+        case 'arrowup':
+          this.attackP2 = true;
+
+          setTimeout(() => {
+            // Desactivar ataque
+            this.attackP2 = false;
+          }, 800);
           break;
         case 'arrowleft':
           this.leftPressed = false;
@@ -207,7 +217,7 @@ export default {
     Player 1
     <div
       class="attack"
-      v-if="attack === true"
+      v-if="attackP1 === true"
     >
       Attack
     </div>
@@ -220,7 +230,7 @@ export default {
     Player 2
     <div
       class="attack"
-      v-if="attack === true"
+      v-if="attackP2 === true"
     >
       Attack
     </div>
