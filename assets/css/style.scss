@@ -5,3 +5,7 @@
 .router-link-active {
   @apply font-bold;
 }
+
+.rotate-x-180 {
+  transform: rotateY(180deg);
+}
