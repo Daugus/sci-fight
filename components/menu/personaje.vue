@@ -9,9 +9,6 @@ export default {
     current() {
       return characters[this.index];
     },
-    imagen() {
-      return `/src/img/characters/${this.current.name}.png`;
-    },
   },
   mounted() {},
   methods: {
@@ -32,25 +29,23 @@ export default {
 </script>
 
 <template>
-  <div class="flex justify-center">
-    <button
-      class="mt-20 h-20"
-      @click="menos"
-    >
-      -
-    </button>
-    <img
-      class="w-36"
-      :src="imagen"
-      alt=""
-    />
-    <button
-      class="mt-20 h-20"
-      @click="mas"
-    >
-      +
-    </button>
+  <div class="mt-40 flex justify-center bg-white">
+    <div class="relative mt-12 flex w-20 justify-center bg-slate-500">
+      <div :class="['sprite', `${current.name}-idle`]"></div>
+    </div>
   </div>
+  <button
+    class="h-5 w-5"
+    @click="menos"
+  >
+    -
+  </button>
+  <button
+    class="h-5 w-5"
+    @click="mas"
+  >
+    +
+  </button>
 </template>
 
 <style lang="scss"></style>

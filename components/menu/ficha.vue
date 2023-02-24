@@ -16,7 +16,7 @@ export default {
 
 <template>
   <div :class="['flex', 'border', 'p-2', rotar && 'rotate-x-180']">
-    <div class="bg-slate-600">
+    <div>
       <MenuPersonaje />
     </div>
     <div class="col rotate-x-180 m-2 border p-2">
