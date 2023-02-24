@@ -12,10 +12,10 @@ export default {
       character: quasar,
       position: 0,
       distance: '1%',
-      dPressed: false,
-      aPressed: false,
-      currentIntervalIzq: timerIzquierda,
-      currentIntervalDer: timerDerecha,
+      rightPressed: false,
+      leftPressed: false,
+      currentIntervalLeft: timerIzquierda,
+      currentIntervalRight: timerDerecha,
     };
   },
   props: {
@@ -66,37 +66,17 @@ export default {
       // hacer el switch case de las teclas para que se puedan leer
       // ademas setear el componente a clase para que pare
       switch (event.key.toLowerCase()) {
-        case 'w':
+        case this.key.up:
           // Activar ataque
           this.attack = true;
 
-          // setTimeout(() => {
-          //   // Cambiar sprite
-          //   this.spriteW = '443px';
-          //   this.spriteH = '140px';
-          //   this.spriteMW = '-3544px';
-          //   this.animation = 'animation .8s steps(8) infinite';
-          //   this.sprite = 'url(' + new URL(`/src/img/characters/quasar/attack.png`, import.meta.url) + ')';
-          // }, 100);
-
-          setTimeout(() => {
-            // Desactivar ataque
-            this.attack = false;
-          }, 800);
-
-          // Cambiar sprite
-          //   this.spriteW = '135px';
-          //   this.spriteH = '140px';
-          //   this.spriteMW = '-675px';
-          //   this.animation = 'animation .5s steps(5) infinite';
-          //   this.sprite = 'url(' + new URL(`/src/img/characters/quasar/idle.png`, import.meta.url) + ')';
-          // }, 800);
+          setTimeout(() => (this.attack = false), 800);
           break;
         case this.key.left:
-          this.aPressed = false;
+          this.leftPressed = false;
           break;
         case this.key.right:
-          this.dPressed = false;
+          this.rightPressed = false;
           break;
       }
     },
@@ -104,28 +84,49 @@ export default {
       //switch para que se muevan los divs
       switch (event.key.toLowerCase()) {
         case this.key.left:
-          this.aPressed = true;
+          this.leftPressed = true;
           break;
         case this.key.right:
-          this.dPressed = true;
+          this.rightPressed = true;
           break;
       }
     },
     // funciones para mover los divs
     moveLeft() {
-      if (!this.dPressed && this.position > 1) {
+      if (!this.rightPressed && this.position > 1) {
         this.position -= this.movement;
         this.distance = `${this.position - this.movement}%`;
       }
     },
     moveRight() {
-      if (!this.aPressed && this.position < 99 - this.width) {
+      if (!this.leftPressed && this.position < 99 - this.width) {
         this.position += this.movement;
         this.distance = `${this.position + this.movement}%`;
       }
     },
   },
-  watch: {},
+  watch: {
+    rightPressed: function () {
+      clearInterval(this.currentIntervalLeft);
+
+      if (this.rightPressed) this.currentIntervalLeft = setImmediateInterval(this.moveRight, 10);
+
+      // if (this.rightPressed) {
+      //   this.moveRight();
+      //   this.currentIntervalLeft = setInterval(this.moveRight, 10);
+      // }
+    },
+    leftPressed: function () {
+      clearInterval(this.currentIntervalRight);
+
+      if (this.leftPressed) this.currentIntervalRight = setImmediateInterval(this.moveLeft, 10);
+
+      // if (this.leftPressed) {
+      //   this.moveLeft();
+      //   this.currentIntervalRight = setInterval(this.moveLeft, 10);
+      // }
+    },
+  },
 };
 </script>
 
@@ -134,14 +135,43 @@ export default {
     class="player"
     :id="`player${playerNumber}`"
   >
-    Player 1
+    Player {{ playerNumber }}
 
     <CharacterAttack
-      :player-number="1"
+      :player-number="playerNumber"
       @getRect="getRect"
       v-if="attack === true"
     />
   </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.player {
+  position: absolute;
+  bottom: 0;
+
+  height: 140px;
+
+  .attack {
+    width: 443px;
+    height: 70px;
+    background-color: rgba(0, 255, 0, 0.5);
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+#player1 {
+  width: v-bind(widthPx);
+  background-color: red;
+  left: v-bind(distance);
+}
+
+// #player2 {
+//   transform: rotateY(180deg);
+//   width: v-bind(widthPxP2);
+
+//   background-color: blue;
+//   right: v-bind(distanceP2);
+// }
+</style>
