@@ -9,3 +9,455 @@
 .rotate-x-180 {
   transform: rotateY(180deg);
 }
+
+// ------ SPRITES GENERAL ------
+.sprite {
+  position: absolute;
+  bottom: 0;
+  z-index: 10;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+// ------ ASTRAEUS ------
+// Appear
+.astraeus-appear {
+  width: 565px;
+  height: 500px;
+
+  background: url('/src/img/characters/astraeus/appear.png');
+
+  animation: astraeus-appear 0.8s steps(8) infinite;
+}
+
+@keyframes astraeus-appear {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -4520px;
+  }
+}
+
+// Idle
+.astraeus-idle {
+  width: 565px;
+  height: 201px;
+
+  background: url('/src/img/characters/astraeus/idle.png');
+
+  animation: astraeus-idle 0.5s steps(5) infinite;
+}
+
+@keyframes astraeus-idle {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -2825px;
+  }
+}
+
+// Move
+.astraeus-move {
+  width: 565px;
+  height: 201px;
+
+  background: url('/src/img/characters/astraeus/move.png');
+
+  animation: astraeus-move 0.5s steps(5) infinite;
+}
+
+@keyframes astraeus-move {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -2825px;
+  }
+}
+// Attack
+.astraeus-attack {
+  width: 565px;
+  height: 201px;
+
+  background: url('/src/img/characters/astraeus/attack.png');
+
+  animation: astraeus-attack 0.8s steps(8) infinite;
+}
+
+@keyframes astraeus-attack {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -4520px;
+  }
+}
+// Hit
+.astraeus-hit {
+  width: 565px;
+  height: 201px;
+
+  background: url('/src/img/characters/astraeus/hit.png');
+
+  animation: astraeus-hit 0.5s steps(5) infinite;
+}
+
+@keyframes astraeus-hit {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -2825px;
+  }
+}
+// Death
+.astraeus-death {
+  width: 565px;
+  height: 286px;
+
+  background: url('/src/img/characters/astraeus/death.png');
+
+  animation: astraeus-death 0.6s steps(6) infinite;
+}
+
+@keyframes astraeus-death {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -3390px;
+  }
+}
+
+// ------ GALVUS ------
+// Appear
+.galvus-appear {
+  width: 987px;
+  height: 500px;
+
+  background: url('/src/img/characters/galvus/appear.png');
+
+  animation: galvus-appear 1.2s steps(12) infinite;
+}
+
+@keyframes galvus-appear {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -11844px;
+  }
+}
+// Idle
+.galvus-idle {
+  width: 987px;
+  height: 186px;
+
+  background: url('/src/img/characters/galvus/idle.png');
+
+  animation: galvus-idle 0.6s steps(6) infinite;
+}
+
+@keyframes galvus-idle {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -5922px;
+  }
+}
+// Move
+.galvus-move {
+  width: 987px;
+  height: 186px;
+
+  background: url('/src/img/characters/galvus/move.png');
+
+  animation: galvus-move 0.6s steps(6) infinite;
+}
+
+@keyframes galvus-move {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -5922px;
+  }
+}
+// Attack
+.galvus-attack {
+  width: 987px;
+  height: 186px;
+
+  background: url('/src/img/characters/galvus/attack.png');
+
+  animation: galvus-attack 1s steps(10) infinite;
+}
+
+@keyframes galvus-attack {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -9870px;
+  }
+}
+// Hit
+.galvus-hit {
+  width: 987px;
+  height: 186px;
+
+  background: url('/src/img/characters/galvus/hit.png');
+
+  animation: galvus-hit 0.6s steps(6) infinite;
+}
+
+@keyframes galvus-hit {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -5922px;
+  }
+}
+// Death
+.galvus-death {
+  width: 987px;
+  height: 186px;
+
+  background: url('/src/img/characters/galvus/death.png');
+
+  animation: galvus-death 0.6s steps(6) infinite;
+}
+
+@keyframes galvus-death {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -5922px;
+  }
+}
+
+// ------ QUASAR ------
+// Appear
+.quasar-appear {
+  width: 675px;
+  height: 140px;
+
+  background: url('/src/img/characters/quasar/appear.png');
+
+  animation: quasar-appear 0.4s steps(4) infinite;
+}
+
+@keyframes quasar-appear {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -2700px;
+  }
+}
+// Idle
+.quasar-idle {
+  width: 675px;
+  height: 140px;
+
+  background: url('/src/img/characters/quasar/idle.png');
+
+  animation: quasar-idle 0.5s steps(5) infinite;
+}
+
+@keyframes quasar-idle {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -3375px;
+  }
+}
+// Move
+.quasar-move {
+  width: 675px;
+  height: 140px;
+
+  background: url('/src/img/characters/quasar/move.png');
+
+  animation: quasar-move 0.8s steps(8) infinite;
+}
+
+@keyframes quasar-move {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -5400px;
+  }
+}
+// Attack
+.quasar-attack {
+  width: 675px;
+  height: 140px;
+
+  background: url('/src/img/characters/quasar/attack.png');
+
+  animation: quasar-attack 0.8s steps(8) infinite;
+}
+
+@keyframes quasar-attack {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -5400px;
+  }
+}
+// Hit
+.quasar-hit {
+  width: 675px;
+  height: 140px;
+
+  background: url('/src/img/characters/quasar/hit.png');
+
+  animation: quasar-hit 0.5s steps(5) infinite;
+}
+
+@keyframes quasar-hit {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -3375px;
+  }
+}
+// Death
+.quasar-death {
+  width: 675px;
+  height: 140px;
+
+  background: url('/src/img/characters/quasar/death.png');
+
+  animation: quasar-death 0.5s steps(5) infinite;
+}
+
+@keyframes quasar-death {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -3375px;
+  }
+}
+
+// ------ VESPERA ------
+// Appear
+.vespera-appear {
+  width: 1152px;
+  height: 176px;
+
+  background: url('/src/img/characters/vespera/appear.png');
+
+  animation: vespera-appear 0.9s steps(9) infinite;
+}
+
+@keyframes vespera-appear {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -10368px;
+  }
+}
+// Idle
+.vespera-idle {
+  width: 1152px;
+  height: 176px;
+
+  background: url('/src/img/characters/vespera/idle.png');
+
+  animation: vespera-idle 0.6s steps(6) infinite;
+}
+
+@keyframes vespera-idle {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -6912px;
+  }
+}
+// Move
+.vespera-move {
+  width: 1152px;
+  height: 176px;
+
+  background: url('/src/img/characters/vespera/move.png');
+
+  animation: vespera-move 0.6s steps(6) infinite;
+}
+
+@keyframes vespera-move {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -6912px;
+  }
+}
+// Attack
+.vespera-attack {
+  width: 1152px;
+  height: 220px;
+
+  background: url('/src/img/characters/vespera/attack.png');
+
+  animation: vespera-attack 0.5s steps(5) infinite;
+}
+
+@keyframes vespera-attack {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -5760px;
+  }
+}
+// Hit
+.vespera-hit {
+  width: 1152px;
+  height: 176px;
+
+  background: url('/src/img/characters/vespera/hit.png');
+
+  animation: vespera-hit 0.6s steps(6) infinite;
+}
+
+@keyframes vespera-hit {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -6912px;
+  }
+}
+// Death
+.vespera-death {
+  width: 1152px;
+  height: 176px;
+
+  background: url('/src/img/characters/vespera/death.png');
+
+  animation: vespera-death 0.9s steps(9) infinite;
+}
+
+@keyframes vespera-death {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -10368px;
+  }
+}

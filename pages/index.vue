@@ -2,6 +2,7 @@
   <header class="absolute top-5 text-2xl">
     <ul class="mx-auto flex w-full flex-col items-center justify-center">
       <li><NuxtLink to="/">Index</NuxtLink></li>
+      <li><NuxtLink to="/menu">Menu selección</NuxtLink></li>
       <li><NuxtLink to="/characters">Characters</NuxtLink></li>
       <li><NuxtLink to="/arena">Arena</NuxtLink></li>
     </ul>

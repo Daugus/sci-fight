@@ -1,4 +1,4 @@
-import { Character } from './types';
+import Character from './types';
 
 const astraeus: Character = {
   name: 'astraeus',
@@ -12,13 +12,14 @@ const astraeus: Character = {
       width: 330,
     },
     cooldown: 0,
-    damage: 0,
+    damage: 30,
   },
   speed: {
     space: 80,
-    time: 0,
+    time: 1.5,
   },
-  health: 0,
+  health: 140,
+  color: '#5d6545',
 };
 
 export default astraeus;

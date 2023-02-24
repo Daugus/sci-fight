@@ -1,7 +1,8 @@
-import { Character } from './types';
+import Character from './types';
 
 const quasar: Character = {
   name: 'quasar',
+
   hitbox: {
     height: 140,
     width: 135,
@@ -12,13 +13,14 @@ const quasar: Character = {
       width: 290,
     },
     cooldown: 0,
-    damage: 0,
+    damage: 20,
   },
   speed: {
-    space: 100,
-    time: 0,
+    space: 140,
+    time: 1.5,
   },
-  health: 0,
+  health: 120,
+  color: '#9c3333',
 };
 
 export default quasar;
