@@ -3,7 +3,7 @@
     <ul class="mx-auto flex w-full flex-col items-center justify-center">
       <li><NuxtLink to="/">Index</NuxtLink></li>
       <li><NuxtLink to="/characters">Characters</NuxtLink></li>
-      <li><NuxtLink to="/movement">Movement</NuxtLink></li>
+      <li><NuxtLink to="/arena">Arena</NuxtLink></li>
     </ul>
   </header>
 
@@ -11,5 +11,3 @@
     <h1>página de index</h1>
   </div>
 </template>
-
-<style lang="scss"></style>

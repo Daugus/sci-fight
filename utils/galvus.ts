@@ -1,6 +1,7 @@
 import { Character } from './types';
 
 const galvus: Character = {
+  name: 'galvus',
   hitbox: {
     height: 186,
     width: 94,
