@@ -1,4 +1,6 @@
 <script lang="ts">
+import { Astraeus } from '~~/.nuxt/components';
+
 export default {
   data() {
     return {
@@ -6,7 +8,7 @@ export default {
     };
   },
   computed: {
-    current() {
+    currentCharacter() {
       return characters[this.index];
     },
   },
@@ -18,34 +20,41 @@ export default {
       }
     },
     menos() {
-      this.index = this.index - 1 === 0 ? characters.length - 1 : this.index - 1;
+      this.index = this.index - 1 < 0 ? characters.length - 1 : this.index - 1;
     },
     mas() {
       this.index = this.index + 1 >= characters.length ? 0 : this.index + 1;
     },
   },
-  watch: {},
+  watch: {
+    index() {
+      this.$emit('getCurrentCharacter', this.currentCharacter);
+      this.$emit('getCurrentCharacterName', this.currentCharacter.name);
+    },
+  },
 };
 </script>
 
 <template>
-  <div class="mt-40 flex justify-center bg-white">
-    <div class="relative mt-12 flex w-20 justify-center bg-slate-500">
-      <div :class="['sprite', `${current.name}-idle`]"></div>
+  <div>
+    <div class="mt-40 flex justify-center bg-white align-middle">
+      <button
+        class="z-50 h-5 w-5"
+        @click="menos"
+      >
+        -
+      </button>
+      <div class="relative mt-12 flex w-52 justify-center bg-slate-500">
+        <div :class="['sprite', `${currentCharacter.name}-idle`]"></div>
+      </div>
+      <button
+        class="z-50 h-5 w-5"
+        @click="mas"
+      >
+        +
+      </button>
     </div>
   </div>
-  <button
-    class="h-5 w-5"
-    @click="menos"
-  >
-    -
-  </button>
-  <button
-    class="h-5 w-5"
-    @click="mas"
-  >
-    +
-  </button>
 </template>
 
 <style lang="scss"></style>

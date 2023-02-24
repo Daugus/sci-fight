@@ -1,3 +1,3 @@
-const characters = [astraeus, quasar, vespera];
+const characters = [astraeus, galvus, quasar, vespera];
 
 export default characters;

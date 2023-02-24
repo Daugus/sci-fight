@@ -1,4 +1,4 @@
-import { Character } from './types';
+import Character from './types';
 
 const vespera: Character = {
   name: 'vespera',
@@ -13,13 +13,14 @@ const vespera: Character = {
       width: 400,
     },
     cooldown: 0,
-    damage: 0,
+    damage: 30,
   },
   speed: {
     space: 120,
-    time: 0,
+    time: 1.5,
   },
-  health: 0,
+  health: 120,
+  color: '#ba9db5 ',
 };
 
 export default vespera;

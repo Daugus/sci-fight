@@ -1,6 +1,8 @@
-import { Character } from './types';
+import Character from './types';
 
 const galvus: Character = {
+  name: 'galvus',
+
   hitbox: {
     height: 186,
     width: 94,
@@ -11,13 +13,14 @@ const galvus: Character = {
       width: 520,
     },
     cooldown: 0,
-    damage: 0,
+    damage: 40,
   },
   speed: {
-    space: 0,
-    time: 0,
+    space: 120,
+    time: 1.5,
   },
-  health: 0,
+  health: 100,
+  color: '#23313d',
 };
 
 export default galvus;

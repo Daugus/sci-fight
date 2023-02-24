@@ -14,10 +14,13 @@ export type speed = {
   time: number;
 };
 
-export type Character = {
+type Character = {
   name: string;
   hitbox: hitbox;
   attack: attack;
   speed: speed;
   health: number;
+  color: string;
 };
+
+export default Character;
