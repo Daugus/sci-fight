@@ -34,17 +34,18 @@ export default {
 <template>
   <div class="flex justify-center">
     <button
-      class="mt-20"
+      class="mt-20 h-20"
       @click="menos"
     >
       -
     </button>
     <img
+      class="w-36"
       :src="imagen"
       alt=""
     />
     <button
-      class="mt-20 h-10"
+      class="mt-20 h-20"
       @click="mas"
     >
       +
