@@ -1,6 +1,7 @@
 import { Character } from './types';
 
 const quasar: Character = {
+  name: 'quasar',
   hitbox: {
     height: 140,
     width: 135,

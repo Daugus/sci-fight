@@ -1,6 +1,7 @@
 import { Character } from './types';
 
 const astraeus: Character = {
+  name: 'astraeus',
   hitbox: {
     height: 201,
     width: 113,

@@ -1,6 +1,7 @@
 import { Character } from './types';
 
 const vespera: Character = {
+  name: 'vespera',
   hitbox: {
     height: 176,
     width: 192.2,
