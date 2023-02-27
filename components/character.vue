@@ -83,8 +83,21 @@ export default {
       const { left } = document.querySelector(`#player-2`)!.getBoundingClientRect();
 
       if (!this.leftPressed && this.position < 99 - this.width && !this.attack) {
-        if (this.playerNumber === 1 && right >= left) return;
-        if (this.playerNumber === 2 && left <= right) return;
+        if (this.playerNumber === 1 && right >= left) {
+          //hacemos que la posicion de el que se choca sea de 30 cuando detecta que las dos cajas se han chocado
+          this.position -= 30;
+          // hacemos que distancia que es un porcentaje sea de -30 para moverlo 30 % hacia atras
+          this.distance = `${this.position}%`;
+          return;
+        }
+
+        if (this.playerNumber === 2 && left <= right) {
+          //hacemos que la posicion de el que se choca sea de 30 cuando detecta que las dos cajas se han chocado
+          this.position -= 30;
+          // hacemos que distancia que es un porcentaje sea de -30 para moverlo 30 % hacia atras
+          this.distance = `${this.position}%`;
+          return;
+        }
 
         this.position += this.movement;
         this.distance = `${this.position + this.movement}%`;
