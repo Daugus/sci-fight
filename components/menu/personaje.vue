@@ -17,17 +17,16 @@ export default {
         this.index = characters.length;
       }
     },
-    menos() {
+    previous() {
       this.index = this.index - 1 < 0 ? characters.length - 1 : this.index - 1;
     },
-    mas() {
+    next() {
       this.index = this.index + 1 >= characters.length ? 0 : this.index + 1;
     },
   },
   watch: {
     index() {
       this.$emit('getCurrentCharacter', this.currentCharacter);
-      this.$emit('getCurrentCharacterName', this.currentCharacter.name);
     },
   },
 };
@@ -35,19 +34,24 @@ export default {
 
 <template>
   <div>
-    <div class="mt-40 flex justify-center bg-white align-middle">
+    <div class="flex h-56 justify-center overflow-hidden align-middle">
+      <!-- Boton: Cambiar personaje (izquierda) -->
       <button
-        class="z-50 h-5 w-5"
-        @click="menos"
+        class="z-50 w-16"
+        @click="previous"
       >
         -
       </button>
-      <div class="relative mt-12 flex w-52 justify-center bg-slate-500">
+
+      <!-- Sprite personaje seleccionado -->
+      <div class="relative flex w-52 justify-center">
         <div :class="['sprite', `${currentCharacter.name}-idle`]"></div>
       </div>
+
+      <!-- Boton: Cambiar personaje (derecha) -->
       <button
-        class="z-50 h-5 w-5"
-        @click="mas"
+        class="z-50 w-16"
+        @click="next"
       >
         +
       </button>

@@ -16,7 +16,6 @@ export default {
   methods: {
     getCurrentCharacter(currentCharacter: Character) {
       this.currentCharacter = currentCharacter;
-      console.log(currentCharacter);
     },
   },
   watch: {},
@@ -24,32 +23,32 @@ export default {
 </script>
 
 <template>
-  <div class="align- m-5 flex flex-col justify-center align-middle">
+  <div class="flex flex-col justify-center align-middle">
     <div class="">{{ currentCharacter.name.toUpperCase() }}</div>
-    <div :class="['flex', 'p-2', rotar && 'rotate-x-180']">
-      <div>
-        <MenuPersonaje @getCurrentCharacter="getCurrentCharacter" />
-      </div>
-      <div class="col rotate-x-180 m-2 justify-center p-2 align-middle">
+    <div :class="['flex', 'h-full', rotar && 'rotate-x-180']">
+      <!-- Sprite personaje -->
+      <MenuPersonaje @getCurrentCharacter="getCurrentCharacter" />
+      <div class="rotate-x-180 flex h-full flex-col justify-center gap-11">
+        <!-- Daño -->
         <MenuEstadistica
           :character="currentCharacter"
           :estadistica="{ name: 'attack', value: currentCharacter.attack.damage * 1.9 }"
           :color-fondo="colorFondo"
         ></MenuEstadistica>
+
+        <!-- Vida -->
         <MenuEstadistica
           :character="currentCharacter"
           :estadistica="{ name: 'health', value: (currentCharacter.health * 100) / 180 }"
           :color-fondo="colorFondo"
-        >
-          vida
-        </MenuEstadistica>
+        ></MenuEstadistica>
+
+        <!-- Velocidad -->
         <MenuEstadistica
           :character="currentCharacter"
           :estadistica="{ name: 'speed', value: currentCharacter.speed.space / currentCharacter.speed.time }"
           :color-fondo="colorFondo"
-        >
-          velocidad
-        </MenuEstadistica>
+        ></MenuEstadistica>
       </div>
     </div>
   </div>

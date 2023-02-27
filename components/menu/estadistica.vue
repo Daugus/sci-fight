@@ -14,14 +14,27 @@ export default {
 </script>
 
 <template>
-  <div class="row m-2 w-64 p-2">
-    <div class="mb-4 h-2.5 w-full rounded-full">
+  <div class="stats-container flex w-64 flex-col justify-center align-middle">
+    <div class="flex h-6 w-full overflow-visible">
       <div
-        :class="['h-2.5', 'rounded-full', 'transition-all']"
+        :class="['h-full', 'transition-all']"
         :style="`width: ${estadistica.value}%; background-color: ${character.color}`"
       ></div>
+      <img
+        class="z-50"
+        src="/src/img/assets/stats_splitter.png"
+      />
     </div>
   </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.stats-container > div {
+  position: relative;
+
+  & > div {
+    position: absolute;
+    overflow: visible;
+  }
+}
+</style>
