@@ -13,12 +13,22 @@ export default {
       currentIntervalLeft: setEmptyInterval(),
       currentIntervalRight: setEmptyInterval(),
       movementDirection: 1,
+      test: {} as HTMLElement,
     };
   },
   props: {
     playerNumber: { required: true, type: Number },
     color: { required: true, type: String },
-    controls: { required: true, type: Object as PropType<{ attack: string; right: string; left: string }> },
+
+    controls: {
+      required: true,
+      type: Object as PropType<{
+        attack: string;
+        right: string;
+        left: string;
+        parry: string;
+      }>,
+    },
   },
   computed: {
     movement() {
@@ -30,9 +40,12 @@ export default {
     widthPx() {
       return `${this.character.hitbox.width}px`;
     },
+    id() {
+      return `player-${this.playerNumber}`;
+    },
   },
   mounted() {
-    // if (this.playerNumber === 2) this.distance = '90%';
+    this.test = document.querySelector(`#${this.id}`)!;
 
     document.addEventListener('keyup', this.keyUp);
     document.addEventListener('keydown', this.keyDown);
@@ -42,14 +55,21 @@ export default {
       const receiverPlayerNumber = playerNumber === 1 ? 2 : 1;
 
       const playerRect = document.querySelector(`#player-${receiverPlayerNumber}`)!.getBoundingClientRect();
+      // console.log(attackRect.x + attackRect.width >= playerRect!.x && attackRect.x <= playerRect.x + playerRect.width);
 
-      const intersect = attackRect.x + attackRect.width >= playerRect!.x && attackRect.x <= playerRect.x + playerRect.width;
+      if (attackRect.x + attackRect.width >= playerRect!.x && attackRect.x <= playerRect.x + playerRect.width)
+        this.$emit('damagePlayer', {
+          receiver: receiverPlayerNumber,
+          damage: this.character.attack.damage,
+        });
     },
     keyUp(event: KeyboardEvent) {
       switch (event.key.toLowerCase()) {
         case this.controls.attack:
           // Activar ataque
           this.attack = true;
+          clearInterval(this.currentIntervalLeft);
+          clearInterval(this.currentIntervalRight);
 
           setTimeout(() => (this.attack = false), 800);
           break;
@@ -73,13 +93,19 @@ export default {
     },
     // funciones para mover los divs
     moveLeft() {
-      if (!this.rightPressed && this.position > 1) {
+      if (!this.rightPressed && this.position > 1 && !this.attack) {
         this.position -= this.movement;
         this.distance = `${this.position - this.movement}%`;
       }
     },
     moveRight() {
-      if (!this.leftPressed && this.position < 99 - this.width) {
+      const { right } = document.querySelector(`#player-1`)!.getBoundingClientRect();
+      const { left } = document.querySelector(`#player-2`)!.getBoundingClientRect();
+
+      if (!this.leftPressed && this.position < 99 - this.width && !this.attack) {
+        if (this.playerNumber === 1 && right >= left) return;
+        if (this.playerNumber === 2 && left <= right) return;
+
         this.position += this.movement;
         this.distance = `${this.position + this.movement}%`;
       }
@@ -103,7 +129,7 @@ export default {
 <template>
   <div
     :class="['player', playerNumber === 2 && 'rotate-x-180']"
-    :id="`player-${playerNumber}`"
+    :id="id"
   >
     Player {{ playerNumber }}
 
@@ -118,7 +144,7 @@ export default {
 <style lang="scss">
 .player {
   position: absolute;
-  bottom: 0;
+  bottom: calc(10vh - 3px);
 
   height: 140px;
 
