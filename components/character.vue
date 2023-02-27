@@ -73,13 +73,19 @@ export default {
     },
     // funciones para mover los divs
     moveLeft() {
-      if (!this.rightPressed && this.position > 1) {
+      if (!this.rightPressed && this.position > 1 && !this.attack) {
         this.position -= this.movement;
         this.distance = `${this.position - this.movement}%`;
       }
     },
     moveRight() {
-      if (!this.leftPressed && this.position < 99 - this.width) {
+      const { right } = document.querySelector(`#player-1`)!.getBoundingClientRect();
+      const { left } = document.querySelector(`#player-2`)!.getBoundingClientRect();
+
+      if (!this.leftPressed && this.position < 99 - this.width && !this.attack) {
+        if (this.playerNumber === 1 && right >= left) return;
+        if (this.playerNumber === 2 && left <= right) return;
+
         this.position += this.movement;
         this.distance = `${this.position + this.movement}%`;
       }

@@ -13,6 +13,9 @@ export default {
     // Generar un escenario aleatorio
     let random = Math.floor(Math.random() * (4 - 1) + 1);
     this.stage = `url(/src/img/stages/${random}.gif)`;
+
+    document.body.classList.add('overflow-hidden');
+
     this.p1Health = this.currentCharacter.health;
     this.p2Health = this.otro.health;
   },
