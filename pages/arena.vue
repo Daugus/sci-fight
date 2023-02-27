@@ -63,6 +63,16 @@ export default {
   background-image: v-bind(stage);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: bottom;
+
+  // .floor {
+  //   width: 100vw;
+  //   height: 10vh;
+  //   position: absolute;
+  //   bottom: 0;
+
+  //   background-image: v-bind(floor);
+  //   background-size: 20%;
+  // }
 }
 </style>

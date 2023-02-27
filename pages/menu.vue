@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-col justify-center gap-6 text-center align-middle">
+  <div class="flex scale-150 flex-col justify-center gap-6 text-center align-middle">
     <!-- Cambiar por un logo  -->
     <h1>SCI-FIGHT</h1>
 

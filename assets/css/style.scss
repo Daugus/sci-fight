@@ -461,3 +461,23 @@
     background-position: -10368px;
   }
 }
+
+// ------ ABILITIES ------
+// protect
+.protect {
+  width: 250px;
+  height: 250px;
+
+  background: url('/src/img/abilities/protect.png');
+
+  animation: protect 0.9s steps(9) infinite;
+}
+
+@keyframes protect {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -2250px;
+  }
+}
