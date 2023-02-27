@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex scale-150 flex-col justify-center gap-6 overflow-hidden text-center align-middle">
+  <div class="flex scale-150 flex-col justify-center gap-6 overflow-hidden py-12 text-center align-middle">
     <!-- Cambiar por un logo  -->
     <h1>SCI-FIGHT</h1>
 
@@ -36,16 +36,16 @@ export default {
     </div>
 
     <!-- Controles -->
-    <div class="flex justify-around">
-      <!-- Jugador 1 -->
-      <div class="">
+    <!-- <div class="flex justify-around"> -->
+    <!-- Jugador 1 -->
+    <!-- <div class="">
         <img src="/src/img/assets/player1_controls.png" />
-      </div>
-      <!-- Jugador 2 -->
-      <div class="">
+      </div> -->
+    <!-- Jugador 2 -->
+    <!-- <div class="">
         <img src="/src/img/assets/player2_controls.png" />
       </div>
-    </div>
+    </div> -->
 
     <!-- Boton: Jugar -->
     <button class="mx-96 bg-black p-2 text-white">Jugar</button>
