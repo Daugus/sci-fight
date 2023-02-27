@@ -8,41 +8,51 @@ export default {
       otro: galvus,
       p1Health: 0,
       p2Health: 0,
+      attack: { receiver: 0, damage: 0 },
     };
   },
-  mounted() {
-    this.p1Health = this.currentCharacter.health;
-    this.p2Health = this.otro.health;
+  methods: {
+    damagePlayer(attack: { receiver: number; damage: number }) {
+      this.attack = attack;
+    },
   },
+  // mounted() {
+  //   this.p1Health = this.currentCharacter.health;
+  //   this.p2Health = this.otro.health;
+  // },
 };
 </script>
 
 <template>
   <div class="stage">
-    <div class="absolute top-8 flex w-full items-center justify-center space-x-5 bg-slate-500 px-11 text-center align-middle">
+    <div class="absolute top-8 flex w-full items-center justify-center space-x-5 px-11 text-center align-middle">
       <HealthBar
+        :player-number="1"
         :character="currentCharacter"
-        :currentHealth="p1Health"
+        :attack="attack"
       ></HealthBar>
       <img
         class="h-9"
-        src="\src\img\assets\stats_health.png "
+        src="/src/img/assets/stats_health.png"
       />
       <HealthBar
-        :currentHealth="p2Health"
+        :player-number="2"
         :character="otro"
+        :attack="attack"
       ></HealthBar>
     </div>
   </div>
   <Character
     :player-number="1"
-    :controls="{ attack: 'w', left: 'a', right: 'd' }"
+    :controls="{ attack: 'w', parry: 's', left: 'a', right: 'd' }"
     color="red"
+    @damagePlayer="damagePlayer"
   />
   <Character
     :player-number="2"
-    :controls="{ attack: 'arrowup', right: 'arrowleft', left: 'arrowright' }"
+    :controls="{ attack: 'arrowup', parry: 'arrowdown', right: 'arrowleft', left: 'arrowright' }"
     color="blue"
+    @damagePlayer="damagePlayer"
   />
 </template>
 

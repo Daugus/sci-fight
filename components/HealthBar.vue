@@ -1,17 +1,30 @@
 <script lang="ts">
 import { PropType } from 'vue';
 import Character from '~~/utils/types';
+
 export default {
   data() {
-    return {};
+    return {
+      currentHealth: 0,
+    };
   },
   props: {
+    playerNumber: { required: true, type: Number },
     character: { required: true, type: Object as PropType<Character> },
-    currentHealth: { required: true, type: Number },
+    attack: { required: true, type: Object as PropType<{ receiver: number; damage: number }> },
   },
   computed: {
-    charactersCurrentHealth() {
+    currentHealthPercentage() {
       return (this.currentHealth / this.character.health) * 100;
+    },
+  },
+  mounted() {
+    this.currentHealth = this.character.health;
+  },
+  watch: {
+    attack() {
+      if (this.attack.receiver !== this.playerNumber || this.currentHealth <= 0) return;
+      this.currentHealth -= this.attack.damage;
     },
   },
 };
@@ -19,10 +32,10 @@ export default {
 </script>
 
 <template>
-  <div class="flex h-6 w-full overflow-visible bg-red-600">
+  <div :class="['flex', 'h-6', ' w-full ', 'overflow-visible', 'bg-red-600', playerNumber === 1 && 'rotate-x-180']">
     <div
       :class="['h-full', 'transition-all']"
-      :style="`width: ${charactersCurrentHealth}%; background-color: ${character.color}`"
+      :style="`width: ${currentHealthPercentage}%; background-color: ${character.color}`"
     ></div>
   </div>
 </template>

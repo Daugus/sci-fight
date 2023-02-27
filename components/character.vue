@@ -19,7 +19,16 @@ export default {
   props: {
     playerNumber: { required: true, type: Number },
     color: { required: true, type: String },
-    controls: { required: true, type: Object as PropType<{ attack: string; right: string; left: string }> },
+
+    controls: {
+      required: true,
+      type: Object as PropType<{
+        attack: string;
+        right: string;
+        left: string;
+        parry: string;
+      }>,
+    },
   },
   computed: {
     movement() {
@@ -46,14 +55,21 @@ export default {
       const receiverPlayerNumber = playerNumber === 1 ? 2 : 1;
 
       const playerRect = document.querySelector(`#player-${receiverPlayerNumber}`)!.getBoundingClientRect();
+      // console.log(attackRect.x + attackRect.width >= playerRect!.x && attackRect.x <= playerRect.x + playerRect.width);
 
-      const intersect = attackRect.x + attackRect.width >= playerRect!.x && attackRect.x <= playerRect.x + playerRect.width;
+      if (attackRect.x + attackRect.width >= playerRect!.x && attackRect.x <= playerRect.x + playerRect.width)
+        this.$emit('damagePlayer', {
+          receiver: receiverPlayerNumber,
+          damage: this.character.attack.damage,
+        });
     },
     keyUp(event: KeyboardEvent) {
       switch (event.key.toLowerCase()) {
         case this.controls.attack:
           // Activar ataque
           this.attack = true;
+          clearInterval(this.currentIntervalLeft);
+          clearInterval(this.currentIntervalRight);
 
           setTimeout(() => (this.attack = false), 800);
           break;
@@ -77,17 +93,13 @@ export default {
     },
     // funciones para mover los divs
     moveLeft() {
-      console.log(this.test.getBoundingClientRect());
-
-      if (!this.rightPressed && this.position > 1) {
+      if (!this.rightPressed && this.position > 1 && !this.attack) {
         this.position -= this.movement;
         this.distance = `${this.position - this.movement}%`;
       }
     },
     moveRight() {
-      console.log(this.test.getBoundingClientRect());
-
-      if (!this.leftPressed && this.position < 99 - this.width) {
+      if (!this.leftPressed && this.position < 99 - this.width && !this.attack) {
         this.position += this.movement;
         this.distance = `${this.position + this.movement}%`;
       }
