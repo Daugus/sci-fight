@@ -44,18 +44,20 @@ export default {
     </div>
   </div>
 
-  <div class="absolute z-50 flex justify-center bg-red-500 text-center align-middle">
+  <div class="absolute z-50 ml-[6rem] mt-[14.5rem] flex justify-center bg-red-500 text-center align-middle">
     <!-- Boton: Cambiar personaje (derecha) -->
     <button
-      class="z-50 w-8"
+      class="jupiter-crash z-50 w-8"
       @click="next"
     >
       +
     </button>
 
+    <p class="jupiter-crash w-24 capitalize">{{ currentCharacter.name }}</p>
+
     <!-- Boton: Cambiar personaje (izquierda) -->
     <button
-      class="z-50 w-8"
+      class="jupiter-crash z-50 w-8"
       @click="previous"
     >
       -

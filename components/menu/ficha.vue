@@ -24,9 +24,6 @@ export default {
 
 <template>
   <div class="flex flex-col justify-center align-middle">
-    <div class="z-50">
-      <p class="jupiter-crash capitalize">{{ currentCharacter.name }}</p>
-    </div>
     <div :class="['flex', 'h-full', rotar && 'rotate-x-180']">
       <!-- Sprite personaje -->
       <MenuPersonaje @getCurrentCharacter="getCurrentCharacter" />

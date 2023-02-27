@@ -22,7 +22,7 @@ export default {
       <MenuFicha :rotar="false"></MenuFicha>
 
       <!-- Indicadores de estadisticas -->
-      <div class="mt-[2rem] flex w-16 flex-col justify-center gap-2 align-middle">
+      <div class="flex w-16 flex-col justify-center gap-2 align-middle">
         <!-- Daño -->
         <img src="/src/img/assets/stats_damage.png" />
         <!-- Vida -->
