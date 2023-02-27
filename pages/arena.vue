@@ -2,13 +2,9 @@
 export default {
   data() {
     return {
-      stage: '',
+      // Generar un escenario aleatorio
+      stage: `url(/src/img/stages/${Math.floor(Math.random() * (4 - 1) + 1)}.gif)`,
     };
-  },
-  mounted() {
-    // Generar un escenario aleatorio
-    let random = Math.floor(Math.random() * (4 - 1) + 1);
-    this.stage = `url(/src/img/stages/${random}.gif)`;
   },
 };
 </script>
