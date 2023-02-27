@@ -138,7 +138,7 @@ export default {
 <style lang="scss">
 .player {
   position: absolute;
-  bottom: 0;
+  bottom: calc(10vh - 3px);
 
   height: 140px;
 

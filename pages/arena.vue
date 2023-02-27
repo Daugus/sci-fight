@@ -9,6 +9,7 @@ export default {
       p1Health: 0,
       p2Health: 0,
       attack: { receiver: 0, damage: 0 },
+      floor: 'url(/src/img/stages/floor.png)',
     };
   },
   methods: {
@@ -16,10 +17,6 @@ export default {
       this.attack = attack;
     },
   },
-  // mounted() {
-  //   this.p1Health = this.currentCharacter.health;
-  //   this.p2Health = this.otro.health;
-  // },
 };
 </script>
 
@@ -41,7 +38,11 @@ export default {
         :attack="attack"
       ></HealthBar>
     </div>
+
+    <!-- suelo -->
+    <div class="floor"></div>
   </div>
+
   <Character
     :player-number="1"
     :controls="{ attack: 'w', parry: 's', left: 'a', right: 'd' }"
@@ -65,14 +66,14 @@ export default {
   background-repeat: no-repeat;
   background-position: bottom;
 
-  // .floor {
-  //   width: 100vw;
-  //   height: 10vh;
-  //   position: absolute;
-  //   bottom: 0;
+  .floor {
+    width: 100vw;
+    height: 10vh;
+    position: absolute;
+    bottom: 0;
 
-  //   background-image: v-bind(floor);
-  //   background-size: 20%;
-  // }
+    background-image: v-bind(floor);
+    background-size: 20%;
+  }
 }
 </style>

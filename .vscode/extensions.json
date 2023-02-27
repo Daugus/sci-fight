@@ -11,6 +11,7 @@
     "dbaeumer.vscode-eslint",
     "IBM.output-colorizer",
     "bradlc.vscode-tailwindcss",
-    "ChakrounAnas.turbo-console-log"
+    "ChakrounAnas.turbo-console-log",
+    "oderwat.indent-rainbow"
   ]
 }
