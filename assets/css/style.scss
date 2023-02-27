@@ -10,6 +10,30 @@
   transform: rotateY(180deg);
 }
 
+// ------ FUENTES ------
+@font-face {
+  font-family: 'Jupiter Crash';
+  src: url('src/fonts/jupiterc.ttf');
+}
+
+.jupiter-crash {
+  font-family: 'Jupiter Crash';
+  font-size: 2rem;
+}
+
+// ------ CHARACTER SELECTION ------
+.character-selector {
+  width: 231px;
+  height: 250px;
+  z-index: 1;
+  position: absolute;
+  transform: scale(1.5);
+  margin-top: 1.6rem;
+  margin-left: 1rem;
+
+  background: url('/src/img/assets/character_selector.png');
+}
+
 // ------ SPRITES GENERAL ------
 .sprite {
   position: absolute;

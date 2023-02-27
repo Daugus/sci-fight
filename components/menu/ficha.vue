@@ -24,11 +24,13 @@ export default {
 
 <template>
   <div class="flex flex-col justify-center align-middle">
-    <div class="">{{ currentCharacter.name.toUpperCase() }}</div>
+    <div class="z-50">
+      <p class="jupiter-crash capitalize">{{ currentCharacter.name }}</p>
+    </div>
     <div :class="['flex', 'h-full', rotar && 'rotate-x-180']">
       <!-- Sprite personaje -->
       <MenuPersonaje @getCurrentCharacter="getCurrentCharacter" />
-      <div class="rotate-x-180 flex h-full flex-col justify-center gap-11">
+      <div class="rotate-x-180 flex h-full flex-col justify-center gap-12">
         <!-- Daño -->
         <MenuEstadistica
           :character="currentCharacter"
