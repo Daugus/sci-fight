@@ -13,6 +13,7 @@ export default {
       currentIntervalLeft: setEmptyInterval(),
       currentIntervalRight: setEmptyInterval(),
       movementDirection: 1,
+      test: {} as HTMLElement,
     };
   },
   props: {
@@ -30,9 +31,12 @@ export default {
     widthPx() {
       return `${this.character.hitbox.width}px`;
     },
+    id() {
+      return `player-${this.playerNumber}`;
+    },
   },
   mounted() {
-    // if (this.playerNumber === 2) this.distance = '90%';
+    this.test = document.querySelector(`#${this.id}`)!;
 
     document.addEventListener('keyup', this.keyUp);
     document.addEventListener('keydown', this.keyDown);
@@ -73,12 +77,16 @@ export default {
     },
     // funciones para mover los divs
     moveLeft() {
+      console.log(this.test.getBoundingClientRect());
+
       if (!this.rightPressed && this.position > 1) {
         this.position -= this.movement;
         this.distance = `${this.position - this.movement}%`;
       }
     },
     moveRight() {
+      console.log(this.test.getBoundingClientRect());
+
       if (!this.leftPressed && this.position < 99 - this.width) {
         this.position += this.movement;
         this.distance = `${this.position + this.movement}%`;
@@ -103,7 +111,7 @@ export default {
 <template>
   <div
     :class="['player', playerNumber === 2 && 'rotate-x-180']"
-    :id="`player-${playerNumber}`"
+    :id="id"
   >
     Player {{ playerNumber }}
 
