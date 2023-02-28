@@ -10,6 +10,14 @@
   transform: rotateY(180deg);
 }
 
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 // ------ FUENTES ------
 @font-face {
   font-family: 'JupiterCrash';
@@ -18,7 +26,7 @@
 
 .jupiter-crash {
   font-family: 'JupiterCrash';
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 // ------ CHARACTER SELECTION ------

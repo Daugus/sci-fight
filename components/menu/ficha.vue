@@ -23,7 +23,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-col justify-center align-middle">
+  <div class="">
     <div :class="['flex', 'h-full', rotar && 'rotate-x-180']">
       <!-- Sprite personaje -->
       <MenuPersonaje @getCurrentCharacter="getCurrentCharacter" />
