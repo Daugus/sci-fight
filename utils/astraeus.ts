@@ -1,4 +1,4 @@
-import Character from './types';
+import { Character } from './types';
 
 const astraeus: Character = {
   name: 'astraeus',
@@ -11,7 +11,8 @@ const astraeus: Character = {
       height: 50,
       width: 330,
     },
-    cooldown: 0,
+    durationMs: 800,
+    cooldownMs: 0,
     damage: 30,
   },
   speed: {

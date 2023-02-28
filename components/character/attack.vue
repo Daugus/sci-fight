@@ -1,9 +1,12 @@
 <script lang="ts">
+import { Character } from '~~/utils/types';
+
 export default {
   data() {
     return { index: 0 };
   },
   props: {
+    character: { required: true, type: Object as PropType<Character> },
     playerNumber: { required: true, type: Number },
   },
   mounted() {
@@ -13,6 +16,11 @@ export default {
 
     const rect = hurtbox.getBoundingClientRect();
     this.$emit(`getRect`, rect, this.playerNumber);
+  },
+  computed: {
+    width() {
+      return `${this.character.attack.hitbox.width}px`;
+    },
   },
 };
 </script>
@@ -28,7 +36,7 @@ export default {
 
 <style lang="scss">
 .attack {
-  width: 443px;
+  width: v-bind(width);
   height: 70px;
   background-color: rgba(0, 255, 0, 0.5);
   position: absolute;

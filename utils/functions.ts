@@ -9,4 +9,6 @@ const setImmediateInterval = (callback: () => void, interval: number) => {
   return setInterval(callback, interval);
 };
 
-export { setEmptyInterval, setImmediateInterval };
+const randomNumber = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+export { setEmptyInterval, setImmediateInterval, randomNumber };

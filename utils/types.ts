@@ -1,15 +1,16 @@
-export type hitbox = {
+type hitbox = {
   height: number;
   width: number;
 };
 
-export type attack = {
+type attack = {
   hitbox: hitbox;
   damage: number;
-  cooldown: number;
+  durationMs: number;
+  cooldownMs: number;
 };
 
-export type speed = {
+type speed = {
   space: number;
   time: number;
 };
@@ -23,4 +24,6 @@ type Character = {
   color: string;
 };
 
-export default Character;
+type state = 'idle' | 'move' | 'attack' | 'appear' | 'death';
+
+export { hitbox, Character, state };
