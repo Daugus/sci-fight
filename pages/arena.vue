@@ -3,24 +3,27 @@ export default {
   data() {
     return {
       // Generar un escenario aleatorio
-      stage: `url(/src/img/stages/${Math.floor(Math.random() * (4 - 1) + 1)}.gif)`,
+      stageNum: 3,
+      stage: ``,
+      floor: ``,
       currentCharacter: astraeus,
       otro: galvus,
       p1Health: 0,
       p2Health: 0,
       attack: { receiver: 0, damage: 0 },
-      floor: 'url(/src/img/stages/floor.png)',
     };
   },
+  // props: {
+  //   stageNum: Number,
+  // },
   methods: {
     damagePlayer(attack: { receiver: number; damage: number }) {
       this.attack = attack;
     },
   },
   mounted() {
-    // Generar un escenario aleatorio
-    let random = Math.floor(Math.random() * (4 - 1) + 1);
-    this.stage = `url(/src/img/stages/${random}.gif)`;
+    this.stage = `url(/src/img/stages/${this.stageNum}/stage.gif)`;
+    this.floor = `url(/src/img/stages/${this.stageNum}/floor.png)`;
 
     document.body.classList.add('overflow-hidden');
 
@@ -49,8 +52,8 @@ export default {
       ></HealthBar>
     </div>
 
-    <!-- suelo -->
-    <div class="floor"></div>
+    <!-- Suelo -->
+    <div :class="['floor', stageNum !== 1 && 'bg-repeat-x']"></div>
   </div>
 
   <Character
@@ -74,7 +77,7 @@ export default {
   background-image: v-bind(stage);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: bottom;
+  background-position: center;
 
   .floor {
     width: 100vw;
@@ -83,7 +86,7 @@ export default {
     bottom: 0;
 
     background-image: v-bind(floor);
-    background-size: 20%;
+    background-size: 4%;
   }
 }
 </style>
