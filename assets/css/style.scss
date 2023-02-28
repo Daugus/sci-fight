@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+::selection {
+  display: none;
+}
+
+:not(button, a, button *, a *) {
+  cursor: default;
+}
+
 .router-link-active {
   @apply font-bold;
 }
@@ -21,7 +29,7 @@
 // ------ FUENTES ------
 @font-face {
   font-family: 'JupiterCrash';
-  src: url('src/fonts/jupiterc.ttf');
+  src: url('/src/fonts/jupiterc.ttf');
 }
 
 .jupiter-crash {

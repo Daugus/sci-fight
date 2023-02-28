@@ -6,14 +6,17 @@ export default {
     };
   },
   props: {
-    rotate: Boolean,
+    rotate: { required: true, type: Boolean },
+    controls: { required: true, type: Object as PropType<{ left: string; right: string }> },
+  },
+  mounted() {
+    document.addEventListener('keydown', this.keyUp);
   },
   computed: {
     currentCharacter() {
       return characters[this.index];
     },
   },
-  mounted() {},
   methods: {
     menosUno() {
       if (characters.length < this.index) {
@@ -26,8 +29,19 @@ export default {
     next() {
       this.index = this.index + 1 >= characters.length ? 0 : this.index + 1;
     },
+    keyUp(event: KeyboardEvent) {
+      console.log(event.key.toLowerCase());
+
+      switch (event.key.toLowerCase()) {
+        case this.controls.left:
+          this.previous();
+          break;
+        case this.controls.right:
+          this.next();
+          break;
+      }
+    },
   },
-  watch: {},
 };
 </script>
 
@@ -39,7 +53,7 @@ export default {
   />
 
   <!-- Selección de personaje -->
-  <div :class="['absolute', 'mx-3', 'my-2', !rotate && 'character-container-player-1', rotate && 'character-container-player-2']">
+  <div :class="['absolute', 'mx-3', 'my-2', `character-container-player-${rotate ? 2 : 1}`]">
     <!-- Cambio de personaje -->
     <div class="flex w-full justify-between text-center align-middle leading-none">
       <!-- Boton: Cambiar personaje (derecha) -->
@@ -72,19 +86,8 @@ export default {
   </div>
 
   <!-- Stats personaje -->
-  <div
-    :class="[
-      'absolute',
-      'flex',
-      'items-center',
-      'justify-center',
-      'p-6',
-      'align-middle',
-      !rotate && 'stats-container-player-1',
-      rotate && 'stats-container-player-2',
-    ]"
-  >
-    <MenuCharacterStats :character="currentCharacter"></MenuCharacterStats>
+  <div :class="['absolute', 'flex', 'items-center', 'justify-center', 'p-6', 'align-middle', `stats-container-player-${rotate ? 2 : 1}`]">
+    <MenuCharacterStats :character="currentCharacter" />
     <img
       class="z-50 w-[100%]"
       src="/src/img/assets/stats_graphic.png"

@@ -1,6 +1,4 @@
 <script lang="ts">
-import { PropType } from 'vue';
-
 export default {
   data() {
     return {
@@ -13,7 +11,6 @@ export default {
       currentIntervalLeft: setEmptyInterval(),
       currentIntervalRight: setEmptyInterval(),
       movementDirection: 1,
-      test: {} as HTMLElement,
     };
   },
   props: {
@@ -45,8 +42,6 @@ export default {
     },
   },
   mounted() {
-    this.test = document.querySelector(`#${this.id}`)!;
-
     document.addEventListener('keyup', this.keyUp);
     document.addEventListener('keydown', this.keyDown);
   },

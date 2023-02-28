@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+definePageMeta({ key: (route) => route.fullPath });
+</script>
+
 <script lang="ts">
 export default {
   data() {

@@ -1,6 +1,6 @@
 <script lang="ts">
-import { PropType } from 'vue';
 import Character from '~~/utils/types';
+
 export default {
   data() {
     return {
