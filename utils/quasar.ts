@@ -1,4 +1,4 @@
-import Character from './types';
+import { Character } from './types';
 
 const quasar: Character = {
   name: 'quasar',
@@ -10,9 +10,10 @@ const quasar: Character = {
   attack: {
     hitbox: {
       height: 50,
-      width: 290,
+      width: 340,
     },
-    cooldown: 0,
+    durationMs: 800,
+    cooldownMs: 0,
     damage: 20,
   },
   speed: {

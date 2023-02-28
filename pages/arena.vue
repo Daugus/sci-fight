@@ -3,11 +3,9 @@ export default {
   data() {
     return {
       // Generar un escenario aleatorio
-      stage: `url(/src/img/stages/${Math.floor(Math.random() * (4 - 1) + 1)}.gif)`,
-      characterP1: astraeus,
-      characterP2: galvus,
-      p1Health: 0,
-      p2Health: 0,
+      stage: `url(/src/img/stages/${randomNumber(1, 3)}.gif)`,
+      characterP1: characters[randomNumber(0, 3)],
+      characterP2: characters[randomNumber(0, 3)],
       attack: { receiver: 0, damage: 0 },
       floor: 'url(/src/img/stages/floor.png)',
       dead: false,
@@ -38,14 +36,7 @@ export default {
     },
   },
   mounted() {
-    // Generar un escenario aleatorio
-    let random = Math.floor(Math.random() * (4 - 1) + 1);
-    this.stage = `url(/src/img/stages/${random}.gif)`;
-
     document.body.classList.add('overflow-hidden');
-
-    this.p1Health = this.characterP1.health;
-    this.p2Health = this.characterP2.health;
   },
 };
 </script>
@@ -83,15 +74,16 @@ export default {
   </div>
 
   <Character
+    :character="characterP1"
     :player-number="1"
     :controls="{ attack: 'w', parry: 's', left: 'a', right: 'd' }"
-    color="red"
     @damagePlayer="damagePlayer"
   />
+
   <Character
+    :character="characterP2"
     :player-number="2"
     :controls="{ attack: 'arrowup', parry: 'arrowdown', right: 'arrowleft', left: 'arrowright' }"
-    color="blue"
     @damagePlayer="damagePlayer"
   />
 </template>

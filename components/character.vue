@@ -1,24 +1,24 @@
 <script lang="ts">
 import { PropType } from 'vue';
+import { Character, state } from '~~/utils/types';
 
 export default {
   data() {
     return {
       attack: false,
-      character: quasar,
       position: 0,
       distance: '1%',
       rightPressed: false,
       leftPressed: false,
       currentIntervalLeft: setEmptyInterval(),
       currentIntervalRight: setEmptyInterval(),
-      movementDirection: 1,
-      test: {} as HTMLElement,
+      state: 'idle' as state,
     };
   },
   props: {
+    character: { required: true, type: Object as PropType<Character> },
+
     playerNumber: { required: true, type: Number },
-    color: { required: true, type: String },
 
     controls: {
       required: true,
@@ -40,22 +40,24 @@ export default {
     widthPx() {
       return `${this.character.hitbox.width}px`;
     },
+    heightPx() {
+      return `${this.character.hitbox.height}px`;
+    },
     id() {
       return `player-${this.playerNumber}`;
     },
   },
   mounted() {
-    this.test = document.querySelector(`#${this.id}`)!;
-
     document.addEventListener('keyup', this.keyUp);
     document.addEventListener('keydown', this.keyDown);
+
+    console.log(this.character.name);
   },
   methods: {
     getRect(attackRect: DOMRect, playerNumber: number) {
       const receiverPlayerNumber = playerNumber === 1 ? 2 : 1;
 
       const playerRect = document.querySelector(`#player-${receiverPlayerNumber}`)!.getBoundingClientRect();
-      // console.log(attackRect.x + attackRect.width >= playerRect!.x && attackRect.x <= playerRect.x + playerRect.width);
 
       if (attackRect.x + attackRect.width >= playerRect!.x && attackRect.x <= playerRect.x + playerRect.width)
         this.$emit('damagePlayer', {
@@ -68,10 +70,16 @@ export default {
         case this.controls.attack:
           // Activar ataque
           this.attack = true;
+          this.state = 'attack';
+
           clearInterval(this.currentIntervalLeft);
           clearInterval(this.currentIntervalRight);
 
-          setTimeout(() => (this.attack = false), 800);
+          setTimeout(() => {
+            this.attack = false;
+            this.state = 'idle';
+          }, this.character.attack.durationMs + 0);
+
           break;
         case this.controls.left:
           this.leftPressed = false;
@@ -115,12 +123,26 @@ export default {
     rightPressed: function () {
       clearInterval(this.currentIntervalLeft);
 
-      if (this.rightPressed) this.currentIntervalLeft = setImmediateInterval(this.moveRight, 10);
+      if (this.attack) return;
+
+      if (this.rightPressed) {
+        this.state = 'move';
+        this.currentIntervalLeft = setImmediateInterval(this.moveRight, 10);
+      } else {
+        this.state = 'idle';
+      }
     },
     leftPressed: function () {
       clearInterval(this.currentIntervalRight);
 
-      if (this.leftPressed) this.currentIntervalRight = setImmediateInterval(this.moveLeft, 10);
+      if (this.attack) return;
+
+      if (this.leftPressed) {
+        this.state = 'move';
+        this.currentIntervalRight = setImmediateInterval(this.moveLeft, 10);
+      } else {
+        this.state = 'idle';
+      }
     },
   },
 };
@@ -131,9 +153,10 @@ export default {
     :class="['player', playerNumber === 2 && 'rotate-x-180']"
     :id="id"
   >
-    Player {{ playerNumber }}
+    <div :class="['sprite', `${character.name}-${state}`]"></div>
 
     <CharacterAttack
+      :character="character"
       :player-number="playerNumber"
       @getRect="getRect"
       v-if="attack === true"
@@ -146,10 +169,13 @@ export default {
   position: absolute;
   bottom: calc(10vh - 3px);
 
-  height: 140px;
-
+  height: v-bind(heightPx);
   width: v-bind(widthPx);
-  background-color: v-bind(color);
+}
+
+.sprite {
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 #player-1 {

@@ -1,5 +1,5 @@
 <script lang="ts">
-import Character from '~~/utils/types';
+import { Character } from '~~/utils/types';
 
 export default {
   data() {
