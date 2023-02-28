@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:not(button, a) {
+  cursor: default;
+}
+
+::selection {
+  display: none;
+}
+
 .router-link-active {
   @apply font-bold;
 }
