@@ -5,6 +5,9 @@ export default {
       index: 0,
     };
   },
+  props: {
+    rotate: Boolean,
+  },
   computed: {
     currentCharacter() {
       return characters[this.index];
@@ -31,12 +34,12 @@ export default {
 <template>
   <!-- Fondo -->
   <img
-    class="w-[49%]"
+    :class="['w-[49%]', rotate && 'rotate-x-180']"
     src="/src/img/assets/character_selector.png"
   />
 
   <!-- Selección de personaje -->
-  <div class="character-container absolute mx-3 my-2">
+  <div :class="['absolute', 'mx-3', 'my-2', !rotate && 'character-container-player-1', rotate && 'character-container-player-2']">
     <!-- Cambio de personaje -->
     <div class="flex w-full justify-between text-center align-middle leading-none">
       <!-- Boton: Cambiar personaje (derecha) -->
@@ -64,12 +67,23 @@ export default {
 
     <!-- Sprite personaje seleccionado -->
     <div class="flex justify-center align-middle">
-      <div :class="['sprite', `${currentCharacter.name}-idle`]"></div>
+      <div :class="['sprite', `${currentCharacter.name}-idle`, rotate && 'rotate-x-180']"></div>
     </div>
   </div>
 
   <!-- Stats personaje -->
-  <div class="stats-container absolute flex items-center justify-center p-6 align-middle">
+  <div
+    :class="[
+      'absolute',
+      'flex',
+      'items-center',
+      'justify-center',
+      'p-6',
+      'align-middle',
+      !rotate && 'stats-container-player-1',
+      rotate && 'stats-container-player-2',
+    ]"
+  >
     <MenuCharacterStats :character="currentCharacter"></MenuCharacterStats>
     <img
       class="z-50 w-[100%]"
@@ -79,12 +93,19 @@ export default {
 </template>
 
 <style lang="scss">
-.character-container {
+.character-container-player-1 {
   inset: 8% 75% 60.5% 11%;
 }
 
-.stats-container {
-  // background-color: rgba(0, 0, 255, 0.5);
+.character-container-player-2 {
+  inset: 8% 11% 60.5% 75%;
+}
+
+.stats-container-player-1 {
   inset: 57% 75% 5.5% 6.1%;
+}
+
+.stats-container-player-2 {
+  inset: 57% 6.1% 5.5% 75%;
 }
 </style>

@@ -12,9 +12,10 @@ export default {
 </script>
 
 <template>
-  <div class="flex h-screen w-screen flex-col justify-center align-middle">
+  <div class="flex h-screen w-screen flex-col justify-center overflow-hidden align-middle">
     <div class="relative flex w-full justify-between">
-      <MenuCharacterSelection />
+      <MenuCharacterSelection :rotate="false" />
+      <MenuCharacterSelection :rotate="true" />
     </div>
   </div>
 </template>
