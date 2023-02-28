@@ -72,10 +72,10 @@
 }
 
 @keyframes astraeus-appear {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -4520px;
   }
 }
@@ -91,10 +91,10 @@
 }
 
 @keyframes astraeus-idle {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -2825px;
   }
 }
@@ -110,10 +110,10 @@
 }
 
 @keyframes astraeus-move {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -2825px;
   }
 }
@@ -128,10 +128,10 @@
 }
 
 @keyframes astraeus-attack {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -4520px;
   }
 }
@@ -146,10 +146,10 @@
 }
 
 @keyframes astraeus-hit {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -2825px;
   }
 }
@@ -158,16 +158,16 @@
   width: 565px;
   height: 286px;
 
-  background: url('/src/img/characters/astraeus/death.png');
+  background-image: url('/src/img/characters/astraeus/death.png');
 
-  animation: astraeus-death 0.6s steps(6) infinite;
+  animation: astraeus-death 0.6s steps(6) forwards;
 }
 
 @keyframes astraeus-death {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -3390px;
   }
 }
@@ -184,10 +184,10 @@
 }
 
 @keyframes galvus-appear {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -11844px;
   }
 }
@@ -202,10 +202,10 @@
 }
 
 @keyframes galvus-idle {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -5922px;
   }
 }
@@ -220,10 +220,10 @@
 }
 
 @keyframes galvus-move {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -5922px;
   }
 }
@@ -238,10 +238,10 @@
 }
 
 @keyframes galvus-attack {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -9870px;
   }
 }
@@ -256,10 +256,10 @@
 }
 
 @keyframes galvus-hit {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -5922px;
   }
 }
@@ -268,16 +268,17 @@
   width: 987px;
   height: 186px;
 
-  background: url('/src/img/characters/galvus/death.png');
+  background-image: url('/src/img/characters/galvus/death.png');
 
-  animation: galvus-death 0.6s steps(6) infinite;
+  background-position: -5922px;
+  animation: galvus-death 0.6s steps(6) forwards;
 }
 
 @keyframes galvus-death {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -5922px;
   }
 }
@@ -294,10 +295,10 @@
 }
 
 @keyframes quasar-appear {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -2700px;
   }
 }
@@ -312,10 +313,10 @@
 }
 
 @keyframes quasar-idle {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -3375px;
   }
 }
@@ -330,10 +331,10 @@
 }
 
 @keyframes quasar-move {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -5400px;
   }
 }
@@ -348,10 +349,10 @@
 }
 
 @keyframes quasar-attack {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -5400px;
   }
 }
@@ -366,10 +367,10 @@
 }
 
 @keyframes quasar-hit {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -3375px;
   }
 }
@@ -378,16 +379,17 @@
   width: 675px;
   height: 140px;
 
-  background: url('/src/img/characters/quasar/death.png');
+  background-image: url('/src/img/characters/quasar/death.png');
 
-  animation: quasar-death 0.5s steps(5) infinite;
+  background-position: -3375px;
+  animation: quasar-death 0.5s steps(5) forwards;
 }
 
 @keyframes quasar-death {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -3375px;
   }
 }
@@ -404,10 +406,10 @@
 }
 
 @keyframes vespera-appear {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -10368px;
   }
 }
@@ -422,10 +424,10 @@
 }
 
 @keyframes vespera-idle {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -6912px;
   }
 }
@@ -440,10 +442,10 @@
 }
 
 @keyframes vespera-move {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -6912px;
   }
 }
@@ -458,10 +460,10 @@
 }
 
 @keyframes vespera-attack {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -5760px;
   }
 }
@@ -476,10 +478,10 @@
 }
 
 @keyframes vespera-hit {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -6912px;
   }
 }
@@ -488,16 +490,17 @@
   width: 1152px;
   height: 176px;
 
-  background: url('/src/img/characters/vespera/death.png');
+  background-image: url('/src/img/characters/vespera/death.png');
 
-  animation: vespera-death 0.9s steps(9) infinite;
+  background-position: -10368px;
+  animation: vespera-death 0.9s steps(9) forwards;
 }
 
 @keyframes vespera-death {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -10368px;
   }
 }
@@ -514,10 +517,10 @@
 }
 
 @keyframes protect {
-  0% {
+  from {
     background-position: 0px;
   }
-  100% {
+  to {
     background-position: -2250px;
   }
 }

@@ -29,16 +29,13 @@ export default {
   <div
     class="attack z-20"
     :id="`attackP${playerNumber}`"
-  >
-    Attack {{ playerNumber }}
-  </div>
+  ></div>
 </template>
 
 <style lang="scss">
 .attack {
   width: v-bind(width);
   height: 70px;
-  background-color: rgba(0, 255, 0, 0.5);
   position: absolute;
   bottom: 0;
 }
