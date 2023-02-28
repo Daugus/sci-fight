@@ -45,22 +45,22 @@ export default {
 
   <div class="stage">
     <div class="absolute top-8 flex w-full items-center justify-center space-x-5 px-11 text-center align-middle">
-      <HealthBar
+      <ArenaHealthBar
         :player-number="1"
         :character="characterP1"
         :attack="attack"
         @endGame="endGame"
-      ></HealthBar>
+      ></ArenaHealthBar>
       <img
         class="h-9"
         src="/src/img/assets/stats_health.png"
       />
-      <HealthBar
+      <ArenaHealthBar
         :player-number="2"
         :character="characterP2"
         :attack="attack"
         @endGame="endGame"
-      ></HealthBar>
+      ></ArenaHealthBar>
     </div>
 
     <!-- suelo -->
