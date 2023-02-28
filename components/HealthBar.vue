@@ -6,6 +6,7 @@ export default {
   data() {
     return {
       currentHealth: 0,
+      death: false,
     };
   },
   props: {
@@ -25,6 +26,12 @@ export default {
     attack() {
       if (this.attack.receiver !== this.playerNumber || this.currentHealth <= 0) return;
       this.currentHealth -= this.attack.damage;
+    },
+    currentHealth() {
+      if (this.currentHealth <= 0) {
+        this.$emit('endGame', this.playerNumber);
+        console.log('muelto');
+      }
     },
   },
 };
