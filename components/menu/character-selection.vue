@@ -30,8 +30,6 @@ export default {
       this.index = this.index + 1 >= characters.length ? 0 : this.index + 1;
     },
     keyUp(event: KeyboardEvent) {
-      console.log(event.key.toLowerCase());
-
       switch (event.key.toLowerCase()) {
         case this.controls.left:
           this.previous();

@@ -50,7 +50,6 @@ export default {
       const receiverPlayerNumber = playerNumber === 1 ? 2 : 1;
 
       const playerRect = document.querySelector(`#player-${receiverPlayerNumber}`)!.getBoundingClientRect();
-      // console.log(attackRect.x + attackRect.width >= playerRect!.x && attackRect.x <= playerRect.x + playerRect.width);
 
       if (attackRect.x + attackRect.width >= playerRect!.x && attackRect.x <= playerRect.x + playerRect.width)
         this.$emit('damagePlayer', {
