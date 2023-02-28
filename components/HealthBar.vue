@@ -30,7 +30,6 @@ export default {
     currentHealth() {
       if (this.currentHealth <= 0) {
         this.$emit('endGame', this.playerNumber);
-        console.log('muelto');
       }
     },
   },

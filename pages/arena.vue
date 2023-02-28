@@ -8,28 +8,21 @@ export default {
       characterP2: characters[randomNumber(0, 3)],
       attack: { receiver: 0, damage: 0 },
       floor: 'url(/src/img/stages/floor.png)',
-      dead: false,
-      winner: '',
-      winnerNumber: 0,
+      winner: {} as { characterName: string; playerNumber: number },
     };
   },
   methods: {
     damagePlayer(attack: { receiver: number; damage: number }) {
       this.attack = attack;
     },
-    //emit de player number, que se envia cuando se muere uno de los personajes
+    // emit de player number, que se envia cuando se muere uno de los personajes
+    // playerNumber es el numero del personaje con vida <= 0
     endGame(playerNumber: number) {
-      //playerNumber es el numero del personaje con vida <= 0
-      this.dead = true;
-      //pongo dead en true para que se muestre el div de ganador
-      if (playerNumber === 1) {
-        //compruebo que el jugador 1 se ha muerto, si es asi doy valor a los datos para mostrarlos
-        this.winner = this.characterP2.name;
-        this.winnerNumber = 2;
-      } else {
-        this.winner = this.characterP1.name;
-        this.winnerNumber = 1;
-      }
+      // pongo dead en true para que se muestre el div de ganador
+      // compruebo que el jugador 1 se ha muerto, si es asi doy valor a los datos para mostrarlos
+      this.winner =
+        playerNumber === 1 ? { characterName: this.characterP2.name, playerNumber: 2 } : { characterName: this.characterP1.name, playerNumber: 1 };
+
       // quitar los listener para que al acabarse la partida no se puedan mover
       window.addEventListener('keyup', (e) => e.stopImmediatePropagation(), true);
       window.addEventListener('keydown', (e) => e.stopImmediatePropagation(), true);
@@ -44,11 +37,12 @@ export default {
 <template>
   <!-- div para mostrar mensaje de ganar -->
   <div
-    v-if="dead === true"
+    v-if="'playerNumber' in winner"
     class="max-w-screen absolute z-50 flex max-h-screen justify-center bg-red-600 align-middle"
   >
-    <p>THE WINNER IS {{ winner.toUpperCase() }}(P{{ winnerNumber }})</p>
+    <p>THE WINNER IS {{ winner.characterName.toUpperCase() }} (P{{ winner.playerNumber }})</p>
   </div>
+
   <div class="stage">
     <div class="absolute top-8 flex w-full items-center justify-center space-x-5 px-11 text-center align-middle">
       <HealthBar
@@ -77,6 +71,7 @@ export default {
     :character="characterP1"
     :player-number="1"
     :controls="{ attack: 'w', parry: 's', left: 'a', right: 'd' }"
+    :winner="winner"
     @damagePlayer="damagePlayer"
   />
 
@@ -84,6 +79,7 @@ export default {
     :character="characterP2"
     :player-number="2"
     :controls="{ attack: 'arrowup', parry: 'arrowdown', right: 'arrowleft', left: 'arrowright' }"
+    :winner="winner"
     @damagePlayer="damagePlayer"
   />
 </template>

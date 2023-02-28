@@ -29,6 +29,14 @@ export default {
         parry: string;
       }>,
     },
+
+    winner: {
+      required: true,
+      type: Object as PropType<{
+        characterName: string;
+        playerNumber: number;
+      }>,
+    },
   },
   computed: {
     movement() {
@@ -50,8 +58,6 @@ export default {
   mounted() {
     document.addEventListener('keyup', this.keyUp);
     document.addEventListener('keydown', this.keyDown);
-
-    console.log(this.character.name);
   },
   methods: {
     getRect(attackRect: DOMRect, playerNumber: number) {
@@ -66,8 +72,11 @@ export default {
         });
     },
     keyUp(event: KeyboardEvent) {
+      if (this.state === 'death') return;
+
       switch (event.key.toLowerCase()) {
         case this.controls.attack:
+          if (this.state === 'attack') return;
           // Activar ataque
           this.attack = true;
           this.state = 'attack';
@@ -77,7 +86,8 @@ export default {
 
           setTimeout(() => {
             this.attack = false;
-            this.state = 'idle';
+
+            if (this.state !== 'death') this.state = 'idle';
           }, this.character.attack.durationMs + 0);
 
           break;
@@ -90,6 +100,8 @@ export default {
       }
     },
     keyDown(event: KeyboardEvent) {
+      if (this.state === 'death') return;
+
       switch (event.key.toLowerCase()) {
         case this.controls.left:
           this.leftPressed = true;
@@ -143,6 +155,9 @@ export default {
       } else {
         this.state = 'idle';
       }
+    },
+    winner: function () {
+      if (this.winner.playerNumber !== this.playerNumber) this.state = 'death';
     },
   },
 };
