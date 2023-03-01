@@ -22,8 +22,8 @@ export default {
       <MenuCharacterSelection
         :rotate="true"
         :controls="{
-          left: 'arrowleft',
-          right: 'arrowright',
+          left: 'arrowright',
+          right: 'arrowleft',
         }"
         :playerNumber="2"
       />

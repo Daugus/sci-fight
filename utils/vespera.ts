@@ -12,6 +12,7 @@ const vespera: Character = {
       height: 50,
       width: 400,
     },
+    delayMsList: [0],
     durationMs: 500,
     cooldownMs: 0,
     damage: 30,

@@ -55,7 +55,6 @@ export default {
 </script>
 
 <template>
-  <!-- div para mostrar mensaje de ganar -->
   <div
     v-if="'playerNumber' in winner"
     class="max-w-screen absolute z-50 flex max-h-screen justify-center bg-red-600 align-middle"
@@ -68,9 +67,11 @@ export default {
       <ArenaHealthBar
         :player-number="1"
         :character="characterP1"
+        :enemy="characterP2"
         :attack="attack"
+        :ended="'playerNumber' in winner"
         @endGame="endGame"
-      ></ArenaHealthBar>
+      />
       <img
         class="h-9"
         src="/src/img/assets/stats_health.png"
@@ -78,9 +79,11 @@ export default {
       <ArenaHealthBar
         :player-number="2"
         :character="characterP2"
+        :enemy="characterP1"
         :attack="attack"
+        :ended="'playerNumber' in winner"
         @endGame="endGame"
-      ></ArenaHealthBar>
+      />
     </div>
 
     <!-- Suelo -->

@@ -6,6 +6,7 @@ type hitbox = {
 type attack = {
   hitbox: hitbox;
   damage: number;
+  delayMsList: number[];
   durationMs: number;
   cooldownMs: number;
 };
@@ -24,6 +25,6 @@ type Character = {
   color: string;
 };
 
-type state = 'idle' | 'move' | 'attack' | 'appear' | 'death';
+type state = 'idle' | 'move' | 'attack' | 'appear' | 'death' | 'hit';
 
 export { hitbox, Character, state };
