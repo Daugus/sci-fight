@@ -18,11 +18,6 @@ export default {
     },
   },
   methods: {
-    menosUno() {
-      if (characters.length < this.index) {
-        this.index = characters.length;
-      }
-    },
     previous() {
       this.index = this.index - 1 < 0 ? characters.length - 1 : this.index - 1;
     },
@@ -51,12 +46,12 @@ export default {
   />
 
   <!-- Selección de personaje -->
-  <div :class="['absolute', 'mx-3', 'my-2', `character-container-player-${rotate ? 2 : 1}`]">
+  <div :class="['absolute', 'mx-3', 'my-2', 'flex', 'flex-col', `character-container-player-${rotate ? 2 : 1}`]">
     <!-- Cambio de personaje -->
     <div class="flex w-full justify-between text-center align-middle leading-none">
       <!-- Boton: Cambiar personaje (derecha) -->
       <button
-        class="jupiter-crash z-50 w-6"
+        class="z-50 w-6"
         @click="next"
       >
         <img
@@ -70,7 +65,7 @@ export default {
 
       <!-- Boton: Cambiar personaje (izquierda) -->
       <button
-        class="jupiter-crash z-50 w-6"
+        class="z-50 w-6"
         @click="previous"
       >
         <img src="/src/img/assets/button_arrow.png" />
