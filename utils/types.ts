@@ -25,6 +25,6 @@ type Character = {
   color: string;
 };
 
-type state = 'idle' | 'move' | 'attack' | 'appear' | 'death';
+type state = 'idle' | 'move' | 'attack' | 'appear' | 'death' | 'hit';
 
 export { hitbox, Character, state };
