@@ -15,7 +15,6 @@
 }
 
 .rotate-x-180 {
-  // transform: rotateY(180deg);
   rotate: y 180deg;
 }
 
@@ -53,6 +52,8 @@
 
 // ------ SPRITES GENERAL ------
 .sprite {
+  @apply drop-shadow-2xl;
+
   position: absolute;
   bottom: 0;
   z-index: 10;
