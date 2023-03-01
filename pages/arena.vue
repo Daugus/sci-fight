@@ -1,16 +1,24 @@
+<script lang="ts" setup>
+definePageMeta({ key: (route) => route.fullPath });
+</script>
+
 <script lang="ts">
 export default {
   data() {
     return {
       // Generar un escenario aleatorio
-      stage: `url(/src/img/stages/${randomNumber(1, 3)}.gif)`,
+      stageNum: 3,
+      stage: ``,
+      floor: ``,
       characterP1: characters[randomNumber(0, 3)],
       characterP2: characters[randomNumber(0, 3)],
       attack: { receiver: 0, damage: 0 },
-      floor: 'url(/src/img/stages/floor.png)',
       winner: {} as { characterName: string; playerNumber: number },
     };
   },
+  // props: {
+  //   stageNum: Number,
+  // },
   methods: {
     damagePlayer(attack: { receiver: number; damage: number }) {
       this.attack = attack;
@@ -29,6 +37,9 @@ export default {
     },
   },
   mounted() {
+    this.stage = `url(/src/img/stages/${this.stageNum}/stage.gif)`;
+    this.floor = `url(/src/img/stages/${this.stageNum}/floor.png)`;
+
     document.body.classList.add('overflow-hidden');
   },
 };
@@ -63,8 +74,8 @@ export default {
       ></ArenaHealthBar>
     </div>
 
-    <!-- suelo -->
-    <div class="floor"></div>
+    <!-- Suelo -->
+    <div :class="['floor', stageNum !== 1 && 'bg-repeat-x']"></div>
   </div>
 
   <Character
@@ -91,7 +102,7 @@ export default {
   background-image: v-bind(stage);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: bottom;
+  background-position: center;
 
   .floor {
     width: 100vw;
@@ -100,7 +111,7 @@ export default {
     bottom: 0;
 
     background-image: v-bind(floor);
-    background-size: 20%;
+    background-size: 4%;
   }
 }
 </style>
