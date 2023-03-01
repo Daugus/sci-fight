@@ -31,6 +31,7 @@ export default {
 </script>
 
 <template>
+  <!-- Contenedor selector -->
   <img
     class="absolute left-1/2 bottom-0 z-10 w-[35%] -translate-x-1/2"
     src="/src/img/assets/stage_selector.png"
@@ -59,9 +60,17 @@ export default {
       </button>
     </div>
 
-    <!-- Stage -->
+    <!-- Preview stage -->
     <img
       class="h-full w-full"
+      :src="stage"
+    />
+  </div>
+
+  <!-- Fondo selector character -->
+  <div class="stage-background absolute top-[-63%] -z-10">
+    <img
+      class="h-full w-full scale-95 bg-bottom"
       :src="stage"
     />
   </div>
@@ -72,7 +81,11 @@ export default {
   inset: 54% 34% 7.5% 34%;
 }
 
+.stage-background {
+  clip-path: polygon(10.7% 55.5%, 10.7% 85.5%, 25.2% 85.5%, 25.2% 55.5%, 74.8% 55.5%, 74.8% 85.5%, 89.3% 85.5%, 89.3% 55.5%);
+}
+
 button img {
-  filter: drop-shadow(0 0 0.2rem #262626);
+  filter: drop-shadow(0 0 0.2rem rgba(255, 255, 255, 0.1));
 }
 </style>

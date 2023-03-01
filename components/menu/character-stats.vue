@@ -1,5 +1,5 @@
 <script lang="ts">
-import Character from '~~/utils/types';
+import { Character } from '~~/utils/types';
 
 export default {
   data() {
@@ -45,7 +45,7 @@ export default {
     width: 100%;
     height: 100%;
     clip-path: polygon(50% v-bind(attack), v-bind(speed), v-bind(health));
-    filter: brightness(1.25);
+    filter: drop-shadow(0 0 0.2rem rgba(255, 255, 255, 0.1));
   }
 }
 </style>
