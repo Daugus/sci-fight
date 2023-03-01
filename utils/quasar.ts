@@ -12,6 +12,7 @@ const quasar: Character = {
       height: 50,
       width: 340,
     },
+    delayMsList: [0, 400],
     durationMs: 800,
     cooldownMs: 0,
     damage: 20,

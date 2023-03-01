@@ -59,9 +59,10 @@ export default {
       <ArenaHealthBar
         :player-number="1"
         :character="characterP1"
+        :enemy="characterP2"
         :attack="attack"
         @endGame="endGame"
-      ></ArenaHealthBar>
+      />
       <img
         class="h-9"
         src="/src/img/assets/stats_health.png"
@@ -69,9 +70,10 @@ export default {
       <ArenaHealthBar
         :player-number="2"
         :character="characterP2"
+        :enemy="characterP1"
         :attack="attack"
         @endGame="endGame"
-      ></ArenaHealthBar>
+      />
     </div>
 
     <!-- Suelo -->

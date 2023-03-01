@@ -6,6 +6,7 @@ type hitbox = {
 type attack = {
   hitbox: hitbox;
   damage: number;
+  delayMsList: number[];
   durationMs: number;
   cooldownMs: number;
 };

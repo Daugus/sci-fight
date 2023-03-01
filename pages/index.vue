@@ -15,8 +15,8 @@ definePageMeta({ key: (route) => route.fullPath });
       <MenuCharacterSelection
         :rotate="true"
         :controls="{
-          left: 'arrowleft',
-          right: 'arrowright',
+          left: 'arrowright',
+          right: 'arrowleft',
         }"
       />
     </div>
