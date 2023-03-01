@@ -46,7 +46,6 @@ export default {
 </script>
 
 <template>
-  <!-- div para mostrar mensaje de ganar -->
   <div
     v-if="'playerNumber' in winner"
     class="max-w-screen absolute z-50 flex max-h-screen justify-center bg-red-600 align-middle"
@@ -61,6 +60,7 @@ export default {
         :character="characterP1"
         :enemy="characterP2"
         :attack="attack"
+        :ended="'playerNumber' in winner"
         @endGame="endGame"
       />
       <img
@@ -72,6 +72,7 @@ export default {
         :character="characterP2"
         :enemy="characterP1"
         :attack="attack"
+        :ended="'playerNumber' in winner"
         @endGame="endGame"
       />
     </div>
