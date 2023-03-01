@@ -188,7 +188,7 @@ export default {
   width: v-bind(widthPx);
 }
 
-.sprite {
+.stage .sprite {
   left: 50%;
   transform: translateX(-50%);
 }

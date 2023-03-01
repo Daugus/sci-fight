@@ -78,7 +78,7 @@ export default {
     </div>
 
     <!-- Sprite personaje seleccionado -->
-    <div class="flex justify-center align-middle">
+    <div :class="['flex', 'justify-center', 'align-middle']">
       <div :class="['sprite', `${currentCharacter.name}-idle`, rotate && 'rotate-x-180']"></div>
     </div>
   </div>
@@ -94,6 +94,11 @@ export default {
 </template>
 
 <style lang="scss">
+.stage .sprite {
+  left: initial;
+  transform: initial;
+}
+
 .character-container-player-1 {
   inset: 8% 75% 60.5% 11%;
 }
