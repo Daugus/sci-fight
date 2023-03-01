@@ -1,14 +1,24 @@
-<template>
-  <header class="absolute top-5 text-2xl">
-    <ul class="mx-auto flex w-full flex-col items-center justify-center">
-      <li><NuxtLink to="/">Index</NuxtLink></li>
-      <li><NuxtLink to="/menu">Menu selección</NuxtLink></li>
-      <li><NuxtLink to="/characters">Characters</NuxtLink></li>
-      <li><NuxtLink to="/arena">Arena</NuxtLink></li>
-    </ul>
-  </header>
+<script setup>
+definePageMeta({ key: (route) => route.fullPath });
+</script>
 
-  <div>
-    <h1>página de index</h1>
+<template>
+  <div class="flex h-screen w-screen flex-col justify-center overflow-hidden align-middle">
+    <div class="relative flex w-full justify-between">
+      <MenuCharacterSelection
+        :rotate="false"
+        :controls="{
+          left: 'a',
+          right: 'd',
+        }"
+      />
+      <MenuCharacterSelection
+        :rotate="true"
+        :controls="{
+          left: 'arrowright',
+          right: 'arrowleft',
+        }"
+      />
+    </div>
   </div>
 </template>

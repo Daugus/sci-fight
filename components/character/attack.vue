@@ -8,6 +8,7 @@ export default {
   props: {
     character: { required: true, type: Object as PropType<Character> },
     playerNumber: { required: true, type: Number },
+    delays: { required: true, type: Object as PropType<number[]> },
   },
   mounted() {
     const hurtbox = document.querySelector(`#attackP${this.playerNumber}`);
@@ -15,11 +16,23 @@ export default {
     if (!hurtbox) return;
 
     const rect = hurtbox.getBoundingClientRect();
-    this.$emit(`getRect`, rect, this.playerNumber);
+    this.attack(rect);
   },
   computed: {
     width() {
       return `${this.character.attack.hitbox.width}px`;
+    },
+  },
+  methods: {
+    // timeout que no ejecuta nada
+    setDelayTimeout: (ms: number) => new Promise((res) => setTimeout(res, ms)),
+
+    async attack(rect: DOMRect) {
+      for (const delay of this.delays) {
+        await this.setDelayTimeout(delay);
+
+        this.$emit(`getRect`, rect, this.playerNumber);
+      }
     },
   },
 };

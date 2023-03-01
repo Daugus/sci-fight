@@ -88,7 +88,7 @@ export default {
             this.attack = false;
 
             if (this.state !== 'death') this.state = 'idle';
-          }, this.character.attack.durationMs + 0);
+          }, this.character.attack.durationMs);
 
           break;
         case this.controls.left:
@@ -173,6 +173,7 @@ export default {
     <CharacterAttack
       :character="character"
       :player-number="playerNumber"
+      :delays="character.attack.delayMsList"
       @getRect="getRect"
       v-if="attack === true"
     />
@@ -188,7 +189,7 @@ export default {
   width: v-bind(widthPx);
 }
 
-.sprite {
+.player .sprite {
   left: 50%;
   transform: translateX(-50%);
 }

@@ -12,6 +12,7 @@ const galvus: Character = {
       height: 50,
       width: 520,
     },
+    delayMsList: [700],
     durationMs: 1000,
     cooldownMs: 0,
     damage: 40,

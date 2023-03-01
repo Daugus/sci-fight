@@ -11,6 +11,7 @@ const astraeus: Character = {
       height: 50,
       width: 330,
     },
+    delayMsList: [400],
     durationMs: 800,
     cooldownMs: 0,
     damage: 30,
