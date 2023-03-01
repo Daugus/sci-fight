@@ -5,10 +5,10 @@ const playSound = function () {
   element.innerHTML = `
     <audio autoplay loop>
       <source src="/src/audio/stages/stage-menu.mp3" type="audio/mpeg">
-      
     </audio>
   `;
   document.appendChild(element);
+  // Quitamos en EventListener para que suene sea automaticamente y no dandole click
   document.removeEventListener('click', playSound);
 };
 </script>

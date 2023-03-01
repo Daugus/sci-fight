@@ -26,5 +26,6 @@ type Character = {
 };
 
 type state = 'idle' | 'move' | 'attack' | 'appear' | 'death';
+type audio = 'hit' | 'attack' | 'appear' | 'death';
 
-export { hitbox, Character, state };
+export { hitbox, Character, state, audio };
