@@ -77,6 +77,9 @@ export default {
       switch (event.key.toLowerCase()) {
         case this.controls.attack:
           if (this.state === 'attack') return;
+          const audio = new Audio(`/src/audio/${this.character.name}/attack.mp3`);
+          audio.play();
+
           // Activar ataque
           this.attack = true;
           this.state = 'attack';

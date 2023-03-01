@@ -16,9 +16,6 @@ export default {
       winner: {} as { characterName: string; playerNumber: number },
     };
   },
-  // props: {
-  //   stageNum: Number,
-  // },
   methods: {
     damagePlayer(attack: { receiver: number; damage: number }) {
       this.attack = attack;
@@ -41,6 +38,9 @@ export default {
     this.floor = `url(/src/img/stages/${this.stageNum}/floor.png)`;
 
     document.body.classList.add('overflow-hidden');
+
+    const audio = new Audio('/src/audio/stages/stage-menu.mp3');
+    audio.play();
   },
 };
 </script>
@@ -56,7 +56,6 @@ export default {
 
   <div class="stage">
     <div class="absolute top-8 flex w-full items-center justify-center space-x-5 px-11 text-center align-middle">
-      <ArenaStageSound></ArenaStageSound>
       <ArenaHealthBar
         :player-number="1"
         :character="characterP1"
