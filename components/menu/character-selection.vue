@@ -8,26 +8,26 @@ export default {
   props: {
     rotate: { required: true, type: Boolean },
     controls: { required: true, type: Object as PropType<{ left: string; right: string }> },
+    playerNumber: { required: true, type: Number },
   },
   mounted() {
     document.addEventListener('keydown', this.keyUp);
   },
   computed: {
     currentCharacter() {
-      return characters[this.index];
+      const character = characters[this.index];
+      localStorage.setItem(`characterP${this.playerNumber}`, JSON.stringify(character));
+      return character;
     },
   },
   methods: {
-    menosUno() {
-      if (characters.length < this.index) {
-        this.index = characters.length;
-      }
-    },
     previous() {
       this.index = this.index - 1 < 0 ? characters.length - 1 : this.index - 1;
+      // this.$emit('getCharacter', this.playerNumber, this.currentCharacter);
     },
     next() {
       this.index = this.index + 1 >= characters.length ? 0 : this.index + 1;
+      // this.$emit('getCharacter', this.playerNumber, this.currentCharacter);
     },
     keyUp(event: KeyboardEvent) {
       switch (event.key.toLowerCase()) {

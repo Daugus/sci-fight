@@ -1,5 +1,11 @@
-<script setup>
-definePageMeta({ key: (route) => route.fullPath });
+<script lang="ts">
+export default {
+  data() {
+    return {
+      characters: [astraeus, astraeus],
+    };
+  },
+};
 </script>
 
 <template>
@@ -11,6 +17,7 @@ definePageMeta({ key: (route) => route.fullPath });
           left: 'a',
           right: 'd',
         }"
+        :playerNumber="1"
       />
       <MenuCharacterSelection
         :rotate="true"
@@ -18,7 +25,16 @@ definePageMeta({ key: (route) => route.fullPath });
           left: 'arrowleft',
           right: 'arrowright',
         }"
+        :playerNumber="2"
       />
+
+      <!-- TODO: PASAR MAPA -->
+      <NuxtLink
+        to="/arena"
+        class="absolute bottom-10 mx-auto w-screen text-center"
+      >
+        Jugar
+      </NuxtLink>
     </div>
   </div>
 </template>

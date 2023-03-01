@@ -1,17 +1,23 @@
-<script lang="ts" setup>
-definePageMeta({ key: (route) => route.fullPath });
-</script>
-
 <script lang="ts">
+import { Character } from '~~/utils/types';
+
 export default {
   data() {
+    // TODO: agregar
+    // || !localStorage.getItem('stage')
+    const jsonP1 = localStorage.getItem('characterP1');
+    const jsonP2 = localStorage.getItem('characterP2');
+
+    if (!jsonP1 || !jsonP2) window.location.replace('/');
+
     return {
       // Generar un escenario aleatorio
       stageNum: 3,
       stage: ``,
       floor: ``,
-      characterP1: characters[randomNumber(0, 3)],
-      characterP2: characters[randomNumber(0, 3)],
+      // carga personajes de localStorage
+      characterP1: JSON.parse(jsonP1!) as Character,
+      characterP2: JSON.parse(jsonP2!) as Character,
       attack: { receiver: 0, damage: 0 },
       winner: {} as { characterName: string; playerNumber: number },
     };
@@ -41,6 +47,9 @@ export default {
     this.floor = `url(/src/img/stages/${this.stageNum}/floor.png)`;
 
     document.body.classList.add('overflow-hidden');
+
+    localStorage.removeItem('characterP1');
+    localStorage.removeItem('characterP2');
   },
 };
 </script>
