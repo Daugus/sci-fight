@@ -11,8 +11,6 @@ const playSound = function () {
   document.appendChild(element);
   document.removeEventListener('click', playSound);
 };
-
-document.addEventListener('click', playSound);
 </script>
 
 <template>
