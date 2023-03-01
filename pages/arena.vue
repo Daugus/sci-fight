@@ -45,6 +45,7 @@ export default {
 
   <div class="stage">
     <div class="absolute top-8 flex w-full items-center justify-center space-x-5 px-11 text-center align-middle">
+      <ArenaStageSound></ArenaStageSound>
       <ArenaHealthBar
         :player-number="1"
         :character="characterP1"
