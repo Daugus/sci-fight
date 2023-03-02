@@ -23,6 +23,8 @@ export default {
       parryP1: false,
       parryP2: false,
       damagedPlayer: 0,
+      countdown: 5,
+      addListeners: false,
     };
   },
   methods: {
@@ -56,9 +58,13 @@ export default {
   },
   mounted() {
     document.body.classList.add('overflow-hidden');
-
-    localStorage.removeItem('characterP1');
-    localStorage.removeItem('characterP2');
+    const countdownIterval = setInterval(() => {
+      this.countdown--;
+      if (this.countdown < 0) {
+        this.addListeners = true;
+        clearInterval(countdownIterval);
+      }
+    }, 1000);
 
     // suena la musica dependiendo del escenario seleccionado
     // const audio = new Audio(`/src/audio/stages/${this.stageNum}/stage.mp3`);
@@ -74,6 +80,15 @@ export default {
     class="max-w-screen absolute z-50 flex max-h-screen justify-center align-middle"
   >
     <p class="win jupiter-crash text-9xl text-[#ffc42e]">{{ winner.characterName.toUpperCase() }} WINS</p>
+  </div>
+
+  <div
+    v-if="countdown >= 0"
+    class="max-w-screen absolute z-50 flex max-h-screen justify-center align-middle"
+  >
+    <p class="win jupiter-crash text-9xl text-[#ffc42e]">
+      {{ countdown > 0 ? countdown : 'FIGHT' }}
+    </p>
   </div>
 
   <div class="stage">
@@ -108,6 +123,7 @@ export default {
     :controls="{ attack: 'w', parry: 's', left: 'a', right: 'd' }"
     :winner="winner"
     :damaged-player="damagedPlayer"
+    :add-listeners="addListeners"
     @damagePlayer="damagePlayer"
     @getParry="getParry"
   />
@@ -119,6 +135,7 @@ export default {
     :controls="{ attack: 'arrowup', parry: 'arrowdown', right: 'arrowleft', left: 'arrowright' }"
     :winner="winner"
     :damaged-player="damagedPlayer"
+    :add-listeners="addListeners"
     @damagePlayer="damagePlayer"
     @getParry="getParry"
   />

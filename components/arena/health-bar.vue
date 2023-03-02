@@ -3,6 +3,7 @@ import { PropType } from 'vue';
 import { Character } from '~~/utils/types';
 
 export default {
+  emits: ['endGame'],
   data() {
     return {
       currentHealth: 0,
@@ -30,9 +31,7 @@ export default {
       this.currentHealth -= this.enemy.attack.damage / this.enemy.attack.delayMsList.length;
     },
     currentHealth() {
-      if (this.currentHealth <= 0) {
-        this.$emit('endGame', this.playerNumber);
-      }
+      if (this.currentHealth <= 0) this.$emit('endGame', this.playerNumber);
     },
   },
 };

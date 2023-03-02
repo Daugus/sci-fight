@@ -3,11 +3,11 @@ import { PropType } from 'vue';
 import { Character, state } from '~~/utils/types';
 
 export default {
+  emits: ['damagePlayer', 'getParry'],
   data() {
     return {
       attack: false,
       position: 20,
-      // distance: '1%',
       rightPressed: false,
       leftPressed: false,
       currentIntervalRight: setEmptyInterval(),
@@ -18,12 +18,10 @@ export default {
   },
   props: {
     character: { required: true, type: Object as PropType<Character> },
-
     playerNumber: { required: true, type: Number },
-
     enemyParried: { required: true, type: Boolean },
-
     damagedPlayer: { required: true, type: Number },
+    addListeners: { required: true, type: Boolean },
 
     controls: {
       required: true,
@@ -64,9 +62,6 @@ export default {
     },
   },
   mounted() {
-    document.addEventListener('keyup', this.keyUp);
-    document.addEventListener('keydown', this.keyDown);
-
     this.state = 'appear';
     setTimeout(() => (this.state = 'idle'), this.character.appear);
   },
@@ -149,6 +144,10 @@ export default {
         this.position += this.movement;
       }
     },
+    playAudio() {
+      const audio = new Audio(`/src/audio/${this.character.name}/${this.state}.mp3`);
+      audio.play();
+    },
   },
   watch: {
     rightPressed: function () {
@@ -194,25 +193,19 @@ export default {
     state: function () {
       switch (this.state) {
         case 'appear':
-          const appear = new Audio(`/src/audio/${this.character.name}/appear.mp3`);
-          appear.play();
-          break;
         case 'attack':
-          const attack = new Audio(`/src/audio/${this.character.name}/attack.mp3`);
-          attack.play();
-          break;
         case 'hit':
-          const hit = new Audio(`/src/audio/${this.character.name}/hit.mp3`);
-          hit.play();
-          break;
         case 'death':
-          const death = new Audio(`/src/audio/${this.character.name}/death.mp3`);
-          death.play();
+          this.playAudio();
           break;
       }
     },
     parry: function () {
       this.$emit('getParry', { player: this.playerNumber, parry: this.parry });
+    },
+    addListeners: function () {
+      document.addEventListener('keyup', this.keyUp);
+      document.addEventListener('keydown', this.keyDown);
     },
   },
 };
