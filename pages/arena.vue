@@ -30,11 +30,7 @@ export default {
       this.damagedPlayer = attack.receiver;
       setTimeout(() => {
         this.damagedPlayer = 0;
-      }, 1000);
-
-      // Sacar el jugador al que se le ha atacado
-      // const damaged = document.querySelector(`#player-${attack.receiver}`);
-      // console.log(damaged);
+      }, 500);
     },
     // emit de player number, que se envia cuando se muere uno de los personajes
     // playerNumber es el numero del personaje con vida <= 0
@@ -96,7 +92,7 @@ export default {
     :player-number="1"
     :controls="{ attack: 'w', parry: 's', left: 'a', right: 'd' }"
     :winner="winner"
-    :damaged="damagedPlayer"
+    :damaged-player="damagedPlayer"
     @damagePlayer="damagePlayer"
   />
 
@@ -105,7 +101,7 @@ export default {
     :player-number="2"
     :controls="{ attack: 'arrowup', parry: 'arrowdown', right: 'arrowleft', left: 'arrowright' }"
     :winner="winner"
-    :damaged="damagedPlayer"
+    :damaged-player="damagedPlayer"
     @damagePlayer="damagePlayer"
   />
 </template>
