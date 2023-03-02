@@ -20,11 +20,21 @@ export default {
 
       attack: { receiver: 0, damage: 0 },
       winner: {} as { characterName: string; playerNumber: number },
+      damagedPlayer: 0,
     };
   },
   methods: {
     damagePlayer(attack: { receiver: number; damage: number }) {
       this.attack = attack;
+
+      this.damagedPlayer = attack.receiver;
+      setTimeout(() => {
+        this.damagedPlayer = 0;
+      }, 1000);
+
+      // Sacar el jugador al que se le ha atacado
+      // const damaged = document.querySelector(`#player-${attack.receiver}`);
+      // console.log(damaged);
     },
     // emit de player number, que se envia cuando se muere uno de los personajes
     // playerNumber es el numero del personaje con vida <= 0
@@ -56,15 +66,9 @@ export default {
 <template>
   <div
     v-if="'playerNumber' in winner"
-    class="max-w-screen absolute z-50 flex max-h-screen justify-center bg-red-600 align-middle"
+    class="max-w-screen absolute z-50 flex max-h-screen justify-center align-middle"
   >
-    <p>THE WINNER IS {{ winner.characterName.toUpperCase() }} (P{{ winner.playerNumber }})</p>
-    <!-- <NuxtLink
-      to="/"
-      class="absolute top-10 w-80 rounded-lg bg-red-600 p-2 text-center"
-    >
-      BACK TO THE MENU
-    </NuxtLink> -->
+    <p class="win jupiter-crash text-9xl text-[#ffc42e]">{{ winner.characterName.toUpperCase() }} WINS</p>
   </div>
 
   <div class="stage">
@@ -100,6 +104,7 @@ export default {
     :player-number="1"
     :controls="{ attack: 'w', parry: 's', left: 'a', right: 'd' }"
     :winner="winner"
+    :damaged="damagedPlayer"
     @damagePlayer="damagePlayer"
   />
 
@@ -108,6 +113,7 @@ export default {
     :player-number="2"
     :controls="{ attack: 'arrowup', parry: 'arrowdown', right: 'arrowleft', left: 'arrowright' }"
     :winner="winner"
+    :damaged="damagedPlayer"
     @damagePlayer="damagePlayer"
   />
 </template>
@@ -130,5 +136,10 @@ export default {
     background-image: v-bind(floor);
     background-size: 4%;
   }
+}
+
+.win {
+  -webkit-text-stroke: 2px #ff7d01;
+  filter: drop-shadow(0 0 0.2rem #ff7d01);
 }
 </style>

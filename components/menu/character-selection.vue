@@ -70,7 +70,7 @@ export default {
       </button>
 
       <!-- Nombre personaje -->
-      <span class="jupiter-crash z-50 capitalize">{{ currentCharacter.name }}</span>
+      <span class="jupiter-crash z-50 text-4xl capitalize">{{ currentCharacter.name }}</span>
 
       <!-- Boton: Cambiar personaje (izquierda) -->
       <button
