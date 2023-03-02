@@ -20,6 +20,8 @@ export default {
       characterP2: JSON.parse(jsonP2!) as Character,
       attack: { receiver: 0, damage: 0 },
       winner: {} as { characterName: string; playerNumber: number },
+      parryP1: false,
+      parryP2: false,
     };
   },
   // props: {
@@ -40,6 +42,13 @@ export default {
       // quitar los listener para que al acabarse la partida no se puedan mover
       window.addEventListener('keyup', (e) => e.stopImmediatePropagation(), true);
       window.addEventListener('keydown', (e) => e.stopImmediatePropagation(), true);
+    },
+    getParry({ player, parry }: { player: number; parry: boolean }) {
+      if (player === 1) {
+        this.parryP1 = parry;
+      } else {
+        this.parryP2 = parry;
+      }
     },
   },
   mounted() {
@@ -92,18 +101,22 @@ export default {
 
   <Character
     :character="characterP1"
+    :enemy-parried="parryP2"
     :player-number="1"
     :controls="{ attack: 'w', parry: 's', left: 'a', right: 'd' }"
     :winner="winner"
     @damagePlayer="damagePlayer"
+    @getParry="getParry"
   />
 
   <Character
     :character="characterP2"
+    :enemy-parried="parryP1"
     :player-number="2"
     :controls="{ attack: 'arrowup', parry: 'arrowdown', right: 'arrowleft', left: 'arrowright' }"
     :winner="winner"
     @damagePlayer="damagePlayer"
+    @getParry="getParry"
   />
 </template>
 
