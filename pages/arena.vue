@@ -1,17 +1,23 @@
-<script lang="ts" setup>
-definePageMeta({ key: (route) => route.fullPath });
-</script>
-
 <script lang="ts">
+import { Character } from '~~/utils/types';
+
 export default {
   data() {
+    // TODO: agregar
+    // || !localStorage.getItem('stage')
+    const jsonP1 = localStorage.getItem('characterP1');
+    const jsonP2 = localStorage.getItem('characterP2');
+
+    if (!jsonP1 || !jsonP2) window.location.replace('/');
+
     return {
       // Generar un escenario aleatorio
       stageNum: 3,
       stage: ``,
       floor: ``,
-      characterP1: characters[randomNumber(0, 3)],
-      characterP2: characters[randomNumber(0, 3)],
+      // carga personajes de localStorage
+      characterP1: JSON.parse(jsonP1!) as Character,
+      characterP2: JSON.parse(jsonP2!) as Character,
       attack: { receiver: 0, damage: 0 },
       winner: {} as { characterName: string; playerNumber: number },
     };
@@ -39,6 +45,9 @@ export default {
 
     document.body.classList.add('overflow-hidden');
 
+    localStorage.removeItem('characterP1');
+    localStorage.removeItem('characterP2');
+
     const audio = new Audio('/src/audio/stages/stage-menu.mp3');
     audio.play();
   },
@@ -46,7 +55,6 @@ export default {
 </script>
 
 <template>
-  <!-- div para mostrar mensaje de ganar -->
   <div
     v-if="'playerNumber' in winner"
     class="max-w-screen absolute z-50 flex max-h-screen justify-center bg-red-600 align-middle"
@@ -61,6 +69,7 @@ export default {
         :character="characterP1"
         :enemy="characterP2"
         :attack="attack"
+        :ended="'playerNumber' in winner"
         @endGame="endGame"
       />
       <img
@@ -72,6 +81,7 @@ export default {
         :character="characterP2"
         :enemy="characterP1"
         :attack="attack"
+        :ended="'playerNumber' in winner"
         @endGame="endGame"
       />
     </div>

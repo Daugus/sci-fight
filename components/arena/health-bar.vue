@@ -14,6 +14,7 @@ export default {
     character: { required: true, type: Object as PropType<Character> },
     enemy: { required: true, type: Object as PropType<Character> },
     attack: { required: true, type: Object as PropType<{ receiver: number }> },
+    ended: { required: true, type: Boolean },
   },
   computed: {
     currentHealthPercentage() {
@@ -25,7 +26,7 @@ export default {
   },
   watch: {
     attack() {
-      if (this.attack.receiver !== this.playerNumber || this.currentHealth <= 0) return;
+      if (this.ended || this.attack.receiver !== this.playerNumber || this.currentHealth <= 0) return;
       this.currentHealth -= this.enemy.attack.damage / this.enemy.attack.delayMsList.length;
     },
     currentHealth() {
