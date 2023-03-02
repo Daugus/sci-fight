@@ -1,31 +1,25 @@
 <script lang="ts">
 export default {
   data() {
-    const random = randomNumber(1, 3);
+    const stage = localStorage.getItem('stage');
+
     return {
-      index: random,
+      index: stage ? parseInt(stage) : randomNumber(1, 3),
     };
   },
   computed: {
     stage() {
+      localStorage.setItem('stage', this.index.toString());
       return `/src/img/stages/${this.index}/stage.gif`;
     },
   },
-  mounted() {},
   methods: {
     previous() {
       this.index = this.index - 1 < 1 ? 3 : this.index - 1;
-      console.log(this.index);
-      console.log(this.stage);
     },
     next() {
       this.index = this.index + 1 > 3 ? 1 : this.index + 1;
-      console.log(this.index);
-      console.log(this.stage);
     },
-  },
-  watch: {
-    index: function () {},
   },
 };
 </script>

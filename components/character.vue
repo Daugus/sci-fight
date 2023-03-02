@@ -165,7 +165,7 @@ export default {
 
 <template>
   <div
-    :class="['player', playerNumber === 2 && 'rotate-x-180']"
+    :class="['player', attack && 'z-50', playerNumber === 2 && 'rotate-x-180']"
     :id="id"
   >
     <div :class="['sprite', `${character.name}-${state}`]"></div>

@@ -26,11 +26,9 @@ export default {
   methods: {
     previous() {
       this.index = this.index - 1 < 0 ? characters.length - 1 : this.index - 1;
-      // this.$emit('getCharacter', this.playerNumber, this.currentCharacter);
     },
     next() {
       this.index = this.index + 1 >= characters.length ? 0 : this.index + 1;
-      // this.$emit('getCharacter', this.playerNumber, this.currentCharacter);
     },
     keyUp(event: KeyboardEvent) {
       switch (event.key.toLowerCase()) {
@@ -69,7 +67,7 @@ export default {
       </button>
 
       <!-- Nombre personaje -->
-      <span class="jupiter-crash capitalize">{{ currentCharacter.name }}</span>
+      <span class="jupiter-crash z-50 capitalize">{{ currentCharacter.name }}</span>
 
       <!-- Boton: Cambiar personaje (izquierda) -->
       <button
