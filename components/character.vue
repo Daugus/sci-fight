@@ -6,8 +6,8 @@ export default {
   data() {
     return {
       attack: false,
-      position: 20,
-      distance: '20%',
+      position: 0,
+      distance: '1%',
       rightPressed: false,
       leftPressed: false,
       currentIntervalLeft: setEmptyInterval(),
@@ -19,8 +19,6 @@ export default {
     character: { required: true, type: Object as PropType<Character> },
 
     playerNumber: { required: true, type: Number },
-
-    damaged: { required: true, type: Number },
 
     controls: {
       required: true,
@@ -116,7 +114,7 @@ export default {
     },
     // funciones para mover los divs
     moveLeft() {
-      if (!this.rightPressed && this.position > 1 && !this.attack && this.playerNumber !== this.damaged) {
+      if (!this.rightPressed && this.position > 1 && !this.attack) {
         this.position -= this.movement;
         this.distance = `${this.position - this.movement}%`;
       }
@@ -125,7 +123,7 @@ export default {
       const { right } = document.querySelector(`#player-1`)!.getBoundingClientRect();
       const { left } = document.querySelector(`#player-2`)!.getBoundingClientRect();
 
-      if (!this.leftPressed && this.position < 99 - this.width && !this.attack && this.playerNumber !== this.damaged) {
+      if (!this.leftPressed && this.position < 99 - this.width && !this.attack) {
         if (this.playerNumber === 1 && right >= left) return;
         if (this.playerNumber === 2 && left <= right) return;
 
@@ -159,15 +157,6 @@ export default {
         this.state = 'idle';
       }
     },
-    damaged: function () {
-      if (this.playerNumber !== this.damaged) return;
-
-      this.state = 'hit';
-
-      setTimeout(() => {
-        this.state = 'idle';
-      }, 1000);
-    },
     winner: function () {
       if (this.winner.playerNumber !== this.playerNumber) this.state = 'death';
     },
@@ -197,7 +186,7 @@ export default {
 
 <template>
   <div
-    :class="['player', attack && 'z-50', playerNumber === 2 && 'rotate-x-180']"
+    :class="['player', playerNumber === 2 && 'rotate-x-180']"
     :id="id"
   >
     <div :class="['sprite', `${character.name}-${state}`]"></div>
