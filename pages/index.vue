@@ -11,6 +11,10 @@ export default {
 <template>
   <div class="flex h-screen w-screen flex-col justify-center overflow-hidden align-middle">
     <div class="relative flex w-full justify-between">
+      <!-- Seleccion de mapa -->
+      <MenuStageSelection />
+
+      <!-- Seleccion personaje: Player 1 -->
       <MenuCharacterSelection
         :rotate="false"
         :controls="{
@@ -19,6 +23,8 @@ export default {
         }"
         :playerNumber="1"
       />
+
+      <!-- Seleccion personaje: Player 2 -->
       <MenuCharacterSelection
         :rotate="true"
         :controls="{

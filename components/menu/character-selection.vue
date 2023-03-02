@@ -19,6 +19,9 @@ export default {
       localStorage.setItem(`characterP${this.playerNumber}`, JSON.stringify(character));
       return character;
     },
+    currentCharacterColor() {
+      return characters[this.index].color;
+    },
   },
   methods: {
     previous() {
@@ -51,12 +54,12 @@ export default {
   />
 
   <!-- Selección de personaje -->
-  <div :class="['absolute', 'mx-3', 'my-2', `character-container-player-${rotate ? 2 : 1}`]">
+  <div :class="['absolute', 'mx-3', 'my-2', 'flex', 'flex-col', `character-container-player-${rotate ? 2 : 1}`]">
     <!-- Cambio de personaje -->
     <div class="flex w-full justify-between text-center align-middle leading-none">
       <!-- Boton: Cambiar personaje (derecha) -->
       <button
-        class="jupiter-crash z-50 w-6"
+        class="z-50 w-6"
         @click="next"
       >
         <img
@@ -70,7 +73,7 @@ export default {
 
       <!-- Boton: Cambiar personaje (izquierda) -->
       <button
-        class="jupiter-crash z-50 w-6"
+        class="z-50 w-6"
         @click="previous"
       >
         <img src="/src/img/assets/button_arrow.png" />
@@ -91,9 +94,39 @@ export default {
       src="/src/img/assets/stats_graphic.png"
     />
   </div>
+
+  <!-- Controles -->
+  <div :class="['absolute', 'controls', `player-${rotate ? 2 : 1}`]"></div>
 </template>
 
 <style lang="scss">
+.controls {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.player-1 {
+  inset: 10% 53% 67% 28.5%;
+  background-image: url('/src/img/assets/player1_controls.png');
+}
+
+.player-2 {
+  inset: 10% 28.5% 67% 53%;
+  background-image: url('/src/img/assets/player2_controls.png');
+}
+
+span {
+  scale: 1.25;
+  -webkit-text-stroke: 1px black;
+  color: #363636;
+  filter: drop-shadow(0 0 0.2rem rgba(255, 255, 255, 0.25));
+}
+
+button {
+  filter: drop-shadow(0 0 0.2rem rgba(255, 255, 255, 0.1));
+}
+
 .stage .sprite {
   left: initial;
   transform: initial;
