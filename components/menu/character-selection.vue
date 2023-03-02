@@ -9,14 +9,17 @@ export default {
     rotate: { required: true, type: Boolean },
     controls: { required: true, type: Object as PropType<{ left: string; right: string }> },
     playerNumber: { required: true, type: Number },
+    characterIndex: { required: true, type: Number },
   },
   mounted() {
+    this.index = this.characterIndex;
     document.addEventListener('keydown', this.keyUp);
   },
   computed: {
     currentCharacter() {
       const character = characters[this.index];
       localStorage.setItem(`characterP${this.playerNumber}`, JSON.stringify(character));
+      localStorage.setItem(`characterP${this.playerNumber}Index`, this.index.toString());
       return character;
     },
     currentCharacterColor() {

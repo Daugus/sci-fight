@@ -3,28 +3,25 @@ import { Character } from '~~/utils/types';
 
 export default {
   data() {
-    // TODO: agregar
-    // || !localStorage.getItem('stage')
     const jsonP1 = localStorage.getItem('characterP1');
     const jsonP2 = localStorage.getItem('characterP2');
+    const stageLs = localStorage.getItem('stage');
 
-    if (!jsonP1 || !jsonP2) window.location.replace('/');
+    if (!jsonP1 || !jsonP2 || !stageLs) window.location.replace('/');
 
+    const stage = parseInt(stageLs!);
     return {
-      // Generar un escenario aleatorio
-      stageNum: 3,
-      stage: ``,
-      floor: ``,
-      // carga personajes de localStorage
+      // carga datos de localStorage
+      stageNum: stage,
+      stage: `url(/src/img/stages/${stage}/stage.gif)`,
+      floor: `url(/src/img/stages/${stage}/floor.png)`,
       characterP1: JSON.parse(jsonP1!) as Character,
       characterP2: JSON.parse(jsonP2!) as Character,
+
       attack: { receiver: 0, damage: 0 },
       winner: {} as { characterName: string; playerNumber: number },
     };
   },
-  // props: {
-  //   stageNum: Number,
-  // },
   methods: {
     damagePlayer(attack: { receiver: number; damage: number }) {
       this.attack = attack;
@@ -43,13 +40,7 @@ export default {
     },
   },
   mounted() {
-    this.stage = `url(/src/img/stages/${this.stageNum}/stage.gif)`;
-    this.floor = `url(/src/img/stages/${this.stageNum}/floor.png)`;
-
     document.body.classList.add('overflow-hidden');
-
-    localStorage.removeItem('characterP1');
-    localStorage.removeItem('characterP2');
   },
 };
 </script>

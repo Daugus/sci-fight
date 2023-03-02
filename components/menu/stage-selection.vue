@@ -7,6 +7,13 @@ export default {
       index: stage ? parseInt(stage) : randomNumber(1, 3),
     };
   },
+
+  props: {
+    controls: { required: true, type: Object as PropType<{ left: string; right: string }> },
+  },
+  mounted() {
+    document.addEventListener('keydown', this.keyUp);
+  },
   computed: {
     stage() {
       localStorage.setItem('stage', this.index.toString());
@@ -19,6 +26,16 @@ export default {
     },
     next() {
       this.index = this.index + 1 > 3 ? 1 : this.index + 1;
+    },
+    keyUp(event: KeyboardEvent) {
+      switch (event.key.toLowerCase()) {
+        case this.controls.left:
+          this.previous();
+          break;
+        case this.controls.right:
+          this.next();
+          break;
+      }
     },
   },
 };
