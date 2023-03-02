@@ -60,6 +60,9 @@ export default {
   mounted() {
     document.addEventListener('keyup', this.keyUp);
     document.addEventListener('keydown', this.keyDown);
+
+    this.state = 'appear';
+    setTimeout(() => (this.state = 'idle'), this.character.appear);
   },
   methods: {
     getRect(attackRect: DOMRect, playerNumber: number) {

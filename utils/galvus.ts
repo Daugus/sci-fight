@@ -23,6 +23,7 @@ const galvus: Character = {
   },
   health: 100,
   color: '#23313d',
+  appear: 1400,
 };
 
 export default galvus;
