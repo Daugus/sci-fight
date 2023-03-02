@@ -9,14 +9,17 @@ export default {
     rotate: { required: true, type: Boolean },
     controls: { required: true, type: Object as PropType<{ left: string; right: string }> },
     playerNumber: { required: true, type: Number },
+    characterIndex: { required: true, type: Number },
   },
   mounted() {
+    this.index = this.characterIndex;
     document.addEventListener('keydown', this.keyUp);
   },
   computed: {
     currentCharacter() {
       const character = characters[this.index];
       localStorage.setItem(`characterP${this.playerNumber}`, JSON.stringify(character));
+      localStorage.setItem(`characterP${this.playerNumber}Index`, this.index.toString());
       return character;
     },
     currentCharacterColor() {
@@ -26,11 +29,9 @@ export default {
   methods: {
     previous() {
       this.index = this.index - 1 < 0 ? characters.length - 1 : this.index - 1;
-      // this.$emit('getCharacter', this.playerNumber, this.currentCharacter);
     },
     next() {
       this.index = this.index + 1 >= characters.length ? 0 : this.index + 1;
-      // this.$emit('getCharacter', this.playerNumber, this.currentCharacter);
     },
     keyUp(event: KeyboardEvent) {
       switch (event.key.toLowerCase()) {
@@ -69,7 +70,7 @@ export default {
       </button>
 
       <!-- Nombre personaje -->
-      <span class="jupiter-crash capitalize">{{ currentCharacter.name }}</span>
+      <span class="jupiter-crash z-50 capitalize">{{ currentCharacter.name }}</span>
 
       <!-- Boton: Cambiar personaje (izquierda) -->
       <button

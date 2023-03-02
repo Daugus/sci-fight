@@ -1,8 +1,12 @@
 <script lang="ts">
 export default {
   data() {
+    // carga los últimos usados, si no están guardados se carga el primero
+    const characterP1Index = localStorage.getItem('characterP1Index');
+    const characterP2Index = localStorage.getItem('characterP2Index');
+
     return {
-      characters: [astraeus, astraeus],
+      characters: [characterP1Index ? parseInt(characterP1Index) : 0, characterP2Index ? parseInt(characterP2Index) : 0],
     };
   },
   mounted() {
@@ -16,9 +20,6 @@ export default {
 <template>
   <div class="flex h-screen w-screen flex-col justify-center overflow-hidden align-middle">
     <div class="relative flex w-full justify-between">
-      <!-- Seleccion de mapa -->
-      <MenuStageSelection />
-
       <!-- Seleccion personaje: Player 1 -->
       <MenuCharacterSelection
         :rotate="false"
@@ -27,6 +28,7 @@ export default {
           right: 'd',
         }"
         :playerNumber="1"
+        :characterIndex="characters[0]"
       />
 
       <!-- Seleccion personaje: Player 2 -->
@@ -37,15 +39,18 @@ export default {
           right: 'arrowleft',
         }"
         :playerNumber="2"
+        :characterIndex="characters[1]"
       />
 
-      <!-- TODO: PASAR MAPA -->
-      <NuxtLink
-        to="/arena"
-        class="absolute bottom-10 mx-auto w-screen text-center"
-      >
-        Jugar
-      </NuxtLink>
+      <!-- Seleccion de mapa -->
+      <MenuStageSelection
+        :controls="{
+          left: 'n',
+          right: 'm',
+        }"
+      />
+
+      <MenuButtonStart button=" "></MenuButtonStart>
     </div>
   </div>
 </template>
