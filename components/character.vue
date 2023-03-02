@@ -77,8 +77,6 @@ export default {
       switch (event.key.toLowerCase()) {
         case this.controls.attack:
           if (this.state === 'attack') return;
-          const audio = new Audio(`/src/audio/${this.character.name}/attack.mp3`);
-          audio.play();
 
           // Activar ataque
           this.attack = true;
@@ -161,6 +159,26 @@ export default {
     },
     winner: function () {
       if (this.winner.playerNumber !== this.playerNumber) this.state = 'death';
+    },
+    state: function () {
+      switch (this.state) {
+        case 'appear':
+          const appear = new Audio(`/src/audio/${this.character.name}/appear.mp3`);
+          appear.play();
+          break;
+        case 'attack':
+          const attack = new Audio(`/src/audio/${this.character.name}/attack.mp3`);
+          attack.play();
+          break;
+        case 'hit':
+          const hit = new Audio(`/src/audio/${this.character.name}/hit.mp3`);
+          hit.play();
+          break;
+        case 'death':
+          const death = new Audio(`/src/audio/${this.character.name}/death.mp3`);
+          death.play();
+          break;
+      }
     },
   },
 };

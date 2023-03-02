@@ -5,6 +5,11 @@ export default {
       characters: [astraeus, astraeus],
     };
   },
+  mounted() {
+    // const audio = new Audio('/src/audio/stages/stage-menu.mp3');
+    // audio.volume = 0.5;
+    // audio.play();
+  },
 };
 </script>
 

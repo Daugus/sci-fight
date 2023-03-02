@@ -12,7 +12,7 @@ export default {
 
     return {
       // Generar un escenario aleatorio
-      stageNum: 3,
+      stageNum: 1,
       stage: ``,
       floor: ``,
       // carga personajes de localStorage
@@ -48,8 +48,10 @@ export default {
     localStorage.removeItem('characterP1');
     localStorage.removeItem('characterP2');
 
-    const audio = new Audio('/src/audio/stages/stage-menu.mp3');
-    audio.play();
+    // suena la musica dependiendo del escenario seleccionado
+    // const audio = new Audio(`/src/audio/stages/${this.stageNum}/stage.mp3`);
+    // audio.loop = true;
+    // audio.play();
   },
 };
 </script>
@@ -60,6 +62,12 @@ export default {
     class="max-w-screen absolute z-50 flex max-h-screen justify-center bg-red-600 align-middle"
   >
     <p>THE WINNER IS {{ winner.characterName.toUpperCase() }} (P{{ winner.playerNumber }})</p>
+    <!-- <NuxtLink
+      to="/"
+      class="absolute top-10 w-80 rounded-lg bg-red-600 p-2 text-center"
+    >
+      BACK TO THE MENU
+    </NuxtLink> -->
   </div>
 
   <div class="stage">
