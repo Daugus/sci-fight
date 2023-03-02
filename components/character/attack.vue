@@ -11,6 +11,7 @@ export default {
     delays: { required: true, type: Object as PropType<number[]> },
   },
   mounted() {
+    // Ataque
     const hurtbox = document.querySelector(`#attackP${this.playerNumber}`)!;
 
     const rect = hurtbox.getBoundingClientRect();

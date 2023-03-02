@@ -7,6 +7,7 @@ export default {
     // || !localStorage.getItem('stage')
     const jsonP1 = localStorage.getItem('characterP1');
     const jsonP2 = localStorage.getItem('characterP2');
+    // const stageNum = localStorage.getItem('stage');
 
     if (!jsonP1 || !jsonP2) window.location.replace('/');
 
@@ -15,6 +16,7 @@ export default {
       stageNum: 3,
       stage: ``,
       floor: ``,
+      damagedPlayer: 0,
       // carga personajes de localStorage
       characterP1: JSON.parse(jsonP1!) as Character,
       characterP2: JSON.parse(jsonP2!) as Character,
@@ -28,6 +30,15 @@ export default {
   methods: {
     damagePlayer(attack: { receiver: number; damage: number }) {
       this.attack = attack;
+
+      this.damagedPlayer = attack.receiver;
+      setTimeout(() => {
+        this.damagedPlayer = 0;
+      }, 1000);
+
+      // Sacar el jugador al que se le ha atacado
+      // const damaged = document.querySelector(`#player-${attack.receiver}`);
+      // console.log(damaged);
     },
     // emit de player number, que se envia cuando se muere uno de los personajes
     // playerNumber es el numero del personaje con vida <= 0
@@ -47,9 +58,6 @@ export default {
     this.floor = `url(/src/img/stages/${this.stageNum}/floor.png)`;
 
     document.body.classList.add('overflow-hidden');
-
-    localStorage.removeItem('characterP1');
-    localStorage.removeItem('characterP2');
   },
 };
 </script>
@@ -95,6 +103,7 @@ export default {
     :player-number="1"
     :controls="{ attack: 'w', parry: 's', left: 'a', right: 'd' }"
     :winner="winner"
+    :damaged="damagedPlayer"
     @damagePlayer="damagePlayer"
   />
 
@@ -103,6 +112,7 @@ export default {
     :player-number="2"
     :controls="{ attack: 'arrowup', parry: 'arrowdown', right: 'arrowleft', left: 'arrowright' }"
     :winner="winner"
+    :damaged="damagedPlayer"
     @damagePlayer="damagePlayer"
   />
 </template>
