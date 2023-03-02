@@ -6,8 +6,8 @@ export default {
   data() {
     return {
       attack: false,
-      position: 0,
-      distance: '1%',
+      position: 20,
+      distance: '20%',
       rightPressed: false,
       leftPressed: false,
       currentIntervalLeft: setEmptyInterval(),
