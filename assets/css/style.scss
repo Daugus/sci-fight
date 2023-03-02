@@ -35,7 +35,6 @@
 
 .jupiter-crash {
   font-family: 'JupiterCrash';
-  font-size: 2.5rem;
 }
 
 // ------ CHARACTER SELECTION ------
@@ -69,7 +68,7 @@
 
   background: url('/src/img/characters/astraeus/appear.png');
 
-  animation: astraeus-appear 0.8s steps(8) infinite;
+  animation: astraeus-appear 0.8s steps(8) forwards;
 }
 
 @keyframes astraeus-appear {
@@ -181,7 +180,7 @@
 
   background: url('/src/img/characters/galvus/appear.png');
 
-  animation: galvus-appear 1.2s steps(12) infinite;
+  animation: galvus-appear 1.4s steps(14) forwards;
 }
 
 @keyframes galvus-appear {
@@ -189,7 +188,7 @@
     background-position: 0px;
   }
   to {
-    background-position: -11844px;
+    background-position: -13818px;
   }
 }
 // Idle
@@ -403,7 +402,7 @@
 
   background: url('/src/img/characters/vespera/appear.png');
 
-  animation: vespera-appear 0.9s steps(9) infinite;
+  animation: vespera-appear 0.9s steps(9) forwards;
 }
 
 @keyframes vespera-appear {
