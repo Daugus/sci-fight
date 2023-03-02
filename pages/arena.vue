@@ -68,7 +68,7 @@ export default {
   </div>
 
   <div class="stage">
-    <div class="absolute top-8 flex w-full items-center justify-center space-x-5 px-11 text-center align-middle">
+    <div class="relative flex h-[12rem] w-full items-center justify-between text-center align-middle">
       <ArenaHealthBar
         :player-number="1"
         :character="characterP1"
@@ -77,10 +77,7 @@ export default {
         :ended="'playerNumber' in winner"
         @endGame="endGame"
       />
-      <img
-        class="h-9"
-        src="/src/img/assets/stats_health.png"
-      />
+
       <ArenaHealthBar
         :player-number="2"
         :character="characterP2"
