@@ -80,7 +80,7 @@ export default {
         }
     },
     keyUp(event: KeyboardEvent) {
-      if (this.state === 'death' || this.parry) return;
+      if (this.state === 'death' || this.state === 'hit' || this.state === 'attack' || this.parry) return;
 
       switch (event.key.toLowerCase()) {
         case this.controls.attack:
