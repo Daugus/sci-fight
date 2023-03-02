@@ -54,9 +54,9 @@ export default {
 <template>
   <div
     v-if="'playerNumber' in winner"
-    class="max-w-screen absolute z-50 flex max-h-screen justify-center bg-red-600 align-middle"
+    class="max-w-screen absolute z-50 flex max-h-screen justify-center align-middle"
   >
-    <p>THE WINNER IS {{ winner.characterName.toUpperCase() }} (P{{ winner.playerNumber }})</p>
+    <p class="win jupiter-crash text-9xl text-[#ffc42e]">{{ winner.characterName.toUpperCase() }} WINS</p>
   </div>
 
   <div class="stage">
@@ -124,5 +124,10 @@ export default {
     background-image: v-bind(floor);
     background-size: 4%;
   }
+}
+
+.win {
+  -webkit-text-stroke: 2px #ff7d01;
+  filter: drop-shadow(0 0 0.2rem #ff7d01);
 }
 </style>

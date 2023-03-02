@@ -23,6 +23,7 @@ const quasar: Character = {
   },
   health: 120,
   color: '#9c3333',
+  appear: 3800,
 };
 
 export default quasar;
