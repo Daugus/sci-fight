@@ -509,12 +509,23 @@
 // ------ ABILITIES ------
 // protect
 .protect {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+
   width: 250px;
   height: 250px;
 
-  background: url('/src/img/abilities/protect.png');
+  z-index: 100;
+
+  background-image: url('/src/img/abilities/protect.png');
 
   animation: protect 0.9s steps(9) infinite;
+}
+
+.quasar.protect {
+  top: -34%;
 }
 
 @keyframes protect {

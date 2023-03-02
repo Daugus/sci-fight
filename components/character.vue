@@ -13,12 +13,15 @@ export default {
       currentIntervalLeft: setEmptyInterval(),
       currentIntervalRight: setEmptyInterval(),
       state: 'idle' as state,
+      parry: false,
     };
   },
   props: {
     character: { required: true, type: Object as PropType<Character> },
 
     playerNumber: { required: true, type: Number },
+
+    enemyParried: { required: true, type: Boolean },
 
     controls: {
       required: true,
@@ -66,13 +69,15 @@ export default {
       const playerRect = document.querySelector(`#player-${receiverPlayerNumber}`)!.getBoundingClientRect();
 
       if (attackRect.x + attackRect.width >= playerRect!.x && attackRect.x <= playerRect.x + playerRect.width)
-        this.$emit('damagePlayer', {
-          receiver: receiverPlayerNumber,
-          damage: this.character.attack.damage,
-        });
+        if (!this.enemyParried) {
+          this.$emit('damagePlayer', {
+            receiver: receiverPlayerNumber,
+            damage: this.character.attack.damage,
+          });
+        }
     },
     keyUp(event: KeyboardEvent) {
-      if (this.state === 'death') return;
+      if (this.state === 'death' || this.parry) return;
 
       switch (event.key.toLowerCase()) {
         case this.controls.attack:
@@ -98,10 +103,17 @@ export default {
         case this.controls.right:
           this.rightPressed = false;
           break;
+        case this.controls.parry:
+          this.parry = true;
+
+          setTimeout(() => {
+            this.parry = false;
+          }, 500);
+          break;
       }
     },
     keyDown(event: KeyboardEvent) {
-      if (this.state === 'death') return;
+      if (this.state === 'death' || this.parry) return;
 
       switch (event.key.toLowerCase()) {
         case this.controls.left:
@@ -180,6 +192,9 @@ export default {
           break;
       }
     },
+    parry: function () {
+      this.$emit('getParry', { player: this.playerNumber, parry: this.parry });
+    },
   },
 };
 </script>
@@ -189,6 +204,11 @@ export default {
     :class="['player', attack && 'z-50', playerNumber === 2 && 'rotate-x-180']"
     :id="id"
   >
+    <div
+      :class="`protect ${character.name}`"
+      v-if="parry"
+    ></div>
+
     <div :class="['sprite', `${character.name}-${state}`]"></div>
 
     <CharacterAttack
