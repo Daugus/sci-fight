@@ -13,7 +13,7 @@ const astraeus: Character = {
     },
     delayMsList: [400],
     durationMs: 800,
-    cooldownMs: 0,
+    cooldownMs: 100,
     damage: 30,
   },
   speed: {

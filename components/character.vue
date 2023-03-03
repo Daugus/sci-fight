@@ -1,5 +1,4 @@
 <script lang="ts">
-import { PropType } from 'vue';
 import { Character, state } from '~~/utils/types';
 
 export default {
@@ -14,13 +13,14 @@ export default {
       currentIntervalBackward: setEmptyInterval(),
       state: 'idle' as state,
       parry: false,
+      sendBack: false,
     };
   },
   props: {
     character: { required: true, type: Object as PropType<Character> },
     playerNumber: { required: true, type: Number },
     enemyParried: { required: true, type: Boolean },
-    damagedPlayer: { required: true, type: Number },
+    damagedPlayer: { required: true, type: Object as PropType<{ receiver: number; sendBack: boolean }> },
     addListeners: { required: true, type: Boolean },
 
     controls: {
@@ -39,6 +39,10 @@ export default {
         characterName: string;
         playerNumber: number;
       }>,
+    },
+    canParry: {
+      required: true,
+      type: Boolean,
     },
   },
   computed: {
@@ -66,7 +70,7 @@ export default {
     setTimeout(() => (this.state = 'idle'), this.character.appear);
   },
   methods: {
-    getRect(attackRect: DOMRect, playerNumber: number) {
+    getRect(attackRect: DOMRect, playerNumber: number, sendBack: boolean) {
       const receiverPlayerNumber = playerNumber === 1 ? 2 : 1;
 
       const playerRect = document.querySelector(`#player-${receiverPlayerNumber}`)!.getBoundingClientRect();
@@ -76,6 +80,7 @@ export default {
           this.$emit('damagePlayer', {
             receiver: receiverPlayerNumber,
             damage: this.character.attack.damage,
+            sendBack: sendBack,
           });
         }
     },
@@ -105,6 +110,8 @@ export default {
           this.forwardPressed = false;
           break;
         case this.controls.parry:
+          if (!this.canParry) return;
+
           this.parry = true;
 
           setTimeout(() => {
@@ -173,19 +180,25 @@ export default {
       }
     },
     damagedPlayer: function () {
-      if (this.playerNumber !== this.damagedPlayer || this.state === 'death') return;
+      const correctPlayer = this.playerNumber === this.damagedPlayer.receiver;
 
+      if (!correctPlayer || this.state === 'death') return;
+
+      this.state = 'hit';
       this.backwardPressed = false;
       this.forwardPressed = false;
       clearInterval(this.currentIntervalBackward);
       clearInterval(this.currentIntervalForward);
 
-      this.state = 'hit';
+      if (correctPlayer && !this.damagedPlayer.sendBack) return;
+
+      this.sendBack = true;
       this.currentIntervalBackward = setImmediateInterval(this.moveBackward, 10);
 
       setTimeout(() => {
         clearInterval(this.currentIntervalBackward);
         this.state = 'playerNumber' in this.winner && this.winner.playerNumber !== this.playerNumber ? 'death' : 'idle';
+        this.sendBack = false;
       }, 500);
     },
     winner: function () {
@@ -214,7 +227,7 @@ export default {
 
 <template>
   <div
-    :class="['player', state === 'hit' && 'damaged', attack && 'z-50', playerNumber === 2 && 'rotate-x-180']"
+    :class="['player', state === 'hit' && sendBack && 'damaged', attack && 'z-50', playerNumber === 2 && 'rotate-x-180']"
     :id="id"
   >
     <div

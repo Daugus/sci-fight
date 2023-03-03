@@ -51,7 +51,7 @@ export default {
         }"
       />
 
-      <MenuButtonStart key=" "></MenuButtonStart>
+      <MenuButtonStart button=" "></MenuButtonStart>
     </div>
   </div>
 </template>

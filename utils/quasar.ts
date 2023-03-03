@@ -14,7 +14,7 @@ const quasar: Character = {
     },
     delayMsList: [0, 400],
     durationMs: 800,
-    cooldownMs: 0,
+    cooldownMs: 100,
     damage: 20,
   },
   speed: {

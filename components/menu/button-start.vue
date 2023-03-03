@@ -1,14 +1,14 @@
 <script lang="ts">
 export default {
   props: {
-    key: { required: true, type: String },
+    button: { required: true, type: String },
   },
   mounted() {
     document.addEventListener('keydown', this.keyUp);
   },
   methods: {
     keyUp(event: KeyboardEvent) {
-      if (event.key === this.key) this.play();
+      if (event.key === this.button) this.play();
     },
     play: () => window.location.replace('/arena'),
   },

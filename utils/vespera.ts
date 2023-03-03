@@ -14,7 +14,7 @@ const vespera: Character = {
     },
     delayMsList: [0],
     durationMs: 500,
-    cooldownMs: 0,
+    cooldownMs: 100,
     damage: 30,
   },
   speed: {
