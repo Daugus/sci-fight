@@ -21,7 +21,7 @@ export default {
       parry: [false, false],
       canParry: [true, true],
       damagedPlayer: { receiver: 0, sendBack: false } as { receiver: number; sendBack: boolean },
-      countdown: -1,
+      countdown: 5,
       addListeners: false,
     };
   },
