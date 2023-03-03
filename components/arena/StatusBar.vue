@@ -3,14 +3,17 @@ import { PropType } from 'vue';
 import { Character } from '~~/utils/types';
 
 export default {
-  emits: ['endGame', 'enableParry'],
+  emits: ['endGame', 'enableParry', 'enableAttack'],
   data() {
     return {
       currentHealth: 0,
       death: false,
+
       parryCooldownDuration: 1000,
       parryCooldownProgress: 100,
-      parryCooldownInterval: setEmptyInterval(),
+
+      attackCooldownDuration: 1000,
+      attackCooldownProgress: 100,
     };
   },
   props: {
@@ -19,7 +22,9 @@ export default {
     enemy: { required: true, type: Object as PropType<Character> },
     attack: { required: true, type: Object as PropType<{ receiver: number }> },
     ended: { required: true, type: Boolean },
+
     playerParry: { required: true, type: Boolean },
+    playerAttack: { required: true, type: Boolean },
   },
   computed: {
     currentHealthPercentage() {
@@ -28,15 +33,24 @@ export default {
     playerClasses() {
       return this.playerNumber === 1 ? 'left-[6.7%]' : 'right-[6.7%] rotate-x-180';
     },
+
     currentParryPercentage() {
       return `${this.parryCooldownProgress}%`;
     },
     parryCooldownDurationMs() {
       return `${this.parryCooldownDuration}ms`;
     },
+
+    currentAttackPercentage() {
+      return `${this.attackCooldownProgress}%`;
+    },
+    attackCooldownDurationMs() {
+      return `${this.attackCooldownDuration}ms`;
+    },
   },
   mounted() {
     this.currentHealth = this.character.health;
+    this.attackCooldownDuration = this.character.attack.cooldownMs;
   },
   watch: {
     attack() {
@@ -46,6 +60,7 @@ export default {
     currentHealth() {
       if (this.currentHealth <= 0) this.$emit('endGame', this.playerNumber);
     },
+
     playerParry() {
       if (this.playerParry) {
         this.parryCooldownProgress = 0;
@@ -57,10 +72,16 @@ export default {
         setTimeout(() => this.$emit('enableParry', this.playerNumber), 1000);
       }
     },
-    parryCooldownProgress() {
-      if (this.parryCooldownProgress >= 100) {
-        clearInterval(this.parryCooldownInterval);
-        this.parryCooldownProgress = 100;
+
+    playerAttack() {
+      if (this.playerAttack) {
+        this.attackCooldownProgress = 0;
+        this.attackCooldownDuration = 300;
+      } else {
+        this.attackCooldownProgress = 100;
+        this.attackCooldownDuration = this.character.attack.cooldownMs;
+
+        setTimeout(() => this.$emit('enableAttack', this.playerNumber), this.character.attack.cooldownMs);
       }
     },
   },
@@ -129,6 +150,12 @@ export default {
   --parry-progress: v-bind(currentParryPercentage);
   width: var(--parry-progress);
   transition: all v-bind(parryCooldownDurationMs) linear;
+}
+
+#attack-bar {
+  --attack-progress: v-bind(currentAttackPercentage);
+  width: var(--attack-progress);
+  transition: all v-bind(attackCooldownDurationMs) linear;
 }
 
 @keyframes cancel {

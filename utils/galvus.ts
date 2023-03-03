@@ -14,7 +14,7 @@ const galvus: Character = {
     },
     delayMsList: [700],
     durationMs: 1000,
-    cooldownMs: 100,
+    cooldownMs: 1000,
     damage: 40,
   },
   speed: {

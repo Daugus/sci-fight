@@ -21,11 +21,15 @@ export default {
       characterP2: JSON.parse(jsonP2!) as Character,
       attack: { receiver: 0, damage: 0 },
       winner: {} as { characterName: string; playerNumber: number },
-      parry: [false, false],
-      canParry: [true, true],
       damagedPlayer: { receiver: 0, sendBack: false } as { receiver: number; sendBack: boolean },
       countdown: 5,
       addListeners: false,
+
+      parrying: [false, false],
+      canParry: [true, true],
+      attacking: [false, false],
+      canAttack: [true, true],
+
       audio: new Audio(`/src/audio/stages/1/menu2.mp3`),
     };
   },
@@ -50,19 +54,28 @@ export default {
       window.addEventListener('keyup', (e) => e.stopImmediatePropagation(), true);
       window.addEventListener('keydown', (e) => e.stopImmediatePropagation(), true);
     },
-    getParry({ player, parry }: { player: number; parry: boolean }) {
-      this.parry[player - 1] = parry;
+
+    getParrying({ player, parry }: { player: number; parry: boolean }) {
+      this.parrying[player - 1] = parry;
       this.canParry[player - 1] = false;
     },
     enableParry(player: number) {
       this.canParry[player - 1] = true;
+    },
+
+    getAttacking({ player, attack }: { player: number; attack: boolean }) {
+      this.attacking[player - 1] = attack;
+      this.canAttack[player - 1] = false;
+    },
+    enableAttack(player: number) {
+      this.canAttack[player - 1] = true;
     },
   },
   mounted() {
     document.body.classList.add('overflow-hidden');
     const countdownIterval = setInterval(() => {
       this.countdown--;
-      if (this.countdown === 1) {
+      if (this.countdown === 0) {
         this.addListeners = true;
       } else if (this.countdown < 0) {
         clearInterval(countdownIterval);
@@ -101,8 +114,10 @@ export default {
         :enemy="characterP2"
         :attack="attack"
         :ended="'playerNumber' in winner"
-        :player-parry="parry[0]"
+        :player-parry="parrying[0]"
+        :player-attack="attacking[0]"
         @enable-parry="enableParry"
+        @enable-attack="enableAttack"
         @end-game="endGame"
       />
 
@@ -112,8 +127,10 @@ export default {
         :enemy="characterP1"
         :attack="attack"
         :ended="'playerNumber' in winner"
-        :player-parry="parry[1]"
+        :player-parry="parrying[1]"
+        :player-attack="attacking[1]"
         @enable-parry="enableParry"
+        @enable-attack="enableAttack"
         @end-game="endGame"
       />
     </div>
@@ -124,28 +141,32 @@ export default {
 
   <Character
     :character="characterP1"
-    :enemy-parried="parry[1]"
+    :enemy-parried="parrying[1]"
     :player-number="1"
     :controls="{ attack: 'w', parry: 's', backward: 'a', forward: 'd' }"
     :winner="winner"
     :damaged-player="damagedPlayer"
     :add-listeners="addListeners"
     :can-parry="canParry[0]"
-    @damagePlayer="damagePlayer"
-    @getParry="getParry"
+    :can-attack="canAttack[0]"
+    @damage-player="damagePlayer"
+    @get-parrying="getParrying"
+    @get-attacking="getAttacking"
   />
 
   <Character
     :character="characterP2"
-    :enemy-parried="parry[0]"
+    :enemy-parried="parrying[0]"
     :player-number="2"
     :controls="{ attack: 'arrowup', parry: 'arrowdown', forward: 'arrowleft', backward: 'arrowright' }"
     :winner="winner"
     :damaged-player="damagedPlayer"
     :add-listeners="addListeners"
     :can-parry="canParry[1]"
-    @damagePlayer="damagePlayer"
-    @getParry="getParry"
+    :can-attack="canAttack[1]"
+    @damage-player="damagePlayer"
+    @get-attacking="getAttacking"
+    @get-parrying="getParrying"
   />
 </template>
 

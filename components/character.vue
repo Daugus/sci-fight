@@ -2,7 +2,7 @@
 import { Character, state } from '~~/utils/types';
 
 export default {
-  emits: ['damagePlayer', 'getParry'],
+  emits: ['damagePlayer', 'getParrying', 'getAttacking'],
   data() {
     return {
       attack: false,
@@ -40,7 +40,13 @@ export default {
         playerNumber: number;
       }>,
     },
+
     canParry: {
+      required: true,
+      type: Boolean,
+    },
+
+    canAttack: {
       required: true,
       type: Boolean,
     },
@@ -90,10 +96,12 @@ export default {
         }
     },
     keyUp(event: KeyboardEvent) {
-      if (this.characterState === 'death' || this.characterState === 'hit' || this.characterState === 'attack' || this.parry) return;
+      if (this.characterState === 'death' || this.characterState === 'hit' || this.characterState === 'attack') return;
 
       switch (event.key.toLowerCase()) {
         case this.controls.attack:
+          if (this.parry || !this.canAttack) return;
+
           // Activar ataque
           this.attack = true;
           this.characterState = 'attack';
@@ -115,7 +123,7 @@ export default {
           this.forwardPressed = false;
           break;
         case this.controls.parry:
-          if (!this.canParry) return;
+          if (this.parry || !this.canParry) return;
 
           this.parry = true;
 
@@ -137,7 +145,6 @@ export default {
           break;
       }
     },
-    // funciones para mover los divs
     moveBackward() {
       if (!this.forwardPressed && this.position > 1 && !this.attack) {
         this.position -= this.movement;
@@ -195,7 +202,7 @@ export default {
       clearInterval(this.currentIntervalBackward);
       clearInterval(this.currentIntervalForward);
 
-      if (correctPlayer && !this.damagedPlayer.sendBack) return;
+      if (!this.damagedPlayer.sendBack) return;
 
       this.sendBack = true;
       this.currentIntervalBackward = setImmediateInterval(this.moveBackward, 10);
@@ -220,7 +227,10 @@ export default {
       }
     },
     parry: function () {
-      this.$emit('getParry', { player: this.playerNumber, parry: this.parry });
+      this.$emit('getParrying', { player: this.playerNumber, parry: this.parry });
+    },
+    attack: function () {
+      this.$emit('getAttacking', { player: this.playerNumber, attack: this.attack });
     },
     addListeners: function () {
       document.addEventListener('keyup', this.keyUp);
