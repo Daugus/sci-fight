@@ -18,6 +18,7 @@ export default {
 </script>
 
 <template>
+  <div class="fondo absolute inset-0 -z-50 bg-red-500"></div>
   <div class="flex h-screen w-screen flex-col justify-center overflow-hidden align-middle">
     <div class="relative flex w-full justify-between">
       <!-- Seleccion personaje: Player 1 -->
