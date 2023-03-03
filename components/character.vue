@@ -64,6 +64,9 @@ export default {
     distance() {
       return `${this.position}%`;
     },
+    fetchSprites() {
+      return ['hit', 'idle', 'move', 'attack', 'death'].map((sprite) => `url(/src/img/characters/${this.character.name}/${sprite}.png)`).join(', ');
+    },
   },
   mounted() {
     this.characterState = 'appear';
@@ -245,6 +248,8 @@ export default {
       v-if="attack === true"
     />
   </div>
+
+  <div id="fetch-sprites"></div>
 </template>
 
 <style lang="scss">
@@ -285,5 +290,9 @@ export default {
 
 #player-2 {
   right: v-bind(distance);
+}
+
+#fetch-sprites {
+  background-image: v-bind(fetchSprites);
 }
 </style>
