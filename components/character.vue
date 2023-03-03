@@ -11,7 +11,7 @@ export default {
       backwardPressed: false,
       currentIntervalForward: setEmptyInterval(),
       currentIntervalBackward: setEmptyInterval(),
-      state: 'idle' as state,
+      characterState: 'idle' as state,
       parry: false,
       sendBack: false,
     };
@@ -66,8 +66,8 @@ export default {
     },
   },
   mounted() {
-    this.state = 'appear';
-    setTimeout(() => (this.state = 'idle'), this.character.appear);
+    this.characterState = 'appear';
+    setTimeout(() => (this.characterState = 'idle'), this.character.appear);
   },
   methods: {
     getRect(attackRect: DOMRect, playerNumber: number, sendBack: boolean) {
@@ -85,13 +85,13 @@ export default {
         }
     },
     keyUp(event: KeyboardEvent) {
-      if (this.state === 'death' || this.state === 'hit' || this.state === 'attack' || this.parry) return;
+      if (this.characterState === 'death' || this.characterState === 'hit' || this.characterState === 'attack' || this.parry) return;
 
       switch (event.key.toLowerCase()) {
         case this.controls.attack:
           // Activar ataque
           this.attack = true;
-          this.state = 'attack';
+          this.characterState = 'attack';
 
           clearInterval(this.currentIntervalForward);
           clearInterval(this.currentIntervalBackward);
@@ -99,7 +99,7 @@ export default {
           setTimeout(() => {
             this.attack = false;
 
-            this.state = 'idle';
+            this.characterState = 'idle';
           }, this.character.attack.durationMs);
 
           break;
@@ -121,7 +121,7 @@ export default {
       }
     },
     keyDown(event: KeyboardEvent) {
-      if (this.state === 'death' || this.state === 'hit' || this.parry) return;
+      if (this.characterState === 'death' || this.characterState === 'hit' || this.parry) return;
 
       switch (event.key.toLowerCase()) {
         case this.controls.backward:
@@ -150,7 +150,7 @@ export default {
       }
     },
     playAudio() {
-      const audio = new Audio(`/src/audio/${this.character.name}/${this.state}.mp3`);
+      const audio = new Audio(`/src/audio/${this.character.name}/${this.characterState}.mp3`);
       audio.play();
     },
   },
@@ -158,33 +158,33 @@ export default {
     forwardPressed: function () {
       clearInterval(this.currentIntervalForward);
 
-      if (this.attack || this.state === 'death') return;
+      if (this.attack || this.characterState === 'death') return;
 
       if (this.forwardPressed) {
-        if (this.state !== 'hit') this.state = 'move';
+        if (this.characterState !== 'hit') this.characterState = 'move';
         this.currentIntervalForward = setImmediateInterval(this.moveForward, 10);
       } else {
-        if (this.state !== 'hit') this.state = 'idle';
+        if (this.characterState !== 'hit') this.characterState = 'idle';
       }
     },
     backwardPressed: function () {
       clearInterval(this.currentIntervalBackward);
 
-      if (this.attack || this.state === 'death') return;
+      if (this.attack || this.characterState === 'death') return;
 
       if (this.backwardPressed) {
-        if (this.state !== 'hit') this.state = 'move';
+        if (this.characterState !== 'hit') this.characterState = 'move';
         this.currentIntervalBackward = setImmediateInterval(this.moveBackward, 10);
       } else {
-        if (this.state !== 'hit') this.state = 'idle';
+        if (this.characterState !== 'hit') this.characterState = 'idle';
       }
     },
     damagedPlayer: function () {
       const correctPlayer = this.playerNumber === this.damagedPlayer.receiver;
 
-      if (!correctPlayer || this.state === 'death') return;
+      if (!correctPlayer || this.characterState === 'death') return;
 
-      this.state = 'hit';
+      this.characterState = 'hit';
       this.backwardPressed = false;
       this.forwardPressed = false;
       clearInterval(this.currentIntervalBackward);
@@ -197,15 +197,15 @@ export default {
 
       setTimeout(() => {
         clearInterval(this.currentIntervalBackward);
-        this.state = 'playerNumber' in this.winner && this.winner.playerNumber !== this.playerNumber ? 'death' : 'idle';
+        this.characterState = 'playerNumber' in this.winner && this.winner.playerNumber !== this.playerNumber ? 'death' : 'idle';
         this.sendBack = false;
       }, 500);
     },
     winner: function () {
-      if (this.winner.playerNumber !== this.playerNumber) this.state = 'death';
+      if (this.winner.playerNumber !== this.playerNumber) this.characterState = 'death';
     },
     state: function () {
-      switch (this.state) {
+      switch (this.characterState) {
         case 'appear':
         case 'attack':
         case 'hit':
@@ -227,7 +227,7 @@ export default {
 
 <template>
   <div
-    :class="['player', state === 'hit' && sendBack && 'damaged', attack && 'z-50', playerNumber === 2 && 'rotate-x-180']"
+    :class="['player', characterState === 'hit' && sendBack && 'damaged', attack && 'z-50', playerNumber === 2 && 'rotate-x-180']"
     :id="id"
   >
     <div
@@ -235,7 +235,7 @@ export default {
       v-if="parry"
     ></div>
 
-    <div :class="['sprite', `${character.name}-${state}`]"></div>
+    <div :class="['sprite', `${character.name}-${characterState}`]"></div>
 
     <CharacterAttack
       :character="character"
