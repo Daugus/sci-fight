@@ -59,7 +59,7 @@ export default {
     ]"
   >
     <div
-      class="h-full transition-all"
+      class="h-full brightness-125 transition-all"
       :style="`width: ${currentHealthPercentage}%; background-color: ${character.color}`"
     ></div>
   </div>
@@ -93,7 +93,7 @@ export default {
       'bg-[#262626]',
       'top-[64.5%]',
       'w-[27.5%]',
-      'h-[1.2rem]',
+      'h-[1.1rem]',
       `${playerNumber == 1 ? 'left-[6.7%]' : 'right-[6.7%]'}`,
       playerNumber === 2 && 'rotate-x-180',
     ]"

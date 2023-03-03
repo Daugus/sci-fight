@@ -28,24 +28,16 @@ export default {
 </script>
 
 <template>
-  <div class="graph-container absolute flex">
+  <div class="graph-container absolute flex h-[95%] w-[87%]">
     <div
-      class="statform transition-all"
+      class="statform h-full w-full brightness-110 transition-all"
       :style="`background-color: ${character.color}`"
     ></div>
   </div>
 </template>
 
 <style lang="scss">
-.graph-container {
-  width: 87%;
-  height: 95%;
-
-  .statform {
-    width: 100%;
-    height: 100%;
-    clip-path: polygon(50% v-bind(attack), v-bind(speed), v-bind(health));
-    filter: drop-shadow(0 0 0.2rem rgba(255, 255, 255, 0.1));
-  }
+.statform {
+  clip-path: polygon(50% v-bind(attack), v-bind(speed), v-bind(health));
 }
 </style>
