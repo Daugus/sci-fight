@@ -58,8 +58,9 @@ export default {
     document.body.classList.add('overflow-hidden');
     const countdownIterval = setInterval(() => {
       this.countdown--;
-      if (this.countdown < 0) {
+      if (this.countdown === 1) {
         this.addListeners = true;
+      } else if (this.countdown < 0) {
         clearInterval(countdownIterval);
       }
     }, 1000);
