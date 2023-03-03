@@ -65,7 +65,9 @@ export default {
       return `${this.position}%`;
     },
     fetchSprites() {
-      return ['hit', 'idle', 'move', 'attack', 'death'].map((sprite) => `url(/src/img/characters/${this.character.name}/${sprite}.png)`).join(', ');
+      return `${['hit', 'idle', 'move', 'attack', 'death']
+        .map((sprite) => `url('/src/img/characters/${this.character.name}/${sprite}.png')`)
+        .join(', ')}, url('/src/img/abilities/protect.png')`;
     },
   },
   mounted() {
