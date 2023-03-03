@@ -93,7 +93,7 @@ export default {
   </div>
 
   <div class="stage">
-    <div class="relative flex h-[12rem] w-full items-center justify-between text-center align-middle">
+    <div class="relative top-16 flex w-full justify-between">
       <ArenaHealthBar
         :player-number="1"
         :character="characterP1"

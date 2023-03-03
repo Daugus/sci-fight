@@ -84,8 +84,6 @@ export default {
 
       switch (event.key.toLowerCase()) {
         case this.controls.attack:
-          if (this.state === 'attack') return;
-
           // Activar ataque
           this.attack = true;
           this.state = 'attack';
@@ -177,14 +175,17 @@ export default {
     damagedPlayer: function () {
       if (this.playerNumber !== this.damagedPlayer || this.state === 'death') return;
 
-      this.leftPressed = true;
+      this.leftPressed = false;
+      this.rightPressed = false;
+      clearInterval(this.currentIntervalLeft);
+      clearInterval(this.currentIntervalRight);
+
       this.state = 'hit';
       this.currentIntervalLeft = setImmediateInterval(this.moveLeft, 10);
 
       setTimeout(() => {
-        this.leftPressed = false;
-        this.state = 'idle';
         clearInterval(this.currentIntervalLeft);
+        this.state = 'playerNumber' in this.winner && this.winner.playerNumber !== this.playerNumber ? 'death' : 'idle';
       }, 500);
     },
     winner: function () {
