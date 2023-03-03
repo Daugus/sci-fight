@@ -83,19 +83,7 @@ export default {
   </div>
 
   <!-- Cooldown: Ataque -->
-  <div
-    :class="[
-      'rounded-r-lg',
-      'overflow-hidden',
-      'absolute',
-      'bg-[#262626]',
-      'top-[43%]',
-      'w-[27.5%]',
-      'h-[1.1rem]',
-      `${playerNumber == 1 ? 'left-[6.7%]' : 'right-[6.7%]'}`,
-      playerNumber === 2 && 'rotate-x-180',
-    ]"
-  >
+  <div :class="['rounded-r-lg', 'overflow-hidden', 'absolute', 'bg-[#262626]', 'top-[43%]', 'w-[27.5%]', 'h-[1.1rem]', playerClasses]">
     <div
       class="h-full bg-[#ffc42e] opacity-75 transition-all"
       id="attack-bar"
@@ -104,17 +92,8 @@ export default {
 
   <!-- Cooldown: Defensa -->
   <div
-    :class="[
-      'rounded-r-lg',
-      'overflow-hidden',
-      'absolute',
-      'bg-[#262626]',
-      'top-[64.5%]',
-      'w-[27.5%]',
-      'h-[1.1rem]',
-      `${playerNumber == 1 ? 'left-[6.7%]' : 'right-[6.7%]'}`,
-      playerNumber === 2 && 'rotate-x-180',
-    ]"
+    :class="['rounded-r-lg', 'overflow-hidden', 'absolute', 'bg-[#262626]', 'top-[64.5%]', 'w-[27.5%]', 'h-[1.1rem]']"
+    playerClasses
   >
     <div
       class="h-full bg-white opacity-75 transition-all"
