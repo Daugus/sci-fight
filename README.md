@@ -26,6 +26,13 @@ npm run preview
 Crear imagen y subir a Docker Hub:
 
 ```bash
-docker tag $(docker build -q .) dlcde/sci-fight:1.0
-docker push dlcde/sci-fight:1.0
+docker build -t dlcde/sci-fight -t dlcde/sci-fight:[tag] .
+docker push dlcde/sci-fight dlcde/sci-fight:[tag]
+```
+
+Descargar imagen e iniciar servidor:
+
+```bash
+docker pull dlcde/sci-fight
+docker run -dp [port]:3000 --name sci-fight dlcde/sci-fight
 ```
