@@ -175,14 +175,17 @@ export default {
     damagedPlayer: function () {
       if (this.playerNumber !== this.damagedPlayer || this.state === 'death') return;
 
-      this.leftPressed = true;
+      this.leftPressed = false;
+      this.rightPressed = false;
+      clearInterval(this.currentIntervalLeft);
+      clearInterval(this.currentIntervalRight);
+
       this.state = 'hit';
       this.currentIntervalLeft = setImmediateInterval(this.moveLeft, 10);
 
       setTimeout(() => {
-        this.leftPressed = false;
-        this.state = 'idle';
         clearInterval(this.currentIntervalLeft);
+        this.state = 'playerNumber' in this.winner && this.winner.playerNumber !== this.playerNumber ? 'death' : 'idle';
       }, 500);
     },
     winner: function () {
