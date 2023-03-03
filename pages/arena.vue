@@ -10,6 +10,9 @@ export default {
     if (!jsonP1 || !jsonP2 || !stageLs) window.location.replace('/');
 
     const stage = parseInt(stageLs!);
+
+    // const audio = new Audio(`/src/audio/stages/${stage}/stage.mp3`);
+
     return {
       // carga datos de localStorage
       stageNum: stage,
@@ -25,6 +28,7 @@ export default {
       damagedPlayer: 0,
       countdown: 5,
       addListeners: false,
+      audio: new Audio(`/src/audio/stages/1/menu2.mp3`),
     };
   },
   methods: {
@@ -67,10 +71,8 @@ export default {
     }, 1000);
 
     // suena la musica dependiendo del escenario seleccionado
-    // const audio = new Audio(`/src/audio/stages/${this.stageNum}/stage.mp3`);
-    // audio.volume = 0.5;
-    // audio.loop = true;
-    // audio.play();
+    this.audio.loop = true;
+    this.audio.play();
   },
 };
 </script>
