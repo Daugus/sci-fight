@@ -14,6 +14,7 @@ export default {
       characterState: 'idle' as state,
       parry: false,
       sendBack: false,
+      ended: false,
     };
   },
   props: {
@@ -96,7 +97,7 @@ export default {
         }
     },
     keyUp(event: KeyboardEvent) {
-      if (this.characterState === 'death' || this.characterState === 'hit' || this.characterState === 'attack') return;
+      if (this.characterState === 'death' || this.characterState === 'hit' || this.characterState === 'attack' || this.ended) return;
 
       switch (event.key.toLowerCase()) {
         case this.controls.attack:
@@ -134,7 +135,7 @@ export default {
       }
     },
     keyDown(event: KeyboardEvent) {
-      if (this.characterState === 'death' || this.characterState === 'hit' || this.parry) return;
+      if (this.characterState === 'death' || this.characterState === 'hit' || this.parry || this.ended) return;
 
       switch (event.key.toLowerCase()) {
         case this.controls.backward:
@@ -215,6 +216,7 @@ export default {
     },
     winner: function () {
       if (this.winner.playerNumber !== this.playerNumber) this.characterState = 'death';
+      this.ended = true;
     },
     characterState: function () {
       switch (this.characterState) {
