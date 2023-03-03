@@ -11,29 +11,27 @@ export default {
 
     const stage = parseInt(stageLs!);
     return {
-      // carga datos de localStorage
       stageNum: stage,
       stage: `url(/src/img/stages/${stage}/stage.gif)`,
       floor: `url(/src/img/stages/${stage}/floor.png)`,
       characterP1: JSON.parse(jsonP1!) as Character,
       characterP2: JSON.parse(jsonP2!) as Character,
-
       attack: { receiver: 0, damage: 0 },
       winner: {} as { characterName: string; playerNumber: number },
-      parryP1: false,
-      parryP2: false,
-      damagedPlayer: 0,
-      countdown: 5,
+      parry: [false, false],
+      canParry: [true, true],
+      damagedPlayer: { receiver: 0, sendBack: false } as { receiver: number; sendBack: boolean },
+      countdown: -1,
       addListeners: false,
     };
   },
   methods: {
-    damagePlayer(attack: { receiver: number; damage: number }) {
+    damagePlayer(attack: { receiver: number; damage: number; sendBack: boolean }) {
       this.attack = attack;
 
-      this.damagedPlayer = attack.receiver;
+      this.damagedPlayer = { receiver: attack.receiver, sendBack: attack.sendBack };
       setTimeout(() => {
-        this.damagedPlayer = 0;
+        this.damagedPlayer = { receiver: 0, sendBack: false };
       }, 500);
     },
     // emit de player number, que se envia cuando se muere uno de los personajes
@@ -49,11 +47,11 @@ export default {
       window.addEventListener('keydown', (e) => e.stopImmediatePropagation(), true);
     },
     getParry({ player, parry }: { player: number; parry: boolean }) {
-      if (player === 1) {
-        this.parryP1 = parry;
-      } else {
-        this.parryP2 = parry;
-      }
+      this.parry[player - 1] = parry;
+      this.canParry[player - 1] = false;
+    },
+    enableParry(player: number) {
+      this.canParry[player - 1] = true;
     },
   },
   mounted() {
@@ -82,28 +80,32 @@ export default {
     class="max-w-screen absolute z-50 flex max-h-screen justify-center align-middle"
   >
     <p class="win jupiter-crash text-9xl">
-      {{ countdown > 0 ? countdown : 'FIGHT' }}
+      {{ countdown > 0 ? countdown : 'SCI-FIGHT' }}
     </p>
   </div>
 
   <div class="stage">
     <div class="relative top-16 flex w-full justify-between">
-      <ArenaHealthBar
+      <ArenaStatusBar
         :player-number="1"
         :character="characterP1"
         :enemy="characterP2"
         :attack="attack"
         :ended="'playerNumber' in winner"
-        @endGame="endGame"
+        :player-parry="parry[0]"
+        @enable-parry="enableParry"
+        @end-game="endGame"
       />
 
-      <ArenaHealthBar
+      <ArenaStatusBar
         :player-number="2"
         :character="characterP2"
         :enemy="characterP1"
         :attack="attack"
         :ended="'playerNumber' in winner"
-        @endGame="endGame"
+        :player-parry="parry[1]"
+        @enable-parry="enableParry"
+        @end-game="endGame"
       />
     </div>
 
@@ -113,24 +115,26 @@ export default {
 
   <Character
     :character="characterP1"
-    :enemy-parried="parryP2"
+    :enemy-parried="parry[1]"
     :player-number="1"
-    :controls="{ attack: 'w', parry: 's', left: 'a', right: 'd' }"
+    :controls="{ attack: 'w', parry: 's', backward: 'a', forward: 'd' }"
     :winner="winner"
     :damaged-player="damagedPlayer"
     :add-listeners="addListeners"
+    :can-parry="canParry[0]"
     @damagePlayer="damagePlayer"
     @getParry="getParry"
   />
 
   <Character
     :character="characterP2"
-    :enemy-parried="parryP1"
+    :enemy-parried="parry[0]"
     :player-number="2"
-    :controls="{ attack: 'arrowup', parry: 'arrowdown', right: 'arrowleft', left: 'arrowright' }"
+    :controls="{ attack: 'arrowup', parry: 'arrowdown', forward: 'arrowleft', backward: 'arrowright' }"
     :winner="winner"
     :damaged-player="damagedPlayer"
     :add-listeners="addListeners"
+    :can-parry="canParry[1]"
     @damagePlayer="damagePlayer"
     @getParry="getParry"
   />

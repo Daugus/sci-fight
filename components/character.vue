@@ -1,5 +1,4 @@
 <script lang="ts">
-import { PropType } from 'vue';
 import { Character, state } from '~~/utils/types';
 
 export default {
@@ -8,27 +7,28 @@ export default {
     return {
       attack: false,
       position: 20,
-      rightPressed: false,
-      leftPressed: false,
-      currentIntervalRight: setEmptyInterval(),
-      currentIntervalLeft: setEmptyInterval(),
+      forwardPressed: false,
+      backwardPressed: false,
+      currentIntervalForward: setEmptyInterval(),
+      currentIntervalBackward: setEmptyInterval(),
       state: 'idle' as state,
       parry: false,
+      sendBack: false,
     };
   },
   props: {
     character: { required: true, type: Object as PropType<Character> },
     playerNumber: { required: true, type: Number },
     enemyParried: { required: true, type: Boolean },
-    damagedPlayer: { required: true, type: Number },
+    damagedPlayer: { required: true, type: Object as PropType<{ receiver: number; sendBack: boolean }> },
     addListeners: { required: true, type: Boolean },
 
     controls: {
       required: true,
       type: Object as PropType<{
         attack: string;
-        right: string;
-        left: string;
+        forward: string;
+        backward: string;
         parry: string;
       }>,
     },
@@ -39,6 +39,10 @@ export default {
         characterName: string;
         playerNumber: number;
       }>,
+    },
+    canParry: {
+      required: true,
+      type: Boolean,
     },
   },
   computed: {
@@ -66,7 +70,7 @@ export default {
     setTimeout(() => (this.state = 'idle'), this.character.appear);
   },
   methods: {
-    getRect(attackRect: DOMRect, playerNumber: number) {
+    getRect(attackRect: DOMRect, playerNumber: number, sendBack: boolean) {
       const receiverPlayerNumber = playerNumber === 1 ? 2 : 1;
 
       const playerRect = document.querySelector(`#player-${receiverPlayerNumber}`)!.getBoundingClientRect();
@@ -76,6 +80,7 @@ export default {
           this.$emit('damagePlayer', {
             receiver: receiverPlayerNumber,
             damage: this.character.attack.damage,
+            sendBack: sendBack,
           });
         }
     },
@@ -88,8 +93,8 @@ export default {
           this.attack = true;
           this.state = 'attack';
 
-          clearInterval(this.currentIntervalRight);
-          clearInterval(this.currentIntervalLeft);
+          clearInterval(this.currentIntervalForward);
+          clearInterval(this.currentIntervalBackward);
 
           setTimeout(() => {
             this.attack = false;
@@ -98,13 +103,15 @@ export default {
           }, this.character.attack.durationMs);
 
           break;
-        case this.controls.left:
-          this.leftPressed = false;
+        case this.controls.backward:
+          this.backwardPressed = false;
           break;
-        case this.controls.right:
-          this.rightPressed = false;
+        case this.controls.forward:
+          this.forwardPressed = false;
           break;
         case this.controls.parry:
+          if (!this.canParry) return;
+
           this.parry = true;
 
           setTimeout(() => {
@@ -117,25 +124,25 @@ export default {
       if (this.state === 'death' || this.state === 'hit' || this.parry) return;
 
       switch (event.key.toLowerCase()) {
-        case this.controls.left:
-          this.leftPressed = true;
+        case this.controls.backward:
+          this.backwardPressed = true;
           break;
-        case this.controls.right:
-          this.rightPressed = true;
+        case this.controls.forward:
+          this.forwardPressed = true;
           break;
       }
     },
     // funciones para mover los divs
-    moveLeft() {
-      if (!this.rightPressed && this.position > 1 && !this.attack) {
+    moveBackward() {
+      if (!this.forwardPressed && this.position > 1 && !this.attack) {
         this.position -= this.movement;
       }
     },
-    moveRight() {
+    moveForward() {
       const { right } = document.querySelector(`#player-1`)!.getBoundingClientRect();
       const { left } = document.querySelector(`#player-2`)!.getBoundingClientRect();
 
-      if (!this.leftPressed && this.position < 99 - this.width && !this.attack) {
+      if (!this.backwardPressed && this.position < 99 - this.width && !this.attack) {
         if (this.playerNumber === 1 && right >= left) return;
         else if (this.playerNumber === 2 && left <= right) return;
 
@@ -148,44 +155,50 @@ export default {
     },
   },
   watch: {
-    rightPressed: function () {
-      clearInterval(this.currentIntervalRight);
+    forwardPressed: function () {
+      clearInterval(this.currentIntervalForward);
 
       if (this.attack || this.state === 'death') return;
 
-      if (this.rightPressed) {
+      if (this.forwardPressed) {
         if (this.state !== 'hit') this.state = 'move';
-        this.currentIntervalRight = setImmediateInterval(this.moveRight, 10);
+        this.currentIntervalForward = setImmediateInterval(this.moveForward, 10);
       } else {
         if (this.state !== 'hit') this.state = 'idle';
       }
     },
-    leftPressed: function () {
-      clearInterval(this.currentIntervalLeft);
+    backwardPressed: function () {
+      clearInterval(this.currentIntervalBackward);
 
       if (this.attack || this.state === 'death') return;
 
-      if (this.leftPressed) {
+      if (this.backwardPressed) {
         if (this.state !== 'hit') this.state = 'move';
-        this.currentIntervalLeft = setImmediateInterval(this.moveLeft, 10);
+        this.currentIntervalBackward = setImmediateInterval(this.moveBackward, 10);
       } else {
         if (this.state !== 'hit') this.state = 'idle';
       }
     },
     damagedPlayer: function () {
-      if (this.playerNumber !== this.damagedPlayer || this.state === 'death') return;
+      const correctPlayer = this.playerNumber === this.damagedPlayer.receiver;
 
-      this.leftPressed = false;
-      this.rightPressed = false;
-      clearInterval(this.currentIntervalLeft);
-      clearInterval(this.currentIntervalRight);
+      if (!correctPlayer || this.state === 'death') return;
 
       this.state = 'hit';
-      this.currentIntervalLeft = setImmediateInterval(this.moveLeft, 10);
+      this.backwardPressed = false;
+      this.forwardPressed = false;
+      clearInterval(this.currentIntervalBackward);
+      clearInterval(this.currentIntervalForward);
+
+      if (correctPlayer && !this.damagedPlayer.sendBack) return;
+
+      this.sendBack = true;
+      this.currentIntervalBackward = setImmediateInterval(this.moveBackward, 10);
 
       setTimeout(() => {
-        clearInterval(this.currentIntervalLeft);
+        clearInterval(this.currentIntervalBackward);
         this.state = 'playerNumber' in this.winner && this.winner.playerNumber !== this.playerNumber ? 'death' : 'idle';
+        this.sendBack = false;
       }, 500);
     },
     winner: function () {
@@ -214,7 +227,7 @@ export default {
 
 <template>
   <div
-    :class="['player', state === 'hit' && 'damaged', attack && 'z-50', playerNumber === 2 && 'rotate-x-180']"
+    :class="['player', state === 'hit' && sendBack && 'damaged', attack && 'z-50', playerNumber === 2 && 'rotate-x-180']"
     :id="id"
   >
     <div

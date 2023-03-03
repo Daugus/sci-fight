@@ -3,11 +3,14 @@ import { PropType } from 'vue';
 import { Character } from '~~/utils/types';
 
 export default {
-  emits: ['endGame'],
+  emits: ['endGame', 'enableParry'],
   data() {
     return {
       currentHealth: 0,
       death: false,
+      parryCooldownDuration: 1000,
+      parryCooldownProgress: 100,
+      parryCooldownInterval: setEmptyInterval(),
     };
   },
   props: {
@@ -16,10 +19,20 @@ export default {
     enemy: { required: true, type: Object as PropType<Character> },
     attack: { required: true, type: Object as PropType<{ receiver: number }> },
     ended: { required: true, type: Boolean },
+    playerParry: { required: true, type: Boolean },
   },
   computed: {
     currentHealthPercentage() {
-      return (this.currentHealth / this.character.health) * 100;
+      return this.currentHealth > 0 ? (this.currentHealth / this.character.health) * 100 : 0;
+    },
+    playerClasses() {
+      return this.playerNumber === 1 ? 'left-[6.7%]' : 'right-[6.7%] rotate-x-180';
+    },
+    currentParryPercentage() {
+      return `${this.parryCooldownProgress}%`;
+    },
+    parryCooldownDurationMs() {
+      return `${this.parryCooldownDuration}ms`;
     },
   },
   mounted() {
@@ -33,6 +46,23 @@ export default {
     currentHealth() {
       if (this.currentHealth <= 0) this.$emit('endGame', this.playerNumber);
     },
+    playerParry() {
+      if (this.playerParry) {
+        this.parryCooldownProgress = 0;
+        this.parryCooldownDuration = 300;
+      } else {
+        this.parryCooldownProgress = 100;
+        this.parryCooldownDuration = 1000;
+
+        setTimeout(() => this.$emit('enableParry', this.playerNumber), 1000);
+      }
+    },
+    parryCooldownProgress() {
+      if (this.parryCooldownProgress >= 100) {
+        clearInterval(this.parryCooldownInterval);
+        this.parryCooldownProgress = 100;
+      }
+    },
   },
 };
 </script>
@@ -45,19 +75,7 @@ export default {
   />
 
   <!-- Vida maxima restante -->
-  <div
-    :class="[
-      'absolute',
-      'bg-[#262626]',
-      'top-[20%]',
-      'w-[42.2%]',
-      'h-[1.25rem]',
-      'rounded-r-lg',
-      'overflow-hidden',
-      `${playerNumber == 1 ? 'left-[6.7%]' : 'right-[6.7%]'}`,
-      playerNumber === 2 && 'rotate-x-180',
-    ]"
-  >
+  <div :class="['absolute', 'bg-[#262626]', 'top-[20%]', 'w-[42.2%]', 'h-[1.25rem]', 'rounded-r-lg', 'overflow-hidden', playerClasses]">
     <div
       class="h-full brightness-125 transition-all"
       :style="`width: ${currentHealthPercentage}%; background-color: ${character.color}`"
@@ -80,7 +98,7 @@ export default {
   >
     <div
       class="h-full bg-[#ffc42e] opacity-75 transition-all"
-      :style="`width: ${currentHealthPercentage}%`"
+      id="attack-bar"
     ></div>
   </div>
 
@@ -100,7 +118,7 @@ export default {
   >
     <div
       class="h-full bg-white opacity-75 transition-all"
-      :style="`width: ${currentHealthPercentage}%`"
+      id="parry-bar"
     ></div>
   </div>
 
@@ -125,6 +143,16 @@ export default {
 
 .cancel {
   animation: cancel 1s infinite;
+}
+
+.transition-all {
+  transition-timing-function: linear;
+}
+
+#parry-bar {
+  --parry-progress: v-bind(currentParryPercentage);
+  width: var(--parry-progress);
+  transition: all v-bind(parryCooldownDurationMs) linear;
 }
 
 @keyframes cancel {

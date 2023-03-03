@@ -28,10 +28,10 @@ export default {
     setDelayTimeout: (ms: number) => new Promise((res) => setTimeout(res, ms)),
 
     async attack(rect: DOMRect) {
-      for (const delay of this.delays) {
+      for (const [i, delay] of this.delays.entries()) {
         await this.setDelayTimeout(delay);
 
-        this.$emit(`getRect`, rect, this.playerNumber);
+        this.$emit(`getRect`, rect, this.playerNumber, i === this.delays.length - 1);
       }
     },
   },
