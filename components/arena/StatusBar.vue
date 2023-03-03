@@ -88,7 +88,6 @@ export default {
       class="h-full bg-[#ffc42e] opacity-75 transition-all"
       id="attack-bar"
     ></div>
-    <!-- :style="`width: ${currentHealthPercentage}%`" -->
   </div>
 
   <!-- Cooldown: Defensa -->
@@ -97,7 +96,6 @@ export default {
       class="h-full bg-white opacity-75 transition-all"
       id="parry-bar"
     ></div>
-    <!-- :style="`width: ${parryCooldownProgress}%`" -->
   </div>
 
   <!-- Preview character -->
