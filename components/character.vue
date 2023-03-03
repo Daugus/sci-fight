@@ -204,7 +204,7 @@ export default {
     winner: function () {
       if (this.winner.playerNumber !== this.playerNumber) this.characterState = 'death';
     },
-    state: function () {
+    characterState: function () {
       switch (this.characterState) {
         case 'appear':
         case 'attack':
