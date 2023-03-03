@@ -51,7 +51,7 @@ export default {
       'bg-[#262626]',
       'top-[20%]',
       'w-[42.2%]',
-      'h-[1.3rem]',
+      'h-[1.2rem]',
       'rounded-r-lg',
       'overflow-hidden',
       `${playerNumber == 1 ? 'left-[6.7%]' : 'right-[6.7%]'}`,
@@ -73,7 +73,7 @@ export default {
       'bg-[#262626]',
       'top-[43%]',
       'w-[27.5%]',
-      'h-[1.2rem]',
+      'h-[1.1rem]',
       `${playerNumber == 1 ? 'left-[6.7%]' : 'right-[6.7%]'}`,
       playerNumber === 2 && 'rotate-x-180',
     ]"
