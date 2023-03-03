@@ -70,6 +70,9 @@ export default {
     enableAttack(player: number) {
       this.canAttack[player - 1] = true;
     },
+    reload() {
+      window.location.reload();
+    },
   },
   mounted() {
     document.body.classList.add('overflow-hidden');
@@ -93,9 +96,23 @@ export default {
 <template>
   <div
     v-if="'playerNumber' in winner"
-    class="max-w-screen absolute z-50 flex max-h-screen justify-center align-middle"
+    class="max-w-screen absolute z-50 flex max-h-screen flex-col justify-center align-middle"
   >
-    <p class="win jupiter-crash text-9xl text-[#ffc42e]">{{ winner.characterName.toUpperCase() }} WINS</p>
+    <p class="win jupiter-crash text-9xl">{{ winner.characterName.toUpperCase() }} WINS</p>
+    <div class="flex h-full w-full justify-between px-20">
+      <button
+        class="jupiter-crash option text-4xl"
+        @click="reload()"
+      >
+        Figth again
+      </button>
+      <a
+        class="jupiter-crash option text-4xl"
+        href="/"
+      >
+        Back to menu
+      </a>
+    </div>
   </div>
 
   <div
@@ -195,5 +212,20 @@ export default {
   color: #ffc42e;
   -webkit-text-stroke: 2px #ff7d01;
   filter: drop-shadow(0 0 0.2rem #ff7d01);
+}
+
+.option {
+  color: #ffc42e;
+  -webkit-text-stroke: 1px #ff7d01;
+  filter: drop-shadow(0 0 0.2rem #ff7d01);
+  filter: grayscale(1);
+  opacity: 0.25;
+  transition: all ease-in-out 0.1s;
+
+  &:hover {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
 </style>
