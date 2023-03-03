@@ -91,10 +91,7 @@ export default {
   </div>
 
   <!-- Cooldown: Defensa -->
-  <div
-    :class="['rounded-r-lg', 'overflow-hidden', 'absolute', 'bg-[#262626]', 'top-[64.5%]', 'w-[27.5%]', 'h-[1.1rem]']"
-    playerClasses
-  >
+  <div :class="['rounded-r-lg', 'overflow-hidden', 'absolute', 'bg-[#262626]', 'top-[64.5%]', 'w-[27.5%]', 'h-[1.1rem]', playerClasses]">
     <div
       class="h-full bg-white opacity-75 transition-all"
       id="parry-bar"
