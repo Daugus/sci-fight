@@ -96,7 +96,7 @@ export default {
   />
 
   <!-- Vida maxima restante -->
-  <div :class="['absolute', 'bg-[#262626]', 'top-[20%]', 'w-[42.2%]', 'h-[1.3rem]', 'rounded-r-lg', 'overflow-hidden', playerClasses]">
+  <div :class="['absolute', 'bg-[#262626]', 'top-[20%]', 'w-[42.2%]', 'h-[20%]', 'rounded-r-lg', 'overflow-hidden', playerClasses]">
     <div
       class="h-full brightness-125 transition-all"
       :style="`width: ${currentHealthPercentage}%; background-color: ${character.color}`"
@@ -104,7 +104,7 @@ export default {
   </div>
 
   <!-- Cooldown: Ataque -->
-  <div :class="['rounded-r-lg', 'overflow-hidden', 'absolute', 'bg-[#262626]', 'top-[43%]', 'w-[27.5%]', 'h-[1.15rem]', playerClasses]">
+  <div :class="['rounded-r-lg', 'overflow-hidden', 'absolute', 'bg-[#262626]', 'top-[43%]', 'w-[27.5%]', 'h-[19%]', playerClasses]">
     <div
       class="h-full bg-[#ffc42e] opacity-75 transition-all"
       id="attack-bar"
@@ -112,7 +112,7 @@ export default {
   </div>
 
   <!-- Cooldown: Defensa -->
-  <div :class="['rounded-r-lg', 'overflow-hidden', 'absolute', 'bg-[#262626]', 'top-[64.5%]', 'w-[27.5%]', 'h-[1.1rem]', playerClasses]">
+  <div :class="['rounded-r-lg', 'overflow-hidden', 'absolute', 'bg-[#262626]', 'top-[64.5%]', 'w-[27.5%]', 'h-[19%]', playerClasses]">
     <div
       class="h-full bg-white opacity-75 transition-all"
       id="parry-bar"
