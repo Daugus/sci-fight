@@ -51,7 +51,7 @@ export default {
       'bg-[#262626]',
       'top-[20%]',
       'w-[42.2%]',
-      'h-[1.3rem]',
+      'h-[1.25rem]',
       'rounded-r-lg',
       'overflow-hidden',
       `${playerNumber == 1 ? 'left-[6.7%]' : 'right-[6.7%]'}`,
@@ -59,7 +59,7 @@ export default {
     ]"
   >
     <div
-      class="h-full transition-all"
+      class="h-full brightness-125 transition-all"
       :style="`width: ${currentHealthPercentage}%; background-color: ${character.color}`"
     ></div>
   </div>
@@ -73,7 +73,7 @@ export default {
       'bg-[#262626]',
       'top-[43%]',
       'w-[27.5%]',
-      'h-[1.2rem]',
+      'h-[1.1rem]',
       `${playerNumber == 1 ? 'left-[6.7%]' : 'right-[6.7%]'}`,
       playerNumber === 2 && 'rotate-x-180',
     ]"
@@ -93,7 +93,7 @@ export default {
       'bg-[#262626]',
       'top-[64.5%]',
       'w-[27.5%]',
-      'h-[1.2rem]',
+      'h-[1.1rem]',
       `${playerNumber == 1 ? 'left-[6.7%]' : 'right-[6.7%]'}`,
       playerNumber === 2 && 'rotate-x-180',
     ]"
@@ -106,7 +106,7 @@ export default {
 
   <!-- Preview character -->
   <div
-    :class="[`character-preview-player-${playerNumber}`, 'absolute', 'flex', 'justify-center', 'items-center', 'overflow-hidden', 'bg-[#262626bf]']"
+    :class="[`character-preview-player-${playerNumber}`, 'absolute', 'flex', 'justify-center', 'items-center', 'overflow-hidden', 'bg-[#2626269d]']"
   >
     <div class="relative mt-12 flex h-full w-full items-center justify-center">
       <div :class="[`${character.name}-idle`, 'absolute', 'cancel', playerNumber === 2 && 'rotate-x-180']"></div>
