@@ -1,6 +1,4 @@
 <script lang="ts">
-import { emit } from 'process';
-
 export default {
   props: {
     button: { required: true, type: String },
@@ -12,12 +10,7 @@ export default {
     keyUp(event: KeyboardEvent) {
       if (event.key === this.button) this.play();
     },
-    play() {
-      setTimeout(() => {
-        window.location.replace('/arena');
-      }, 100);
-      this.$emit('pauseAudio', true);
-    },
+    play: () => window.location.replace('/arena'),
   },
 };
 </script>

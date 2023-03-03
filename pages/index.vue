@@ -1,25 +1,16 @@
 <script lang="ts">
+import { assertNuxtCompatibility } from '@nuxt/kit';
+import { AutomaticPrefetchPlugin } from 'webpack';
+
 export default {
   data() {
     // carga los últimos usados, si no están guardados se carga el primero
     const characterP1Index = localStorage.getItem('characterP1Index');
     const characterP2Index = localStorage.getItem('characterP2Index');
-    const audio = new Audio('/src/audio/menu/ambient.mp3');
 
     return {
       characters: [characterP1Index ? parseInt(characterP1Index) : 0, characterP2Index ? parseInt(characterP2Index) : 0],
-      audio: audio,
     };
-  },
-  mounted() {
-    this.audio.volume = 0.5;
-    this.audio.loop = true;
-    this.audio.play();
-  },
-  methods: {
-    pauseAudio() {
-      this.audio.pause();
-    },
   },
 };
 </script>
@@ -58,10 +49,7 @@ export default {
         }"
       />
 
-      <MenuButtonStart
-        button=" "
-        @pauseAudio="pauseAudio"
-      ></MenuButtonStart>
+      <MenuButtonStart button=" "></MenuButtonStart>
     </div>
   </div>
 </template>

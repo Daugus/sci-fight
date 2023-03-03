@@ -82,9 +82,10 @@ export default {
       }
     }, 1000);
 
-    // suena la musica dependiendo del escenario seleccionado
+    this.audio.volume = 0.5;
     this.audio.loop = true;
-    this.audio.play();
+
+    autoplay(this.audio);
   },
 };
 </script>

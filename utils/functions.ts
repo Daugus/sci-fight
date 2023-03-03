@@ -11,4 +11,13 @@ const setImmediateInterval = (callback: () => void, interval: number) => {
 
 const randomNumber = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-export { setEmptyInterval, setImmediateInterval, randomNumber };
+const autoplay = (audio: HTMLAudioElement) => {
+  const userInteracted = setInterval(() => {
+    audio
+      .play()
+      .then(() => clearInterval(userInteracted))
+      .catch(() => '');
+  }, 10);
+};
+
+export { setEmptyInterval, setImmediateInterval, randomNumber, autoplay };
