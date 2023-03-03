@@ -64,11 +64,6 @@ export default {
         clearInterval(countdownIterval);
       }
     }, 1000);
-
-    // suena la musica dependiendo del escenario seleccionado
-    // const audio = new Audio(`/src/audio/stages/${this.stageNum}/stage.mp3`);
-    // audio.loop = true;
-    // audio.play();
   },
 };
 </script>
@@ -91,7 +86,7 @@ export default {
   </div>
 
   <div class="stage">
-    <div class="relative flex h-[12rem] w-full items-center justify-between text-center align-middle">
+    <div class="relative top-16 flex w-full justify-between">
       <ArenaStatus
         :player-number="1"
         :character="characterP1"
