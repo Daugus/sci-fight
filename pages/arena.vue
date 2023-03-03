@@ -81,7 +81,7 @@ export default {
     v-if="countdown >= 0"
     class="max-w-screen absolute z-50 flex max-h-screen justify-center align-middle"
   >
-    <p class="win jupiter-crash text-9xl text-[#ffc42e]">
+    <p class="win jupiter-crash text-9xl">
       {{ countdown > 0 ? countdown : 'FIGHT' }}
     </p>
   </div>
@@ -157,6 +157,7 @@ export default {
 }
 
 .win {
+  color: #ffc42e;
   -webkit-text-stroke: 2px #ff7d01;
   filter: drop-shadow(0 0 0.2rem #ff7d01);
 }
