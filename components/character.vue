@@ -84,8 +84,6 @@ export default {
 
       switch (event.key.toLowerCase()) {
         case this.controls.attack:
-          if (this.state === 'attack') return;
-
           // Activar ataque
           this.attack = true;
           this.state = 'attack';
