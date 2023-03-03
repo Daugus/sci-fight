@@ -21,7 +21,7 @@ export default {
       class="jupiter-crash h-full w-full text-5xl text-[]"
       @click="play"
     >
-      Jugar
+      FIGHT
     </button>
   </div>
 </template>
