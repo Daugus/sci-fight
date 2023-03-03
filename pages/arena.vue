@@ -86,13 +86,13 @@ export default {
     class="max-w-screen absolute z-50 flex max-h-screen justify-center align-middle"
   >
     <p class="win jupiter-crash text-9xl text-[#ffc42e]">
-      {{ countdown > 0 ? countdown : 'FIGHT' }}
+      {{ countdown > 0 ? countdown : 'SCI-FIGHT' }}
     </p>
   </div>
 
   <div class="stage">
     <div class="relative flex h-[12rem] w-full items-center justify-between text-center align-middle">
-      <ArenaHealthBar
+      <ArenaStatus
         :player-number="1"
         :character="characterP1"
         :enemy="characterP2"
@@ -101,7 +101,7 @@ export default {
         @endGame="endGame"
       />
 
-      <ArenaHealthBar
+      <ArenaStatus
         :player-number="2"
         :character="characterP2"
         :enemy="characterP1"

@@ -21,6 +21,14 @@ export default {
     currentHealthPercentage() {
       return this.currentHealth > 0 ? (this.currentHealth / this.character.health) * 100 : 0;
     },
+    playerClasses() {
+      let classes = [];
+      if (this.playerNumber === 1) {
+        classes.push('left-[6.7%]');
+      } else {
+        classes.push('right-[6.7%]', 'rotate-x-180');
+      }
+    },
   },
   mounted() {
     this.currentHealth = this.character.health;
@@ -36,7 +44,6 @@ export default {
     },
   },
 };
-// character.health
 </script>
 
 <template>
@@ -45,11 +52,11 @@ export default {
     :class="[
       'absolute',
       'bg-[#262626]',
-      'top-[30%]',
       'w-[42.1%]',
       'h-[1.5rem]',
       `${playerNumber == 1 ? 'left-[6.7%]' : 'right-[6.7%]'}`,
       playerNumber === 2 && 'rotate-x-180',
+      'top-[30%]',
     ]"
   >
     <div
@@ -65,11 +72,11 @@ export default {
       'overflow-hidden',
       'absolute',
       'bg-[#262626]',
-      'top-[45%]',
       'w-[27.5%]',
       'h-[1.5rem]',
       `${playerNumber == 1 ? 'left-[6.7%]' : 'right-[6.7%]'}`,
       playerNumber === 2 && 'rotate-x-180',
+      'top-[45%]',
     ]"
   >
     <div
@@ -85,11 +92,11 @@ export default {
       'overflow-hidden',
       'absolute',
       'bg-[#262626]',
-      'top-[58%]',
       'w-[27.5%]',
       'h-[1.5rem]',
       `${playerNumber == 1 ? 'left-[6.7%]' : 'right-[6.7%]'}`,
       playerNumber === 2 && 'rotate-x-180',
+      'top-[58%]',
     ]"
   >
     <div
