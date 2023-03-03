@@ -11,7 +11,6 @@ export default {
 
     const stage = parseInt(stageLs!);
     return {
-      // carga datos de localStorage
       stageNum: stage,
       stage: `url(/src/img/stages/${stage}/stage.gif)`,
       floor: `url(/src/img/stages/${stage}/floor.png)`,

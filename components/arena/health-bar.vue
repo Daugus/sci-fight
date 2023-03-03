@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     currentHealthPercentage() {
-      return (this.currentHealth / this.character.health) * 100;
+      return this.currentHealth > 0 ? (this.currentHealth / this.character.health) * 100 : 0;
     },
   },
   mounted() {
@@ -32,6 +32,7 @@ export default {
     },
     currentHealth() {
       if (this.currentHealth <= 0) this.$emit('endGame', this.playerNumber);
+      console.log(`${this.playerNumber}: ${this.currentHealth}`);
     },
   },
 };
