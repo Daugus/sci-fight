@@ -9,7 +9,7 @@ export default {
   },
 
   props: {
-    controls: { required: true, type: Object as PropType<{ left: string; right: string }> },
+    controls: { required: true, type: Object as PropType<{ previous: string; next: string }> },
   },
   mounted() {
     document.addEventListener('keydown', this.keyUp);
@@ -29,10 +29,10 @@ export default {
     },
     keyUp(event: KeyboardEvent) {
       switch (event.key.toLowerCase()) {
-        case this.controls.left:
+        case this.controls.previous:
           this.previous();
           break;
-        case this.controls.right:
+        case this.controls.next:
           this.next();
           break;
       }

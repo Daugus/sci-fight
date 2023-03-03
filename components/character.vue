@@ -8,10 +8,10 @@ export default {
     return {
       attack: false,
       position: 20,
-      rightPressed: false,
-      leftPressed: false,
-      currentIntervalRight: setEmptyInterval(),
-      currentIntervalLeft: setEmptyInterval(),
+      forwardPressed: false,
+      backwardPressed: false,
+      currentIntervalForward: setEmptyInterval(),
+      currentIntervalBackward: setEmptyInterval(),
       state: 'idle' as state,
       parry: false,
     };
@@ -27,8 +27,8 @@ export default {
       required: true,
       type: Object as PropType<{
         attack: string;
-        right: string;
-        left: string;
+        forward: string;
+        backward: string;
         parry: string;
       }>,
     },
@@ -88,8 +88,8 @@ export default {
           this.attack = true;
           this.state = 'attack';
 
-          clearInterval(this.currentIntervalRight);
-          clearInterval(this.currentIntervalLeft);
+          clearInterval(this.currentIntervalForward);
+          clearInterval(this.currentIntervalBackward);
 
           setTimeout(() => {
             this.attack = false;
@@ -98,11 +98,11 @@ export default {
           }, this.character.attack.durationMs);
 
           break;
-        case this.controls.left:
-          this.leftPressed = false;
+        case this.controls.backward:
+          this.backwardPressed = false;
           break;
-        case this.controls.right:
-          this.rightPressed = false;
+        case this.controls.forward:
+          this.forwardPressed = false;
           break;
         case this.controls.parry:
           this.parry = true;
@@ -117,25 +117,25 @@ export default {
       if (this.state === 'death' || this.state === 'hit' || this.parry) return;
 
       switch (event.key.toLowerCase()) {
-        case this.controls.left:
-          this.leftPressed = true;
+        case this.controls.backward:
+          this.backwardPressed = true;
           break;
-        case this.controls.right:
-          this.rightPressed = true;
+        case this.controls.forward:
+          this.forwardPressed = true;
           break;
       }
     },
     // funciones para mover los divs
-    moveLeft() {
-      if (!this.rightPressed && this.position > 1 && !this.attack) {
+    moveBackward() {
+      if (!this.forwardPressed && this.position > 1 && !this.attack) {
         this.position -= this.movement;
       }
     },
-    moveRight() {
+    moveForward() {
       const { right } = document.querySelector(`#player-1`)!.getBoundingClientRect();
       const { left } = document.querySelector(`#player-2`)!.getBoundingClientRect();
 
-      if (!this.leftPressed && this.position < 99 - this.width && !this.attack) {
+      if (!this.backwardPressed && this.position < 99 - this.width && !this.attack) {
         if (this.playerNumber === 1 && right >= left) return;
         else if (this.playerNumber === 2 && left <= right) return;
 
@@ -148,26 +148,26 @@ export default {
     },
   },
   watch: {
-    rightPressed: function () {
-      clearInterval(this.currentIntervalRight);
+    forwardPressed: function () {
+      clearInterval(this.currentIntervalForward);
 
       if (this.attack || this.state === 'death') return;
 
-      if (this.rightPressed) {
+      if (this.forwardPressed) {
         if (this.state !== 'hit') this.state = 'move';
-        this.currentIntervalRight = setImmediateInterval(this.moveRight, 10);
+        this.currentIntervalForward = setImmediateInterval(this.moveForward, 10);
       } else {
         if (this.state !== 'hit') this.state = 'idle';
       }
     },
-    leftPressed: function () {
-      clearInterval(this.currentIntervalLeft);
+    backwardPressed: function () {
+      clearInterval(this.currentIntervalBackward);
 
       if (this.attack || this.state === 'death') return;
 
-      if (this.leftPressed) {
+      if (this.backwardPressed) {
         if (this.state !== 'hit') this.state = 'move';
-        this.currentIntervalLeft = setImmediateInterval(this.moveLeft, 10);
+        this.currentIntervalBackward = setImmediateInterval(this.moveBackward, 10);
       } else {
         if (this.state !== 'hit') this.state = 'idle';
       }
@@ -175,16 +175,16 @@ export default {
     damagedPlayer: function () {
       if (this.playerNumber !== this.damagedPlayer || this.state === 'death') return;
 
-      this.leftPressed = false;
-      this.rightPressed = false;
-      clearInterval(this.currentIntervalLeft);
-      clearInterval(this.currentIntervalRight);
+      this.backwardPressed = false;
+      this.forwardPressed = false;
+      clearInterval(this.currentIntervalBackward);
+      clearInterval(this.currentIntervalForward);
 
       this.state = 'hit';
-      this.currentIntervalLeft = setImmediateInterval(this.moveLeft, 10);
+      this.currentIntervalBackward = setImmediateInterval(this.moveBackward, 10);
 
       setTimeout(() => {
-        clearInterval(this.currentIntervalLeft);
+        clearInterval(this.currentIntervalBackward);
         this.state = 'playerNumber' in this.winner && this.winner.playerNumber !== this.playerNumber ? 'death' : 'idle';
       }, 500);
     },

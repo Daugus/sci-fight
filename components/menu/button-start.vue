@@ -1,14 +1,14 @@
 <script lang="ts">
 export default {
   props: {
-    button: { required: true, type: String },
+    key: { required: true, type: String },
   },
   mounted() {
     document.addEventListener('keydown', this.keyUp);
   },
   methods: {
     keyUp(event: KeyboardEvent) {
-      if (event.key === this.button) this.play();
+      if (event.key === this.key) this.play();
     },
     play: () => window.location.replace('/arena'),
   },
@@ -17,7 +17,7 @@ export default {
 
 <template>
   <button
-    class="absolute bottom-10 mx-auto w-screen text-center"
+    class="absolute bottom-12 z-30 mx-auto w-screen text-center"
     @click="play"
   >
     Jugar

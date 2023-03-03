@@ -25,8 +25,8 @@ export default {
       <MenuCharacterSelection
         :rotate="false"
         :controls="{
-          left: 'a',
-          right: 'd',
+          previous: 'a',
+          next: 'd',
         }"
         :playerNumber="1"
         :characterIndex="characters[0]"
@@ -36,8 +36,8 @@ export default {
       <MenuCharacterSelection
         :rotate="true"
         :controls="{
-          left: 'arrowright',
-          right: 'arrowleft',
+          previous: 'arrowright',
+          next: 'arrowleft',
         }"
         :playerNumber="2"
         :characterIndex="characters[1]"
@@ -46,12 +46,12 @@ export default {
       <!-- Seleccion de mapa -->
       <MenuStageSelection
         :controls="{
-          left: 'n',
-          right: 'm',
+          previous: 'n',
+          next: 'm',
         }"
       />
 
-      <MenuButtonStart button=" "></MenuButtonStart>
+      <MenuButtonStart key=" "></MenuButtonStart>
     </div>
   </div>
 </template>
