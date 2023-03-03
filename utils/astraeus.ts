@@ -22,6 +22,7 @@ const astraeus: Character = {
   },
   health: 140,
   color: '#5d6545',
+  appear: 800,
 };
 
 export default astraeus;

@@ -23,6 +23,7 @@ type Character = {
   speed: speed;
   health: number;
   color: string;
+  appear: number;
 };
 
 type state = 'hit' | 'idle' | 'move' | 'attack' | 'appear' | 'death';

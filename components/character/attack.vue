@@ -2,6 +2,7 @@
 import { Character } from '~~/utils/types';
 
 export default {
+  emits: ['getRect'],
   data() {
     return { index: 0 };
   },

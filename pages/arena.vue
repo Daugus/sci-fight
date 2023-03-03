@@ -20,7 +20,11 @@ export default {
 
       attack: { receiver: 0, damage: 0 },
       winner: {} as { characterName: string; playerNumber: number },
+      parryP1: false,
+      parryP2: false,
       damagedPlayer: 0,
+      countdown: 5,
+      addListeners: false,
     };
   },
   methods: {
@@ -30,11 +34,7 @@ export default {
       this.damagedPlayer = attack.receiver;
       setTimeout(() => {
         this.damagedPlayer = 0;
-      }, 1000);
-
-      // Sacar el jugador al que se le ha atacado
-      // const damaged = document.querySelector(`#player-${attack.receiver}`);
-      // console.log(damaged);
+      }, 500);
     },
     // emit de player number, que se envia cuando se muere uno de los personajes
     // playerNumber es el numero del personaje con vida <= 0
@@ -48,12 +48,23 @@ export default {
       window.addEventListener('keyup', (e) => e.stopImmediatePropagation(), true);
       window.addEventListener('keydown', (e) => e.stopImmediatePropagation(), true);
     },
+    getParry({ player, parry }: { player: number; parry: boolean }) {
+      if (player === 1) {
+        this.parryP1 = parry;
+      } else {
+        this.parryP2 = parry;
+      }
+    },
   },
   mounted() {
     document.body.classList.add('overflow-hidden');
-
-    localStorage.removeItem('characterP1');
-    localStorage.removeItem('characterP2');
+    const countdownIterval = setInterval(() => {
+      this.countdown--;
+      if (this.countdown < 0) {
+        this.addListeners = true;
+        clearInterval(countdownIterval);
+      }
+    }, 1000);
 
     // suena la musica dependiendo del escenario seleccionado
     const audio = new Audio(`/src/audio/stages/${this.stageNum}/stage.mp3`);
@@ -72,8 +83,17 @@ export default {
     <p class="win jupiter-crash text-9xl text-[#ffc42e]">{{ winner.characterName.toUpperCase() }} WINS</p>
   </div>
 
+  <div
+    v-if="countdown >= 0"
+    class="max-w-screen absolute z-50 flex max-h-screen justify-center align-middle"
+  >
+    <p class="win jupiter-crash text-9xl text-[#ffc42e]">
+      {{ countdown > 0 ? countdown : 'FIGHT' }}
+    </p>
+  </div>
+
   <div class="stage">
-    <div class="absolute top-8 flex w-full items-center justify-center space-x-5 px-11 text-center align-middle">
+    <div class="relative flex h-[12rem] w-full items-center justify-between text-center align-middle">
       <ArenaHealthBar
         :player-number="1"
         :character="characterP1"
@@ -82,10 +102,7 @@ export default {
         :ended="'playerNumber' in winner"
         @endGame="endGame"
       />
-      <img
-        class="h-9"
-        src="/src/img/assets/stats_health.png"
-      />
+
       <ArenaHealthBar
         :player-number="2"
         :character="characterP2"
@@ -102,20 +119,26 @@ export default {
 
   <Character
     :character="characterP1"
+    :enemy-parried="parryP2"
     :player-number="1"
     :controls="{ attack: 'w', parry: 's', left: 'a', right: 'd' }"
     :winner="winner"
-    :damaged="damagedPlayer"
+    :damaged-player="damagedPlayer"
+    :add-listeners="addListeners"
     @damagePlayer="damagePlayer"
+    @getParry="getParry"
   />
 
   <Character
     :character="characterP2"
+    :enemy-parried="parryP1"
     :player-number="2"
     :controls="{ attack: 'arrowup', parry: 'arrowdown', right: 'arrowleft', left: 'arrowright' }"
     :winner="winner"
-    :damaged="damagedPlayer"
+    :damaged-player="damagedPlayer"
+    :add-listeners="addListeners"
     @damagePlayer="damagePlayer"
+    @getParry="getParry"
   />
 </template>
 

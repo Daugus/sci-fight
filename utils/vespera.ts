@@ -23,6 +23,7 @@ const vespera: Character = {
   },
   health: 120,
   color: '#ba9db5 ',
+  appear: 900,
 };
 
 export default vespera;

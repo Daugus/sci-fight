@@ -68,7 +68,7 @@
 
   background: url('/src/img/characters/astraeus/appear.png');
 
-  animation: astraeus-appear 0.8s steps(8) infinite;
+  animation: astraeus-appear 0.8s steps(8) forwards;
 }
 
 @keyframes astraeus-appear {
@@ -180,7 +180,7 @@
 
   background: url('/src/img/characters/galvus/appear.png');
 
-  animation: galvus-appear 1.2s steps(12) infinite;
+  animation: galvus-appear 1.4s steps(14) forwards;
 }
 
 @keyframes galvus-appear {
@@ -188,7 +188,7 @@
     background-position: 0px;
   }
   to {
-    background-position: -11844px;
+    background-position: -13818px;
   }
 }
 // Idle
@@ -402,7 +402,7 @@
 
   background: url('/src/img/characters/vespera/appear.png');
 
-  animation: vespera-appear 0.9s steps(9) infinite;
+  animation: vespera-appear 0.9s steps(9) forwards;
 }
 
 @keyframes vespera-appear {
@@ -508,12 +508,23 @@
 // ------ ABILITIES ------
 // protect
 .protect {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+
   width: 250px;
   height: 250px;
 
-  background: url('/src/img/abilities/protect.png');
+  z-index: 100;
+
+  background-image: url('/src/img/abilities/protect.png');
 
   animation: protect 0.9s steps(9) infinite;
+}
+
+.quasar.protect {
+  top: -34%;
 }
 
 @keyframes protect {
