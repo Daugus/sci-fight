@@ -51,8 +51,16 @@ export default {
         playerNumber === 1 ? { characterName: this.characterP2.name, playerNumber: 2 } : { characterName: this.characterP1.name, playerNumber: 1 };
 
       // quitar los listener para que al acabarse la partida no se puedan mover
-      window.addEventListener('keyup', (e) => e.stopImmediatePropagation(), true);
-      window.addEventListener('keydown', (e) => e.stopImmediatePropagation(), true);
+      window.addEventListener('keyup', (e) => {
+        switch (e.key.toLowerCase()) {
+          case ' ':
+            this.reload();
+            break;
+          case 'escape':
+            this.menu();
+            break;
+        }
+      });
     },
 
     getParrying({ player, parry }: { player: number; parry: boolean }) {
@@ -69,6 +77,9 @@ export default {
     },
     enableAttack(player: number) {
       this.canAttack[player - 1] = true;
+    },
+    menu() {
+      window.location.replace('/');
     },
     reload() {
       window.location.reload();
@@ -102,16 +113,16 @@ export default {
     <div class="flex h-full w-full justify-between px-20">
       <button
         class="jupiter-crash option text-4xl"
-        @click="reload()"
+        @click="reload"
       >
         Figth again
       </button>
-      <a
+      <button
         class="jupiter-crash option text-4xl"
-        href="/"
+        @click="menu"
       >
         Back to menu
-      </a>
+      </button>
     </div>
   </div>
 
@@ -218,8 +229,8 @@ export default {
   color: #ffc42e;
   -webkit-text-stroke: 1px #ff7d01;
   filter: drop-shadow(0 0 0.2rem #ff7d01);
-  filter: grayscale(1);
-  opacity: 0.25;
+  filter: grayscale(0.9);
+  opacity: 1;
   transition: all ease-in-out 0.1s;
 
   &:hover {
