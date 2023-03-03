@@ -67,10 +67,10 @@ export default {
     }, 1000);
 
     // suena la musica dependiendo del escenario seleccionado
-    const audio = new Audio(`/src/audio/stages/${this.stageNum}/stage.mp3`);
-    audio.volume = 0.5;
-    audio.loop = true;
-    audio.play();
+    // const audio = new Audio(`/src/audio/stages/${this.stageNum}/stage.mp3`);
+    // audio.volume = 0.5;
+    // audio.loop = true;
+    // audio.play();
   },
 };
 </script>

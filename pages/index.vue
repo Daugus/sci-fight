@@ -10,9 +10,17 @@ export default {
     };
   },
   mounted() {
-    // const audio = new Audio('/src/audio/stages/stage-menu.mp3');
-    // audio.volume = 0.5;
-    // audio.play();
+    const audio = new Audio('/src/audio/stages/stage-menu.mp3');
+    audio.volume = 0.5;
+    audio.loop = true;
+    audio.play();
+
+    // let playing = false;
+
+    // if (!playing) {
+    //   audio.play();
+    //   playing = true;
+    // }
   },
 };
 </script>
