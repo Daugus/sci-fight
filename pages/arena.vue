@@ -10,6 +10,9 @@ export default {
     if (!jsonP1 || !jsonP2 || !stageLs) window.location.replace('/');
 
     const stage = parseInt(stageLs!);
+
+    // const audio = new Audio(`/src/audio/stages/${stage}/stage.mp3`);
+
     return {
       stageNum: stage,
       stage: `url(/src/img/stages/${stage}/stage.gif)`,
@@ -23,6 +26,7 @@ export default {
       damagedPlayer: { receiver: 0, sendBack: false } as { receiver: number; sendBack: boolean },
       countdown: 5,
       addListeners: false,
+      audio: new Audio(`/src/audio/stages/1/menu2.mp3`),
     };
   },
   methods: {
@@ -64,6 +68,10 @@ export default {
         clearInterval(countdownIterval);
       }
     }, 1000);
+
+    // suena la musica dependiendo del escenario seleccionado
+    this.audio.loop = true;
+    this.audio.play();
   },
 };
 </script>
