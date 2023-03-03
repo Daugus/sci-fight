@@ -18,7 +18,7 @@ export default {
 <template>
   <div class="play absolute z-50 flex justify-center pb-2 text-center align-middle">
     <button
-      class="jupiter-crash h-full w-full text-6xl text-[]"
+      class="jupiter-crash h-full w-full text-5xl text-[]"
       @click="play"
     >
       Jugar
