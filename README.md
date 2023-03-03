@@ -1,12 +1,14 @@
 # sci-fight
 
+Instalar:
+
 ```bash
 npm i
 ```
 
 ## Desarrollo
 
-Start the development server on localhost:3000
+Iniciar servidor de desarrollo:
 
 ```bash
 npm run dev
@@ -20,3 +22,11 @@ npm run build
 npm run preview
 ```
 
+## Docker
+
+Crear imagen y subir a Docker Hub:
+
+```bash
+docker tag $(docker build -q .) dlcde/sci-fight:1.0
+docker push dlcde/sci-fight:1.0
+```
