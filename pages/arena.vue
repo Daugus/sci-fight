@@ -11,12 +11,12 @@ export default {
 
     const stage = parseInt(stageLs!);
 
-    // const audio = new Audio(`/src/audio/stages/${stage}/stage.mp3`);
-
     return {
       stageNum: stage,
       stage: `url(/src/img/stages/${stage}/stage.gif)`,
       floor: `url(/src/img/stages/${stage}/floor.png)`,
+      audio: new Audio(`/src/audio/stages/${stage}/stage.mp3`),
+
       characterP1: JSON.parse(jsonP1!) as Character,
       characterP2: JSON.parse(jsonP2!) as Character,
       attack: { receiver: 0, damage: 0 },
@@ -29,8 +29,6 @@ export default {
       canParry: [true, true],
       attacking: [false, false],
       canAttack: [true, true],
-
-      audio: new Audio(`/src/audio/stages/1/menu2.mp3`),
     };
   },
   methods: {
@@ -96,7 +94,7 @@ export default {
       }
     }, 1000);
 
-    this.audio.volume = 0.5;
+    this.audio.volume = this.stageNum === 3 ? 1 : 0.5;
     this.audio.loop = true;
 
     autoplay(this.audio);
