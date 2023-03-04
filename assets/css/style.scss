@@ -7,7 +7,14 @@
 }
 
 :not(button, a, button *, a *) {
-  cursor: default;
+  cursor: url('/src/img/assets/pointer.png'), auto;
+}
+
+button,
+a,
+button *,
+a * {
+  cursor: url('/src/img/assets/link.png'), auto;
 }
 
 .router-link-active {
