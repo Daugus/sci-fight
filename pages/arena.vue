@@ -127,6 +127,11 @@ export default {
   </div>
 
   <div
+    v-else
+    class="z-index absolute h-screen w-screen cursor-none bg-transparent"
+  ></div>
+
+  <div
     v-if="countdown >= 0"
     class="max-w-screen absolute z-50 flex max-h-screen justify-center align-middle"
   >
@@ -200,6 +205,10 @@ export default {
 </template>
 
 <style lang="scss">
+.z-index {
+  z-index: 1000;
+}
+
 .stage {
   width: 100vw;
   height: 100vh;
