@@ -21,7 +21,7 @@ export default {
       return `${rest}% ${speed}%`;
     },
     health() {
-      return `${(this.character.health * 100) / 140}% ${(this.character.health * 100) / 140}%`;
+      return `${(this.character.health * 100) / 280}% ${(this.character.health * 100) / 280}%`;
     },
   },
 };
