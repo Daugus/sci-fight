@@ -21,7 +21,7 @@ const galvus: Character = {
     space: 120,
     time: 1.5,
   },
-  health: 100,
+  health: 200,
   color: '#23313d',
   appear: 1400,
 };
