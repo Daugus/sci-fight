@@ -21,7 +21,7 @@ const vespera: Character = {
     space: 120,
     time: 1.5,
   },
-  health: 120,
+  health: 240,
   color: '#ba9db5 ',
   appear: 900,
 };

@@ -21,7 +21,7 @@ const quasar: Character = {
     space: 140,
     time: 1.5,
   },
-  health: 120,
+  health: 240,
   color: '#9c3333',
   appear: 3800,
 };

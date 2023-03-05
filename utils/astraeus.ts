@@ -20,7 +20,7 @@ const astraeus: Character = {
     space: 80,
     time: 1.5,
   },
-  health: 140,
+  health: 280,
   color: '#5d6545',
   appear: 800,
 };
