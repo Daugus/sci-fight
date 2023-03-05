@@ -16,9 +16,9 @@ export default {
 </script>
 
 <template>
-  <div class="fondo absolute inset-0 -z-50 bg-red-500"></div>
+  <div class="background absolute inset-0 -z-50"></div>
   <div class="flex h-screen w-screen flex-col justify-center overflow-hidden align-middle">
-    <div class="relative flex w-full justify-between">
+    <div class="custom-shadow relative flex w-full justify-between">
       <!-- Seleccion personaje: Player 1 -->
       <MenuCharacterSelection
         :rotate="false"
@@ -53,3 +53,14 @@ export default {
     </div>
   </div>
 </template>
+
+<style lang="scss">
+.background {
+  background: rgb(37, 37, 37);
+  background: linear-gradient(0deg, #252525 0%, #353535 100%);
+}
+
+.custom-shadow {
+  filter: drop-shadow(0 0 0.5rem black);
+}
+</style>
