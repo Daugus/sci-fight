@@ -14,14 +14,14 @@ const galvus: Character = {
     },
     delayMsList: [700],
     durationMs: 1000,
-    cooldownMs: 1000,
+    cooldownMs: 2000,
     damage: 40,
   },
   speed: {
     space: 120,
     time: 1.5,
   },
-  health: 200,
+  health: 150,
   color: '#23313d',
   appear: 1400,
 };

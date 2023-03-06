@@ -13,14 +13,14 @@ const astraeus: Character = {
     },
     delayMsList: [400],
     durationMs: 800,
-    cooldownMs: 1000,
+    cooldownMs: 800,
     damage: 30,
   },
   speed: {
     space: 80,
     time: 1.5,
   },
-  health: 280,
+  health: 210,
   color: '#5d6545',
   appear: 800,
 };

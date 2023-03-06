@@ -14,14 +14,14 @@ const quasar: Character = {
     },
     delayMsList: [0, 400],
     durationMs: 800,
-    cooldownMs: 1000,
+    cooldownMs: 500,
     damage: 20,
   },
   speed: {
     space: 140,
     time: 1.5,
   },
-  health: 240,
+  health: 180,
   color: '#9c3333',
   appear: 3800,
 };

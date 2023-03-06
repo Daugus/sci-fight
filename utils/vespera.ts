@@ -14,14 +14,14 @@ const vespera: Character = {
     },
     delayMsList: [0],
     durationMs: 500,
-    cooldownMs: 1000,
+    cooldownMs: 1200,
     damage: 30,
   },
   speed: {
     space: 120,
     time: 1.5,
   },
-  health: 240,
+  health: 180,
   color: '#ba9db5 ',
   appear: 900,
 };

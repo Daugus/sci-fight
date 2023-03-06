@@ -9,7 +9,7 @@ export default {
       currentHealth: 0,
       death: false,
 
-      parryCooldownDuration: 1000,
+      parryCooldownDuration: 750,
       parryCooldownProgress: 100,
 
       attackCooldownDuration: 1000,
@@ -67,7 +67,7 @@ export default {
         this.parryCooldownDuration = 300;
       } else {
         this.parryCooldownProgress = 100;
-        this.parryCooldownDuration = 1000;
+        this.parryCooldownDuration = 750;
 
         setTimeout(() => this.$emit('enableParry', this.playerNumber), 1000);
       }
